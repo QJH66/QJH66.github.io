@@ -11,6 +11,22 @@
   let phase = 'closed';
   let request = 0;
 
+  function fitImage() {
+    const ratio = source.naturalWidth / source.naturalHeight;
+    const viewportWidth = viewer.clientWidth;
+    const viewportHeight = viewer.clientHeight;
+    // Give every figure the same viewing envelope, preserving its aspect ratio
+    // and retaining up to two source pixels per displayed pixel on Retina screens.
+    const width = Math.min(
+      viewportWidth * (viewportWidth <= 600 ? 0.92 : 0.88),
+      1440,
+      Math.min(viewportHeight * 0.74, viewportHeight - 152) * ratio,
+      source.naturalWidth / Math.min(window.devicePixelRatio || 1, 2)
+    );
+    image.style.width = `${width}px`;
+    image.style.height = `${width / ratio}px`;
+  }
+
   // The thumbnail uses object-fit: contain, so animate from its actual picture,
   // excluding the frame and letterboxing (especially for portrait figures).
   function thumbnailBounds() {
@@ -84,6 +100,7 @@
     document.documentElement.classList.add('figure-viewer-open');
     viewer.showModal();
     phase = 'opening';
+    fitImage();
     const origin = thumbnailTransform();
     source.style.visibility = 'hidden';
     animation = image.animate([
@@ -120,6 +137,7 @@
     if (phase === 'closing') finishClose();
     else {
       animation?.cancel();
+      fitImage();
       phase = 'open';
     }
   });

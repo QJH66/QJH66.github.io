@@ -36,7 +36,7 @@
   <link rel="preload" as="image" href="images/background/retina/jiangwan.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="main.css?v=20260910-2">
+  <link rel="stylesheet" href="main.css?v=20260910-3">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
@@ -357,6 +357,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             [<a class="interest-paper-link" href="#publications" data-paper-id="tempotriads">TempoTriads</a>]
           </span>
         </li>
+        <li>
+          <b>Fact Checking</b><br>
+          <span class="interest-paper-links">
+            [<a class="interest-paper-link" href="#publications" data-paper-id="elementcheck">ElementCheck</a>]
+          </span>
+        </li>
         <li><b>Foundation Agents</b></li>
         <li><b>Deep Research</b></li>
       </ul>
@@ -478,14 +484,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span>/</span>
     <a class="pub-topic-link" href="#topic-graph-computing-learning" data-topic-target="Graph Computing & Learning">Graph Computing & Learning</a>
     <span>/</span>
-    <a class="pub-topic-link" href="#topic-llm-factuality-evaluation" data-topic-target="LLM Factuality Evaluation">LLM Factuality Evaluation</a>
+    <a class="pub-topic-link" href="#topic-fact-checking" data-topic-target="Fact Checking">Fact Checking</a>
   </div>
 
 
 
   <div class="pub-list">
 
-    <div class="pub" data-paper-id="elementcheck" data-selected="true" data-year="2026" data-order="1" data-topic="LLM Factuality Evaluation">
+    <div class="pub" data-paper-id="elementcheck" data-selected="true" data-year="2026" data-order="1" data-topic="Fact Checking">
       <div class="pub-left">
         <button class="pub-figure-button" type="button" aria-haspopup="dialog" aria-controls="publication-figure-viewer" aria-label="Enlarge ElementCheck figure">
           <img class="intro-img frame" src="images/elementcheck-fig2.png" alt="Figure 2: Overview of the ElementCheck pipeline" width="2813" height="1282" loading="lazy" decoding="async">
@@ -511,7 +517,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pub" data-paper-id="fediscan" data-selected="true" data-year="2026" data-order="3" data-topic="Social Bot Detection">
       <div class="pub-left">
         <button class="pub-figure-button" type="button" aria-haspopup="dialog" aria-controls="publication-figure-viewer" aria-label="Enlarge FediScan figure">
-          <img class="intro-img frame" src="images/fediscan.png" alt="FediScan framework" width="1386" height="552" loading="lazy" decoding="async">
+          <img class="intro-img frame" src="images/fediscan.png?v=20260910" alt="FediScan framework" width="3050" height="1244" loading="lazy" decoding="async">
         </button>
       </div>
       <div class="pub-right">
@@ -534,7 +540,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pub" data-paper-id="fedidata" data-selected="true" data-year="2025" data-order="1" data-topic="Social Bot Detection">
       <div class="pub-left">
         <button class="pub-figure-button" type="button" aria-haspopup="dialog" aria-controls="publication-figure-viewer" aria-label="Enlarge FediData figure">
-          <img class="intro-img frame" src="images/fedidata.png" alt="FediData dataset overview" width="656" height="258" loading="lazy" decoding="async">
+          <img class="intro-img frame" src="images/fedidata.png?v=20260910" alt="FediData dataset overview" width="2788" height="1150" loading="lazy" decoding="async">
         </button>
       </div>
       <div class="pub-right">
@@ -559,7 +565,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pub" data-paper-id="fusesampleagg" data-selected="false" data-year="2026" data-order="2" data-topic="Graph Computing & Learning">
       <div class="pub-left">
         <button class="pub-figure-button" type="button" aria-haspopup="dialog" aria-controls="publication-figure-viewer" aria-label="Enlarge FuseSampleAgg figure">
-          <img class="intro-img frame" src="images/fusesampleagg.png" alt="FuseSampleAgg overview" width="840" height="346" loading="lazy" decoding="async">
+          <img class="intro-img frame" src="images/fusesampleagg.png?v=20260910" alt="FuseSampleAgg overview" width="2917" height="1184" loading="lazy" decoding="async">
         </button>
       </div>
       <div class="pub-right">
@@ -582,7 +588,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pub" data-paper-id="tempotriads" data-selected="false" data-year="2025" data-order="2" data-topic="Graph Computing & Learning">
       <div class="pub-left">
         <button class="pub-figure-button" type="button" aria-haspopup="dialog" aria-controls="publication-figure-viewer" aria-label="Enlarge TempoTriads figure">
-          <img class="intro-img frame" src="images/tempotriads.png" alt="TempoTriads overview" width="566" height="680" loading="lazy" decoding="async">
+          <img class="intro-img frame" src="images/tempotriads.png?v=20260910" alt="TempoTriads overview" width="1816" height="2383" loading="lazy" decoding="async">
         </button>
       </div>
       <div class="pub-right">
@@ -620,7 +626,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const publications = document.querySelectorAll('.pub');
 
   if (showSelectedBtn && showAllDateBtn && showAllTopicBtn && pubList && groupedView && publications.length > 0) {
-    const topicOrder = ['Social Bot Detection', 'Graph Computing & Learning', 'LLM Factuality Evaluation'];
+    const topicOrder = ['Social Bot Detection', 'Graph Computing & Learning', 'Fact Checking'];
 
     function setActiveMode(mode) {
       showSelectedBtn.classList.toggle('is-active', mode === 'selected');
@@ -816,8 +822,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     });
 
-    // Keep the first load explicit and consistent.
-    setPublicationMode('selected');
+    // Topic links also work when opened directly or revisited from a bookmark.
+    function openTopicFromHash() {
+      const hash = window.location.hash;
+      const topic = hash === '#topic-llm-factuality-evaluation'
+        ? 'Fact Checking'
+        : topicOrder.find(value => '#' + topicToId(value) === hash);
+      if (!topic) return false;
+      if (hash === '#topic-llm-factuality-evaluation') {
+        history.replaceState(null, '', '#topic-fact-checking');
+      }
+      jumpToTopic(topic);
+      return true;
+    }
+    window.addEventListener('hashchange', openTopicFromHash);
+    if (!openTopicFromHash()) setPublicationMode('selected');
   }
 </script>
 
@@ -829,6 +848,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         GitHub
       </h1>
       <div class="card-container">
+        <div class="github-card" data-repo-id="elementcheck">
+          <div>
+            <a class="repo-link" href="https://github.com/gudehhh666/elementcheck" target="_blank" rel="noopener noreferrer">
+              gudehhh666/<strong>elementcheck</strong>
+            </a>
+            <span class="label">Fact Checking</span>
+          </div>
+          <div class="description">
+            Graph-guided, element-level fact checking for long-form text.
+          </div>
+          <div class="meta">
+            <div class="dot"></div>
+            <div>Python</div>
+            <a href="https://github.com/gudehhh666/elementcheck" target="_blank" rel="noopener noreferrer">Repository</a>
+          </div>
+        </div>
         <div class="github-card" data-repo-id="fedidata">
           <div>
             <a class="repo-link" href="https://github.com/FDUDataNET/FediData" target="_blank">
@@ -990,7 +1025,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </footer>
     <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
-      <span aria-hidden="true">&#8593;</span>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+        <path d="M12 19V5m-6 6 6-6 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </button>
 
 
@@ -1005,7 +1042,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     window.addEventListener('scroll', updateBackToTop, { passive: true });
     backToTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
     });
     updateBackToTop();
   });
@@ -1019,7 +1056,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <figcaption class="figure-viewer__caption" id="publication-figure-caption"></figcaption>
     </figure>
   </dialog>
-  <script src="publication-figures.js?v=20260910-1"></script>
+  <script src="publication-figures.js?v=20260910-2"></script>
   </body>
 
 <!--

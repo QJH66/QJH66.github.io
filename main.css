@@ -1143,19 +1143,20 @@ hr.soft {
 
 .back-to-top {
     position: fixed;
-    right: max(32px, env(safe-area-inset-right));
-    bottom: max(32px, env(safe-area-inset-bottom));
+    right: max(28px, env(safe-area-inset-right));
+    bottom: max(28px, env(safe-area-inset-bottom));
     z-index: 1000;
-    width: 52px;
-    height: 52px;
-    border: 0;
-    border-radius: 50%;
-    color: #fff;
-    background: linear-gradient(135deg, #158f83, #2f6f9f);
-    box-shadow: 0 14px 28px rgba(28, 69, 89, 0.22), 0 4px 10px rgba(28, 69, 89, 0.16);
-    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid rgba(36, 62, 65, 0.13);
+    border-radius: 16px;
+    color: #345c60;
+    background: rgba(251, 253, 252, 0.94);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(26, 47, 49, 0.08), 0 1px 3px rgba(26, 47, 49, 0.04);
     line-height: 1;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1163,8 +1164,12 @@ hr.soft {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(12px);
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, background 180ms ease, box-shadow 180ms ease
+    transform: translateY(10px) scale(0.94);
+    transition: opacity 240ms ease, transform 280ms cubic-bezier(0.16, 1, 0.3, 1), visibility 240ms ease, background 180ms ease, box-shadow 180ms ease
+}
+
+.back-to-top svg {
+    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1)
 }
 
 .back-to-top.is-visible {
@@ -1176,14 +1181,22 @@ hr.soft {
 
 .back-to-top:hover,
 .back-to-top:focus-visible {
-    background: linear-gradient(135deg, #0f766e, #245b84);
-    box-shadow: 0 16px 34px rgba(28, 69, 89, 0.28), 0 6px 14px rgba(28, 69, 89, 0.2);
-    outline: none;
+    background: #edf4f2;
+    box-shadow: 0 8px 22px rgba(26, 47, 49, 0.12), 0 2px 5px rgba(26, 47, 49, 0.04);
     transform: translateY(-2px)
 }
 
+.back-to-top:hover svg {
+    transform: translateY(-2px)
+}
+
+.back-to-top:focus-visible {
+    outline: 2px solid #345c60;
+    outline-offset: 4px
+}
+
 .back-to-top:active {
-    transform: translateY(0)
+    transform: translateY(0) scale(0.95)
 }
 
 @media (max-width: 600px) {
@@ -1192,7 +1205,7 @@ hr.soft {
         height: 46px;
         right: max(20px, env(safe-area-inset-right));
         bottom: max(20px, env(safe-area-inset-bottom));
-        font-size: 25px
+        border-radius: 15px
     }
 }
 
@@ -2129,9 +2142,9 @@ html.figure-viewer-open {
 }
 
 .figure-viewer::backdrop {
-    background: rgba(15, 24, 34, 0.72);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    background: rgba(16, 22, 30, 0.86);
+    -webkit-backdrop-filter: blur(18px) saturate(0.7);
+    backdrop-filter: blur(18px) saturate(0.7);
     opacity: 0;
     transition: opacity 300ms ease;
 }
@@ -2150,21 +2163,20 @@ html.figure-viewer-open {
     width: 100%;
     height: 100%;
     padding: 76px 24px 44px;
+    margin: 0;
 }
 
 .figure-viewer__image {
     display: block;
-    flex: 0 1 auto;
+    flex: none;
     width: auto;
     height: auto;
-    max-width: min(100%, 1600px);
-    max-height: calc(100vh - 180px);
-    max-height: calc(100dvh - 180px);
+    max-width: 100%;
     min-height: 0;
     object-fit: contain;
     background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
     transform-origin: center;
     cursor: default;
 }
@@ -2179,17 +2191,17 @@ html.figure-viewer-open {
 
 .figure-viewer__close {
     position: absolute;
-    top: max(18px, env(safe-area-inset-top));
-    right: max(18px, env(safe-area-inset-right));
+    top: max(24px, env(safe-area-inset-top));
+    right: max(24px, env(safe-area-inset-right));
     z-index: 1;
     display: grid;
     place-items: center;
     width: 44px;
     height: 44px;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
     color: #fff;
     cursor: pointer;
 }
@@ -2221,6 +2233,8 @@ html.figure-viewer-open {
 
 @media (prefers-reduced-motion: reduce) {
     .pub-figure-button,
+    .back-to-top,
+    .back-to-top svg,
     .figure-viewer::backdrop,
     .figure-viewer__caption,
     .figure-viewer__close {
@@ -2564,11 +2578,10 @@ html.figure-viewer-open {
 }
 
 .card-container {
-    display: flex;
-    justify-content: center;
-    gap: 4px 2px;  /* row gap 24px, column gap 32px */
-    flex-wrap: wrap;
-    width: 940px; /* 控制最大宽度，2列布局 */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 16px;
+    width: 100%;
     margin: 0 auto;
   }
   
@@ -2577,8 +2590,10 @@ html.figure-viewer-open {
     border-radius: 8px;
     padding: 16px;
     background-color: white;
-    margin-bottom: 2px;
-    width: 430px;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: #333;
@@ -2598,10 +2613,17 @@ html.figure-viewer-open {
     font-weight: 500;
     font-size: 14px;
   }
+
+  .github-card > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
   
   .github-card .label {
     display: inline-block;
-    margin-left: 8px;
+    margin-left: 0;
     padding: 2px 8px;
     border: 1px solid #d1d5db;
     border-radius: 9999px;
@@ -2616,7 +2638,8 @@ html.figure-viewer-open {
   }
   
   .github-card .meta {
-    margin-top: 12px;
+    margin-top: auto;
+    padding-top: 16px;
     display: flex;
     align-items: center;
     font-size: 13px;
