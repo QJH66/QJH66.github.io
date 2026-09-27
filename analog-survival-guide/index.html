@@ -1,1 +1,134 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analog Survival Guide</title><style>html,body{height:100%;margin:0}body{display:grid;place-items:center;background:#f6f5f1;color:#151515;font-family:"Songti SC","STSong","SimSun",serif}.wrap{text-align:center}.title{font:800 34px/1.1 Inter,system-ui,sans-serif;letter-spacing:-.04em}.sub{margin-top:12px;color:#746f67;font-size:15px}</style></head><body><div class="wrap"><div class="title">Analog Survival Guide</div><div class="sub">正在载入 Clover 大聪明的模电网站…</div></div><script>(async()=>{try{const files=["chunks/part-01.txt","chunks/part-02.txt","chunks/part-03.txt","chunks/part-04.txt","chunks/part-05.txt","chunks/part-06.txt","chunks/part-07.txt","chunks/part-08.txt","chunks/part-09.txt","chunks/part-10.txt"];const parts=await Promise.all(files.map(f=>fetch(f,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error(f+" "+r.status);return r.text()})));document.open();document.write(parts.join(""));document.close()}catch(e){document.body.innerHTML='<div class="wrap"><div class="title">加载失败</div><div class="sub">请刷新页面重试。</div></div>';console.error(e)}})();</script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Clover 大聪明的模电网站：模拟电子线路 B 速通、知识点、历年真题与考前清单。">
+<title>Analog Survival Guide｜Clover 模电期末生存指南</title>
+<style>
+:root{--bg:#f6f5f1;--paper:#fffdf9;--ink:#151515;--muted:#746f67;--line:#e5e0d8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+.sitebar{position:sticky;top:0;z-index:20;background:rgba(246,245,241,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+.sitebar-inner{max-width:1220px;margin:auto;padding:13px 26px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;font-weight:800;letter-spacing:-.02em}
+.nav{font-size:15px;font-weight:700}
+main{max-width:1220px;margin:auto;padding:0 26px 80px}
+.hero{padding:92px 0 62px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:Inter,ui-sans-serif,sans-serif;font-size:11px;font-weight:800;letter-spacing:.18em;color:#8b847b;text-transform:uppercase}
+h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:clamp(58px,8vw,96px);letter-spacing:-.055em;line-height:.96;margin:14px 0 0}
+.sub{font-size:22px;font-weight:800;margin-top:20px;letter-spacing:-.02em}
+.home-guide{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.65;letter-spacing:.01em}
+.section{padding-top:70px}
+.section-head{margin-bottom:24px}
+.section-head h2{font-size:42px;margin:0;letter-spacing:-.03em;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.chapter-card{position:relative;overflow:hidden;min-height:178px;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:27px 28px 25px;transition:.18s ease}
+.chapter-card:hover{transform:translateY(-2px);border-color:#d8d1c7;box-shadow:0 12px 30px rgba(40,34,27,.045)}
+.chapter-card:focus-visible{outline:2px solid #80766a;outline-offset:3px}
+.code{display:flex;align-items:center;gap:10px;font-family:Inter,ui-sans-serif,sans-serif;font-size:11px;font-weight:800;letter-spacing:.16em;color:#8b847b}
+.chapter-no{font-size:10px;letter-spacing:.14em;color:#a0978c}
+.chapter-card h2{font-size:27px;line-height:1.35;margin:13px 0 8px;font-weight:800;letter-spacing:-.02em}
+.chapter-card p{font-size:15px;color:#6a645c;margin:0;line-height:1.75}
+.enter{margin-top:auto;padding-top:20px;font-weight:800;font-size:14px}
+.enter::after{content:"";display:inline-block;width:0;height:1px;background:currentColor;vertical-align:middle;margin-left:6px;transition:width .18s ease}
+.chapter-card:hover .enter::after{width:18px}
+.loading{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;place-items:center}
+.loading.on{display:grid}
+.loading-inner{text-align:center;padding:28px}
+.loading-title{font-family:Inter,ui-sans-serif,sans-serif;font-size:30px;font-weight:800;letter-spacing:-.04em}
+.loading-sub{margin-top:11px;color:var(--muted);font-size:14px}
+.loading-bar{width:min(260px,65vw);height:2px;background:#e6e0d8;margin:20px auto 0;overflow:hidden;border-radius:999px}
+.loading-bar::after{content:"";display:block;width:38%;height:100%;background:#6f6961;animation:load 1.05s ease-in-out infinite}
+@keyframes load{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}
+.footer{max-width:1220px;margin:0 auto 28px;padding:20px 26px 0;border-top:1px solid var(--line);font-size:12px;color:#81796f}
+@media(max-width:760px){
+  main{padding:0 18px 60px}.sitebar-inner{padding:12px 18px}.grid{grid-template-columns:1fr}
+  .hero{padding-top:70px;padding-bottom:48px}.sub{font-size:19px}.home-guide{font-size:13.5px}
+  .section-head h2{font-size:38px}.chapter-card{min-height:160px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chapter-card,.enter::after{transition:none}.loading-bar::after{animation:none}}
+</style>
+</head>
+<body>
+<header class="sitebar"><div class="sitebar-inner"><div class="brand"><a href="#home">Analog Survival Guide</a></div><div class="nav">章节总览</div></div></header>
+
+<main>
+<section class="hero">
+  <div class="eyebrow">Clover's Analog Electronics</div>
+  <h1>Analog Survival Guide</h1>
+  <div class="sub">Clover 大聪明的模电网站</div>
+  <div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>章节</h2></div>
+  <div class="grid">
+    <a class="chapter-card" href="#diode"><div class="code"><span class="chapter-no">01</span><span>DIODE</span></div><h2>二极管与稳压管</h2><p>PN结、模型、温度、稳压</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#fet"><div class="code"><span class="chapter-no">02</span><span>FET</span></div><h2>场效应管</h2><p>JFET、MOSFET、Q点、小信号</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#bjt"><div class="code"><span class="chapter-no">03</span><span>BJT</span></div><h2>双极型晶体管</h2><p>静态、动态、共射/共集/共基</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#frequency"><div class="code"><span class="chapter-no">04</span><span>FREQ</span></div><h2>频率响应</h2><p>截止频率、通频带、相频</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#diff"><div class="code"><span class="chapter-no">05</span><span>DIFF</span></div><h2>差动放大</h2><p>差模、共模、恒流源</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#feedback"><div class="code"><span class="chapter-no">06</span><span>FEEDBACK</span></div><h2>反馈</h2><p>组态、深反馈、阻抗变化</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#opamp"><div class="code"><span class="chapter-no">07</span><span>OP AMP</span></div><h2>运放与比较器</h2><p>运算、比较器、迟滞</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#power"><div class="code"><span class="chapter-no">08</span><span>POWER AMP</span></div><h2>功率放大</h2><p>OCL/OTL、效率、管耗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#oscillator"><div class="code"><span class="chapter-no">09</span><span>OSC</span></div><h2>正弦波振荡</h2><p>RC、LC、振荡条件</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#modulation"><div class="code"><span class="chapter-no">10</span><span>MOD</span></div><h2>调制</h2><p>AM、FM、带宽、功率</p><div class="enter">进入章节 →</div></a>
+  </div>
+</section>
+</main>
+
+<footer class="footer">Clover 大聪明的模电网站</footer>
+<div class="loading" id="loading" aria-live="polite" aria-busy="true"><div class="loading-inner"><div class="loading-title">Analog Survival Guide</div><div class="loading-sub">正在载入这一章的完整内容…</div><div class="loading-bar"></div></div></div>
+
+<script>
+(() => {
+  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt`);
+  const loading = document.getElementById('loading');
+  let started = false;
+
+  function patchFullSite(html){
+    html = html.replace(/<section class="grid" id="quick">/g,'<section class="grid">');
+    html = html.replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
+    html = html.replace(
+      '<div class="sub">Clover 大聪明的模电网站</div></section>',
+      '<div class="sub">Clover 大聪明的模电网站</div><div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div></section>'
+    );
+    html = html.replace('</style>', '.home-guide{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.65;letter-spacing:.01em}@media(max-width:760px){.home-guide{font-size:13.5px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.route-fade{animation:none}.chapter-card,.quick,.sop-step,.chapter-pager a,.original img{transition:none}}<\/style>');
+    return html;
+  }
+
+  async function loadFullSite(){
+    if(started) return;
+    started = true;
+    loading.classList.add('on');
+    try{
+      const parts = await Promise.all(files.map(f=>fetch(f,{cache:'force-cache'}).then(r=>{
+        if(!r.ok) throw new Error(f+' '+r.status);
+        return r.text();
+      })));
+      const html = patchFullSite(parts.join(''));
+      document.open();
+      document.write(html);
+      document.close();
+    }catch(err){
+      started = false;
+      loading.classList.remove('on');
+      console.error(err);
+      alert('章节加载失败，请刷新页面重试。');
+    }
+  }
+
+  function routeNeedsFullSite(){
+    const raw = location.hash.replace(/^#/,'');
+    return raw && raw !== 'home';
+  }
+
+  window.addEventListener('hashchange',()=>{ if(routeNeedsFullSite()) loadFullSite(); });
+  if(routeNeedsFullSite()) loadFullSite();
+})();
+</script>
+</body>
+</html>
