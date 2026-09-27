@@ -518,7 +518,9 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   function refreshHomeProgress(){
     let total=0,complete=0;
     document.querySelectorAll('.chapter-card').forEach(card=>{
-      const page=(card.getAttribute('href')||'').replace(/^#/,'').split('/')[0];
+      const href=card.getAttribute('href')||'';
+      const match=href.match(/#([^/]+)/);
+      const page=match?match[1]:'';
       if(!routeMeta[page]) return;
       const done=readChapterProgress(page);
       total+=done;if(done>=8)complete++;
@@ -548,6 +550,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
       cont.href='guide.html#'+page+'/quick';cont.textContent='继续复习：'+routeMeta[page]+' →';state.classList.add('show');
     }
   }
+  // chapter-nav-feedback-v1: show instant feedback while guide.html starts loading.
+  document.querySelectorAll('a.chapter-card[href^="guide.html#"], a.continue-link[href^="guide.html#"]').forEach(a=>{
+    a.addEventListener('click',()=>{
+      loading.classList.add('on');
+      loading.setAttribute('aria-busy','true');
+    });
+  });
+
   refreshHomeProgress();
 })();
 </script>
