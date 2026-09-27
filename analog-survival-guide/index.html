@@ -119,7 +119,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div>
 <script>
 (() => {
-  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260927-3`);
+  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260927-4`);
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
   const searchInput = document.getElementById('searchInput');
@@ -149,18 +149,18 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const diodeCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
+<div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">二极管这一章的价值不在公式多，而在“状态判断必须快”。把 PN 结、二极管模型、温度和稳压管放在同一条判断链里，后面做差动与运放综合题也会继续用到。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FOUNDATION · PN JUNCTION</div><h3>先判断偏置方向，再决定导通还是截止</h3>
-<p>原笔记把本章主线压成：半导体基本概念 → PN 结单向导电 → 二极管特性与参数 → 大 / 小信号模型 → 基本应用 → 稳压管反向击穿。</p>
+<p>这里把本章主线压成：半导体基本概念 → PN 结单向导电 → 二极管特性与参数 → 大 / 小信号模型 → 基本应用 → 稳压管反向击穿。</p>
 <div class="note-formulas"><div class="note-formula">N 型：五价杂质　｜　P 型：三价杂质</div></div>
-<div class="note-tip"><b>考试抓手：</b>整流、限幅、稳压题第一步都不是列式，而是先判每只器件当前处于什么状态。</div></div></article>
+<div class="note-tip"><b>做题时：</b>整流、限幅、稳压题第一步都不是列式，而是先判每只器件当前处于什么状态。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MODEL · DIODE</div><h3>大信号看工作状态，小信号看工作点附近变化</h3>
-<p>原笔记明确把二极管大信号模型和小信号模型列为考试要点。看到直流状态判断、导通压降和交流微小变化时，要先选对模型再计算。</p>
-<div class="note-tip"><b>易错：</b>不要把“导通”理解成任何情况下都固定一个压降；题目若明确给模型，应严格按题设模型处理。</div></div></article>
+<p>这里把二极管大信号模型和小信号模型列为考试要点。看到直流状态判断、导通压降和交流微小变化时，要先选对模型再计算。</p>
+<div class="note-tip"><b>注意：</b>不要把“导通”理解成任何情况下都固定一个压降；题目若明确给模型，应严格按题设模型处理。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">ZENER · STATE CHECK</div><h3>稳压管：先假设没稳压，再用结果反证</h3>
-<p>原笔记在综合题里给出了一个很实用的方法：先假设稳压管尚未进入反向稳压区，按支路无稳压电流处理；若算出的电压超过假设条件，再切换到稳压状态重新分析。</p>
+<p>这里在综合题里给出了一个很实用的方法：先假设稳压管尚未进入反向稳压区，按支路无稳压电流处理；若算出的电压超过假设条件，再切换到稳压状态重新分析。</p>
 <div class="note-formulas"><div class="note-formula">保持正向电流不变时：温度 ↑ → 二极管正向导通电压 ↓</div></div>
 <div class="note-tip"><b>跨章价值：</b>这套“先假设状态 → 算结果 → 检查是否自洽”的思路，后面差动和运放限幅题还会继续出现。</div></div></article>
 </div></section>
@@ -168,58 +168,58 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const bjtCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
-<p class="note-atlas-intro">这里不再重复教材定义，而是保留你原笔记里最值得反复看的图：Q 点怎么动、失真怎么判、动态范围怎么卡。图保留原批注，旁边只整理成考场能调用的结论。</p>
-<div class="note-recap"><span>考前 30 秒</span><b>先 Q 点 → 再小信号 → 再三种组态 → 最后失真 / 最大摆幅</b><em>不会做时先画直流负载线和交流等效图。</em></div>
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">这一章先抓三件事：Q 点怎么动、失真怎么判、最大不失真摆幅怎么算。图留着，旁边只放做题真正会用到的东西。</p>
+<div class="note-recap"><span>复习顺序</span><b>先 Q 点 → 再小信号 → 再三种组态 → 最后失真 / 最大摆幅</b><em>卡住时先把直流负载线和交流等效图画出来。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/bjt-qpoint.jpg" alt="笔记中的 BJT Q 点与 RB、RC 变化关系图"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/bjt-qpoint.jpg" alt="这里的 BJT Q 点与 RB、RC 变化关系图"></div>
 <div class="note-copy"><div class="note-kicker">DIAGRAM · Q POINT</div><h3>R<sub>B</sub>、R<sub>C</sub> 改变时，Q 点到底怎么走？</h3>
 <p><b>改 R<sub>B</sub></b>：直流负载线不变，变化的是 I<sub>BQ</sub>，所以工作点沿原直流负载线移动。</p>
 <p><b>改 R<sub>C</sub></b>：I<sub>BQ</sub> 不变，但直流负载线斜率改变，因此 Q 点沿对应输出特性曲线移动。</p>
 <div class="note-formulas"><div class="note-formula">u<sub>CE</sub> = V<sub>CC</sub> − i<sub>C</sub>R<sub>C</sub></div><div class="note-formula">直流负载线斜率 ∝ −1 / R<sub>C</sub></div></div>
-<div class="note-tip"><b>考试抓手：</b>不要背“左移右移”，先问自己：这次是换 I<sub>B</sub> 曲线，还是换负载线？图就不会乱。</div></div>
+<div class="note-tip"><b>做题时：</b>不要背“左移右移”，先问自己：这次是换 I<sub>B</sub> 曲线，还是换负载线？图就不会乱。</div></div>
 </article>
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/bjt-distortion.jpg" alt="笔记中的截止失真和饱和失真示意图"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/bjt-distortion.jpg" alt="这里的截止失真和饱和失真示意图"></div>
 <div class="note-copy"><div class="note-kicker">EASY TO MISS · DISTORTION</div><h3>截止 / 饱和失真：先看 Q 点离哪一端更近</h3>
-<p>你的笔记把这件事压得很清楚：<b>Q 点过低，更容易碰到截止端；Q 点过高，更容易碰到饱和端。</b>输入增大后，离 Q 点更近的一侧先被“顶住”，于是输出出现削顶。</p>
+<p>这里直接记：<b>Q 点过低，更容易碰到截止端；Q 点过高，更容易碰到饱和端。</b>输入增大后，离 Q 点更近的一侧先被“顶住”，于是输出出现削顶。</p>
 <p>对 NPN 共射题，原图还把输出削顶方向画了出来。考场上结合相位反转和 Q 点位置一起判断，比单背波形更稳。</p>
 <div class="note-tip"><b>消除思路：</b>先考虑减小输入幅值；若题目要求调偏置，就把 Q 点往更合适的动态范围中部移动。</div></div>
 </article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FORMULA · DYNAMIC RANGE</div><h3>最大不失真摆幅：限制你的是更近的那一端</h3>
 <p>交流负载线经过静态工作点 Q。向饱和端和截止端分别还能摆多少，两个余量都算出来，最后取较小者。</p>
 <div class="note-formulas"><div class="note-formula">交流负载线：经过 Q，斜率 = −1 / R′<sub>L</sub></div><div class="note-formula">U<sub>R</sub> = U<sub>CEQ</sub> − U<sub>CES</sub></div><div class="note-formula">U<sub>F</sub> = I<sub>CQ</sub>R′<sub>L</sub></div><div class="note-formula">U<sub>om,max</sub> = min(U<sub>R</sub>, U<sub>F</sub>)</div></div>
-<div class="note-tip"><b>一眼识别：</b>出现“最大不失真输出 / 动态范围 / 交流负载线”，先找 Q 点到两端的余量。</div></div></article>
+<div class="note-tip"><b>看到这类题：</b>出现“最大不失真输出 / 动态范围 / 交流负载线”，先找 Q 点到两端的余量。</div></div></article>
 </div></section>
 `;
 
 
   const fetCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
+<div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">FET 这章最值得保留的不是定义堆叠，而是三张能直接带你做题的原笔记图：先认管型，再定偏置与 Q 点，最后换低频小信号模型。</p>
 <div class="note-atlas-grid">
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/fet-types.jpg" alt="笔记中的 FET 管型与转移特性快速识别图"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/fet-types.jpg" alt="这里的 FET 管型与转移特性快速识别图"></div>
 <div class="note-copy"><div class="note-kicker">DIAGRAM · TYPE ID</div><h3>看 u<sub>GS</sub> 的取值范围，先把管型认出来</h3>
 <p>按原笔记的快速识别：u<sub>GS</sub> 有正有负 → 耗尽型 MOSFET；全为正 → 增强型 MOSFET；全为负 → JFET。先认管型，再看沟道方向和转移特性。</p>
 <div class="note-formulas"><div class="note-formula">I<sub>DSS</sub>：转移曲线与 i<sub>D</sub> 轴交点</div><div class="note-formula">U<sub>GS(th)</sub> / U<sub>GS(off)</sub>：看 u<sub>GS</sub> 轴交点</div></div>
-<div class="note-tip"><b>考试抓手：</b>认管型题别先死背符号，先看 u<sub>GS</sub> 能落在哪一段。</div></div>
+<div class="note-tip"><b>做题时：</b>认管型题别先死背符号，先看 u<sub>GS</sub> 能落在哪一段。</div></div>
 </article>
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/fet-bias.jpg" alt="笔记中的 FET 自给偏置与分压偏置图"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/fet-bias.jpg" alt="这里的 FET 自给偏置与分压偏置图"></div>
 <div class="note-copy"><div class="note-kicker">METHOD · BIAS</div><h3>偏置先问：这个管能不能自偏？</h3>
 <p>JFET、耗尽型 MOSFET 可用自给偏置；增强型 MOSFET 需要 u<sub>GS</sub>&gt;0 才形成沟道，因此原笔记明确标为不适用于自给偏置。分压偏置可用于各种 FET。</p>
 <div class="note-formulas"><div class="note-formula">I<sub>G</sub> ≈ 0</div><div class="note-formula">典型 N 沟道 JFET 自偏：U<sub>GS</sub> = −I<sub>D</sub>R<sub>S</sub></div></div>
-<div class="note-tip"><b>Q 点顺序：</b>求 U<sub>G</sub> → 写 U<sub>GS</sub> → 代恒流区公式 → 求 U<sub>DS</sub> → 验工作区。</div></div>
+<div class="note-tip"><b>算 Q 点：</b>求 U<sub>G</sub> → 写 U<sub>GS</sub> → 代恒流区公式 → 求 U<sub>DS</sub> → 验工作区。</div></div>
 </article>
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/fet-small-signal.jpg" alt="笔记中的 FET 低频小信号模型与共源放大图"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/fet-small-signal.jpg" alt="这里的 FET 低频小信号模型与共源放大图"></div>
 <div class="note-copy"><div class="note-kicker">MODEL · SMALL SIGNAL</div><h3>小信号模型：g<sub>m</sub>u<sub>GS</sub> 是主角，r<sub>ds</sub> 别凭空删</h3>
 <p>低频小信号模型里，受控电流源为 g<sub>m</sub>u<sub>GS</sub>，r<sub>ds</sub> 接在漏源之间。原笔记注明 r<sub>ds</sub> 常作开路近似；若题目给出 λ 或 r<sub>ds</sub>，就应保留。</p>
 <div class="note-formulas"><div class="note-formula">交流通路：耦合 / 旁路电容按交流短路处理</div><div class="note-formula">共源 A<sub>u</sub> 常带负号；R<sub>i</sub>、R<sub>o</sub> 从等效图直接看</div></div>
-<div class="note-tip"><b>考场顺序：</b>画交流通路 → 换小信号模型 → 再列 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub>。</div></div>
+<div class="note-tip"><b>做题顺序：</b>画交流通路 → 换小信号模型 → 再列 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub>。</div></div>
 </article>
 </div></section>
 `;
@@ -227,23 +227,23 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const diffCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
+<div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">差动放大别把公式拆着背。按你的原笔记，最稳的顺序是：静态先定尾电流；动态再分差模 / 共模；最后看单端 / 双端输出以及恒流源尾电路。</p>
 <div class="note-atlas-grid">
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/diff-static.webp" alt="笔记中的差动放大静态分析电路与批注"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/diff-static.webp" alt="这里的差动放大静态分析电路与批注"></div>
 <div class="note-copy"><div class="note-kicker">METHOD · STATIC</div><h3>静态分析：先锁尾电流，再利用对称性平分</h3>
 <p>对称差动对的静态分析先从公共发射极节点入手：确定尾电流，再利用两侧对称关系得到每支路静态电流，最后回到集电极与发射极电位求 U<sub>CEQ</sub>。</p>
 <div class="note-formulas"><div class="note-formula">I<sub>tail</sub> → I<sub>C1</sub> ≈ I<sub>C2</sub> ≈ I<sub>tail</sub> / 2</div><div class="note-formula">U<sub>CEQ</sub> = U<sub>CQ</sub> − U<sub>EQ</sub></div></div>
-<div class="note-tip"><b>考试抓手：</b>不要一上来分别列两只管子的方程；先把“公共节点 → 总电流 → 对称平分”这条链写出来。</div></div>
+<div class="note-tip"><b>做题时：</b>不要一上来分别列两只管子的方程；先把“公共节点 → 总电流 → 对称平分”这条链写出来。</div></div>
 </article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MODEL · COMMON / DIFFERENTIAL</div><h3>差模看交流地，共模看每边等效 2R<sub>E</sub></h3>
 <p><b>差模：</b>两侧交流变化大小相等、方向相反，公共发射极点对交流近似不动；原笔记因此把尾电阻在差模交流等效里处理为交流地。</p>
-<p><b>共模：</b>两侧同向变化，原笔记把每个晶体管发射极一侧等效为 2R<sub>E</sub>；双端输出时，两侧共模输出理想对称并相消。</p>
+<p><b>共模：</b>两侧同向变化，这里把每个晶体管发射极一侧等效为 2R<sub>E</sub>；双端输出时，两侧共模输出理想对称并相消。</p>
 <div class="note-formulas"><div class="note-formula">差模双端：R<sub>L</sub> 中点可视为差模交流地</div><div class="note-formula">共模双端：理想对称时负载中的共模电流相消</div></div>
 <div class="note-tip"><b>原笔记冲突提示：</b>压缩总结页把“共模输入”也写成“大小相等、极性相反”，与前文共模分析口径冲突；这里不把该句作为记忆结论。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · CMRR</div><h3>恒流源尾电路：重点记住“压共模、提 CMRR、稳 Q 点”</h3>
-<p>原笔记把恒流源差动电路的优势集中在三点：减小共模增益、提高共模抑制比，并改善静态工作点的稳定性。做设计题时，这比单纯记“把 R<sub>E</sub> 换成恒流源”更有用。</p>
+<p>这里把恒流源差动电路的优势集中在三点：减小共模增益、提高共模抑制比，并改善静态工作点的稳定性。做设计题时，这比单纯记“把 R<sub>E</sub> 换成恒流源”更有用。</p>
 <div class="note-formulas"><div class="note-formula">CMRR = |A<sub>d</sub> / A<sub>c</sub>|</div><div class="note-formula">按笔记总结口径：单端 R<sub>o</sub> ≈ R<sub>C</sub>，双端 R<sub>o</sub> ≈ 2R<sub>C</sub></div></div>
 <div class="note-tip"><b>复习提醒：</b>本章原笔记对输入电阻的个别总结存在前后不一致，网站只保留一致且能直接用于做题的部分。</div></div></article>
 </div></section>
@@ -252,28 +252,28 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const opampCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
-<p class="note-atlas-intro">运放题最容易失分的地方不是算式，而是第一步就把电路类型看错。你的原笔记最适合整理成三条做题链：先判线性 / 非线性，再做运算结构，最后单独处理比较器和迟滞。</p>
-<div class="note-recap"><span>考前 30 秒</span><b>负反馈：虚短 + 虚断｜开环 / 正反馈：只保留虚断</b><em>迟滞比较器一定先求上下阈值，再看输入变化方向。</em></div>
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">运放题第一步先别算。先看它在线性区还是非线性区，再决定能不能用虚短；比例、求和、比较器分开处理会省很多事。</p>
+<div class="note-recap"><span>复习顺序</span><b>负反馈：虚短 + 虚断｜开环 / 正反馈：只保留虚断</b><em>迟滞比较器先把上下阈值标出来，再看输入是上升还是下降。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST DECISION · REGION</div><h3>第一问永远是：线性运算，还是比较器非线性？</h3>
-<p>按原笔记，负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
+<p>这里直接按负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
 <div class="note-formulas"><div class="note-formula">线性负反馈：u<sub>+</sub> ≈ u<sub>−</sub>，i<sub>+</sub> ≈ i<sub>−</sub> ≈ 0</div><div class="note-formula">理想运放：R<sub>i</sub> → ∞，R<sub>o</sub> → 0</div><div class="note-formula">比较器：先找阈值与输出限幅，不套 u<sub>+</sub> ≈ u<sub>−</sub></div></div>
 <div class="note-tip"><b>考场第一行：</b>先写“负反馈线性区”或“开环 / 正反馈非线性区”，后面的分析方法自然就定了。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · OPERATION</div><h3>运算电路：先认结构，再把复杂电路拆成一级一级</h3>
 <p>反相 / 同相比例先认反馈路径；求和电路优先用叠加法，把其余输入逐个置零；多级运放则先求前一级输出，再把它当成后一级输入。</p>
 <div class="note-formulas"><div class="note-formula">反相比例：A<sub>u</sub> = −R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">同相比例：A<sub>u</sub> = 1 + R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">反相求和：用叠加法逐路求贡献，再相加</div></div>
-<div class="note-tip"><b>易错：</b>题目要求“画传输特性”不等于它一定是比较器；先用瞬时极性判断反馈正负，再决定分析方法。</div></div></article>
+<div class="note-tip"><b>注意：</b>题目要求“画传输特性”不等于它一定是比较器；先用瞬时极性判断反馈正负，再决定分析方法。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · HYSTERESIS</div><h3>迟滞比较器画波形：先在输入波形上画两条阈值线</h3>
-<p>你的笔记给出的画法非常适合考场：先求 / 读出两个阈值，再看输入当前是上升还是下降；每次穿越相应阈值时，根据传输特性决定输出是否翻转。</p>
+<p>画波形时可以这样做：先求 / 读出两个阈值，再看输入当前是上升还是下降；每次穿越相应阈值时，根据传输特性决定输出是否翻转。</p>
 <div class="note-formulas"><div class="note-formula">求 U<sub>T1</sub>, U<sub>T2</sub> → 标 U<sub>OH</sub>, U<sub>OL</sub> → 看输入方向 → 判跳变</div><div class="note-formula">横向平移：改参考电位　｜　纵向改变：改输出限幅　｜　反向：交换 + / − 输入</div></div>
-<div class="note-tip"><b>考试抓手：</b>不要只看“输入是否超过某个值”，迟滞题必须同时看输入变化方向和当前输出状态。</div></div></article>
+<div class="note-tip"><b>做题时：</b>不要只看“输入是否超过某个值”，迟滞题必须同时看输入变化方向和当前输出状态。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · LIMITER / COMPARATOR</div><h3>单门限比较器：求阈值只是假想临界点，不代表虚短一直成立</h3>
 <p>原笔记里这类题经常把参考电压、电阻网络和输出限幅二极管放在一起。求阈值时令两个输入端“刚好相等”只是找翻转临界条件；真正工作在高 / 低饱和输出时，运放并不满足虚短。</p>
 <div class="note-formulas"><div class="note-formula">临界点：u<sub>+</sub> = u<sub>−</sub> → 解 U<sub>T</sub></div><div class="note-formula">u<sub>+</sub> &gt; u<sub>−</sub> → 输出趋向正饱和；反之趋向负饱和</div></div>
-<div class="note-tip"><b>特别容易错：</b>“求阈值时令两端相等”≠“比较器全过程都可以用虚短”。</div></div></article>
+<div class="note-tip"><b>这里容易错：</b>“求阈值时令两端相等”≠“比较器全过程都可以用虚短”。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · SUMMING</div><h3>求和题别硬列大方程：先线性叠加，再还原</h3>
-<p>你的笔记对反相 / 同相求和都推荐叠加法：一次只保留一路输入，其余独立电压源置零，先变成熟悉的比例运算电路，再把各路贡献相加。</p>
+<p>反相 / 同相求和都可以直接用叠加法：一次只保留一路输入，其余独立电压源置零，先变成熟悉的比例运算电路，再把各路贡献相加。</p>
 <div class="note-formulas"><div class="note-formula">反相求和：每一路贡献都带反相比例系数</div><div class="note-formula">同相多输入：先求 u<sub>+</sub>，再乘闭环同相增益</div></div>
 <div class="note-tip"><b>识别抓手：</b>复杂运放先找反馈电阻，再看信号究竟进“−”端还是“+”端，结构会立刻简单很多。</div></div></article>
 </div></section>
@@ -282,59 +282,59 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const frequencyCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
+<div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">频率响应这一章不适合堆公式，最重要的是把幅频 / 相频、上下限截止频率和 ±3 dB 位置放在同一张“频率地图”里。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MAP · FREQUENCY RESPONSE</div><h3>八个词要连起来记，而不是分开背</h3>
-<p>原笔记把本章考点集中在：幅频响应、相频响应、线性失真、中频增益、上限截止频率、下限截止频率、通频带和增益频带积。</p>
+<p>这里把本章考点集中在：幅频响应、相频响应、线性失真、中频增益、上限截止频率、下限截止频率、通频带和增益频带积。</p>
 <div class="note-formulas"><div class="note-formula">BW = f<sub>H</sub> − f<sub>L</sub></div><div class="note-formula">截止点：相对中频增益下降 3 dB</div></div>
-<div class="note-tip"><b>考试抓手：</b>看到频率特性表达式或波特图，先找中频平台，再找两侧 −3 dB 截止点。</div></div></article>
+<div class="note-tip"><b>做题时：</b>看到频率特性表达式或波特图，先找中频平台，再找两侧 −3 dB 截止点。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · REGION</div><h3>先判输入频率落在哪个区，再讨论幅度和相位</h3>
 <p>做题时先把频率放到低频区 / 中频区 / 高频区。原笔记特别强调 ±3 dB 附近常考，并要求分别判断两个信号频率落在哪个范围。</p>
-<div class="note-tip"><b>复习顺序：</b>频率位置 → 增益变化 → 相位变化 → 是否进入截止区。</div></div></article>
+<div class="note-tip"><b>复习时：</b>频率位置 → 增益变化 → 相位变化 → 是否进入截止区。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">LINK · FEEDBACK</div><h3>和反馈章联动：负反馈会展宽通频带</h3>
-<p>原笔记在反馈章明确总结：负反馈使上限截止频率增大、下限截止频率减小，通频带展宽。这里作为跨章联系保留。</p>
-<div class="note-tip"><b>易错：</b>不要只背“带宽变大”，要同时知道 f<sub>H</sub> 与 f<sub>L</sub> 分别往哪个方向移动。</div></div></article>
+<p>这里在反馈章明确总结：负反馈使上限截止频率增大、下限截止频率减小，通频带展宽。这里作为跨章联系保留。</p>
+<div class="note-tip"><b>注意：</b>不要只背“带宽变大”，要同时知道 f<sub>H</sub> 与 f<sub>L</sub> 分别往哪个方向移动。</div></div></article>
 </div></section>
 `;
 
   const powerCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
+<div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">功放题先别急着套效率公式。原笔记真正的主线是：工作状态 → OCL 结构 → 最大输出 → 效率 / 管耗 → 交越失真。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">CLASSIFY · CONDUCTION</div><h3>甲 / 乙 / 甲乙 / 丙类：先看导通范围和 Q 点位置</h3>
 <p>原笔记按一个周期内的导通情况区分四类工作状态，并把 Q 点位置、导通角和输入输出波形识别列为直接考点。</p>
 <div class="note-formulas"><div class="note-formula">乙类理想最大效率：η<sub>max</sub> = π / 4 ≈ 78.5%</div></div>
-<div class="note-tip"><b>考试抓手：</b>给波形就看每只管导通了多少周期；给类型就反推 Q 点位置。</div></div></article>
+<div class="note-tip"><b>做题时：</b>给波形就看每只管导通了多少周期；给类型就反推 Q 点位置。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">STRUCTURE · OCL</div><h3>OCL：两个互补共集管交替工作</h3>
-<p>笔记把双电源互补推挽乙类 OCL 概括为：NPN 与 PNP 两管各工作半个周期，交替合成完整输出；共集输出阻抗小、带负载能力强，输出与输入同相。</p>
+<p>这里把双电源互补推挽乙类 OCL 概括为：NPN 与 PNP 两管各工作半个周期，交替合成完整输出；共集输出阻抗小、带负载能力强，输出与输入同相。</p>
 <div class="note-formulas"><div class="note-formula">U<sub>(BR)CEO</sub> &gt; 2U<sub>CC</sub></div></div>
 <div class="note-tip"><b>功率管选择：</b>击穿电压条件是非常适合选择 / 填空直接考的结论。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DISTORTION · CROSSOVER</div><h3>交越失真：输入还没跨过发射结导通门槛</h3>
-<p>原笔记指出，当输入幅度小于发射结导通电压时，两只功率管会同时截止，输出在过零附近出现交越失真；改进思路是用二极管提供预偏置。</p>
-<div class="note-tip"><b>注意：</b>笔记中“最大单管损耗”的手写标注前后存在不一致，网站继续保留冲突提示，不替你擅自选一个数值。</div></div></article>
+<p>这里注意：当输入幅度小于发射结导通电压时，两只功率管会同时截止，输出在过零附近出现交越失真；改进思路是用二极管提供预偏置。</p>
+<div class="note-tip"><b>注意：</b>这里“最大单管损耗”的手写标注前后存在不一致，网站继续保留冲突提示，不替你擅自选一个数值。</div></div></article>
 </div></section>
 `;
 
   const oscillatorCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
-<p class="note-atlas-intro">振荡章最适合做成“判断树”：有没有放大？有没有正反馈？有没有选频？三问先过，再认 RC / LC / 晶体。</p>
-<div class="note-recap"><span>考前 30 秒</span><b>起振先看幅值条件 + 相位条件；稳态再回到环路增益 1</b><em>RC 看文氏桥，LC 三点式先用“射同基反”，晶体抓串 / 并联谐振点。</em></div>
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">振荡这一章先问三个问题：有没有放大、有没有正反馈、有没有选频。三件事都看完，再分 RC、LC 和晶体。</p>
+<div class="note-recap"><span>复习顺序</span><b>起振先看幅值条件 + 相位条件；稳态再回到环路增益 1</b><em>RC 先认文氏桥；LC 三点式先看“射同基反”；晶体就抓两个谐振点。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST CHECK · OSCILLATION</div><h3>先检查四个环节，再谈能不能振</h3>
-<p>原笔记把振荡电路的组成压成：放大、正反馈、选频和稳幅。复习时先检查这些环节是否存在，再进入幅值 / 相位条件。</p>
+<p>这里把振荡电路的组成压成：放大、正反馈、选频和稳幅。复习时先检查这些环节是否存在，再进入幅值 / 相位条件。</p>
 <div class="note-formulas"><div class="note-formula">起振：|AF| &gt; 1，φ<sub>A</sub> + φ<sub>F</sub> = 2nπ</div><div class="note-formula">稳态：|AF| = 1，φ<sub>A</sub> + φ<sub>F</sub> = 2nπ</div></div>
 <div class="note-tip"><b>必分清：</b>“起振”和“稳态平衡”不是同一个幅值条件；选择题特别爱在这里换概念。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">RC · WIEN BRIDGE</div><h3>文氏桥：谐振时 F = 1/3，所以放大器增益要略大于 3 才能起振</h3>
 <p>这是你振荡笔记里最值得单独拎出来的公式组。RC 文氏桥常用于低频正弦信号发生器；R、C 对称时，选频网络在谐振频率处相移为 0。</p>
 <div class="note-formulas"><div class="note-formula">f<sub>0</sub> = 1 / (2πRC)</div><div class="note-formula">谐振时 F = 1 / 3</div><div class="note-formula">同相放大器 A = 1 + R<sub>f</sub>/R<sub>1</sub>；起振时要求 A &gt; 3</div></div>
-<div class="note-tip"><b>一眼识别：</b>看到“串联 RC + 并联 RC”的文氏网络，就先写 f<sub>0</sub> 和 F=1/3。</div></div></article>
+<div class="note-tip"><b>看到这类题：</b>看到“串联 RC + 并联 RC”的文氏网络，就先写 f<sub>0</sub> 和 F=1/3。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · LC THREE-POINT</div><h3>LC 三点式先用“射同基反”判相位</h3>
 <p>三点式振荡器中，三个引出点分别接三极管三个极。原笔记给出的快速判断原则是：射极两侧接同性质电抗，基极侧接相反性质电抗。</p>
 <div class="note-formulas"><div class="note-formula">并联 LC：f &lt; f<sub>0</sub> 呈感性，f &gt; f<sub>0</sub> 呈容性</div><div class="note-formula">串联 LC：f &lt; f<sub>0</sub> 呈容性，f &gt; f<sub>0</sub> 呈感性</div></div>
-<div class="note-tip"><b>识图：</b>原笔记还提醒“电容多的是电容反馈”，可作为第一眼快速识别。</div></div></article>
+<div class="note-tip"><b>识图：</b>另外记一下“电容多的是电容反馈”，可作为第一眼快速识别。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">CRYSTAL · REACTANCE</div><h3>石英晶体只要抓住两个谐振点</h3>
 <p>原笔记总结：在串联谐振频率 ω<sub>s</sub> 附近，晶体近似短路；在并联谐振频率 ω<sub>p</sub> 附近，可表现为电感性质。</p>
 <div class="note-tip"><b>大题入口：</b>先画高频交流通路，耦合 / 旁路电容按交流处理，再用“射同基反”和晶体电抗性质判断。</div></div></article>
@@ -344,16 +344,16 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const modulationCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
+<div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">调制章最值得保留的是一条非常清晰的链：为什么调制 → SAM 时域包络 → 频谱 → 带宽 → 功率。先把 AM 主线吃透，再看真题中的 FM。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">WHY · MODULATION</div><h3>调制目的按原笔记记三点</h3>
 <p>原笔记列出的核心目的包括：降低天线长度、实现频分复用，以及增强信号抗噪声能力。选择 / 填空题很适合直接考这些结论。</p>
-<div class="note-tip"><b>记忆顺序：</b>先解决“能不能有效传输”，再解决“多个信号怎么分开”，最后记抗噪声能力。</div></div></article>
+<div class="note-tip"><b>记的时候：</b>先解决“能不能有效传输”，再解决“多个信号怎么分开”，最后记抗噪声能力。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">SAM · ENVELOPE</div><h3>标准调幅先看包络，再读调幅指数</h3>
-<p>原笔记把 SAM 包络写成上下两端幅值：(1+m<sub>a</sub>)U<sub>cm</sub> 与 (1−m<sub>a</sub>)U<sub>cm</sub>。当 m<sub>a</sub>&gt;1 时出现过调幅，包络失真；m<sub>a</sub>=1 对应 100% 调幅。</p>
+<p>这里把 SAM 包络写成上下两端幅值：(1+m<sub>a</sub>)U<sub>cm</sub> 与 (1−m<sub>a</sub>)U<sub>cm</sub>。当 m<sub>a</sub>&gt;1 时出现过调幅，包络失真；m<sub>a</sub>=1 对应 100% 调幅。</p>
 <div class="note-formulas"><div class="note-formula">0 &lt; m<sub>a</sub> ≤ 1：包络可正确反映调制信号</div><div class="note-formula">m<sub>a</sub> &gt; 1：过调幅</div></div>
-<div class="note-tip"><b>考试抓手：</b>给波形先看包络有没有“夹瘪 / 反折”，再判断是否过调幅。</div></div></article>
+<div class="note-tip"><b>做题时：</b>给波形先看包络有没有“夹瘪 / 反折”，再判断是否过调幅。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">SPECTRUM · POWER</div><h3>频谱三条线，信息在上下边频</h3>
 <p>标准单音 AM 的频谱由下边频、载频、上边频组成；原笔记特别强调只有上下边频包含调制信息。随后再进入边频功率、总功率和调制效率。</p>
 <div class="note-formulas"><div class="note-formula">f<sub>c</sub>−f<sub>m</sub>　｜　f<sub>c</sub>　｜　f<sub>c</sub>+f<sub>m</sub></div><div class="note-formula">单音 AM 带宽：BW = 2f<sub>m</sub></div></div>
@@ -363,25 +363,25 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const feedbackCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
-<p class="note-atlas-intro">反馈章最容易“每句话都会，但一上图就乱”。这里把你的判断顺序固定下来：先找反馈通路，再判极性，再判输出取样和输入混合，最后才进入深反馈计算。</p>
-<div class="note-recap"><span>考前 30 秒</span><b>找通路 → 判正负 → 输出端判电压 / 电流 → 输入端判串 / 并</b><em>深反馈再写 Ui≈Uf 或 Ii≈If；不要反过来。</em></div>
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">反馈最怕一上图就乱。先找反馈通路，再判正负，再看输出端和输入端，最后再算深反馈。顺序别跳。</p>
+<div class="note-recap"><span>复习顺序</span><b>找通路 → 判正负 → 输出端判电压 / 电流 → 输入端判串 / 并</b><em>深反馈最后再写 Ui≈Uf 或 Ii≈If。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/feedback-judge.jpg" alt="笔记中的电压电流反馈和串并联反馈判断图"></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/feedback-judge.jpg" alt="这里的电压电流反馈和串并联反馈判断图"></div>
 <div class="note-copy"><div class="note-kicker">METHOD · CLASSIFY</div><h3>四种反馈组态：拆成两个判断，别一次猜全名</h3>
 <p><b>输出端：</b>把输出负载短路。反馈消失 → 电压反馈；反馈仍存在 → 电流反馈。</p>
 <p><b>输入端：</b>输入量与反馈量落在同一点 → 并联；不在同一点 → 串联。</p>
-<div class="note-tip"><b>固定顺序：</b>找反馈通路 → 判正 / 负 → 判电压 / 电流 → 判串联 / 并联。复杂多级图也只是重复这四步。</div></div>
+<div class="note-tip"><b>按这个顺序：</b>找反馈通路 → 判正 / 负 → 判电压 / 电流 → 判串联 / 并联。复杂多级图也只是重复这四步。</div></div>
 </article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · DEEP FEEDBACK</div><h3>深度负反馈：先建立“输入量 ≈ 反馈量”</h3>
-<p>你的笔记把深反馈压成了两个非常好用的入口：串联混合时看电压，并联混合时看电流。这样通常可以直接从反馈网络求闭环关系。</p>
+<p>深反馈可以直接从这两个入口想：串联混合时看电压，并联混合时看电流。这样通常可以直接从反馈网络求闭环关系。</p>
 <div class="note-formulas"><div class="note-formula">串联反馈：U<sub>i</sub> ≈ U<sub>f</sub></div><div class="note-formula">并联反馈：I<sub>i</sub> ≈ I<sub>f</sub></div><div class="note-formula">AF ≫ 1 ⇒ A<sub>f</sub> ≈ 1 / F</div></div>
-<div class="note-tip"><b>考场习惯：</b>先判组态，再写近似关系；不要一上来就把整个多级放大器的开环增益算完。</div></div></article>
+<div class="note-tip"><b>这里建议：</b>先判组态，再写近似关系；不要一上来就把整个多级放大器的开环增益算完。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · Rᵢ / Rₒ</div><h3>输入、输出电阻变化：四句话解决设计题</h3>
 <p>输入端只看串 / 并联，输出端只看电压 / 电流取样。再配合“想稳定什么量，就引入什么量的负反馈”，就能反推所需组态。</p>
 <div class="note-formulas"><div class="note-formula">串联负反馈 → R<sub>if</sub> ↑　　并联负反馈 → R<sub>if</sub> ↓</div><div class="note-formula">电压负反馈 → R<sub>of</sub> ↓　　电流负反馈 → R<sub>of</sub> ↑</div><div class="note-formula">稳 U<sub>o</sub> → 电压反馈　　稳 I<sub>o</sub> → 电流反馈</div></div>
-<div class="note-tip"><b>反推口诀：</b>少向电压源索取电流 → 提高 R<sub>i</sub> → 串联；带负载能力强 → 降低 R<sub>o</sub> → 电压反馈。</div></div></article>
+<div class="note-tip"><b>反过来想：</b>少向电压源索取电流 → 提高 R<sub>i</sub> → 串联；带负载能力强 → 降低 R<sub>o</sub> → 电压反馈。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · REVERSE THINKING</div><h3>题目给“要求”，就从要求反推反馈组态</h3>
 <p>这是你原笔记里非常值得单独留下的一类题：不是给电路让你判反馈，而是给“稳定什么、输入输出电阻怎样变化”，让你反推该接哪一种反馈。</p>
 <div class="note-formulas"><div class="note-formula">减小向电压源索取电流 + 增强带负载能力 → 电压串联负反馈</div><div class="note-formula">电流 → 稳定电压转换 → 电压并联负反馈</div><div class="note-formula">电压 → 稳定电流转换 → 电流串联负反馈</div></div>
@@ -389,7 +389,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DC / AC · FEEDBACK</div><h3>静态稳定看直流反馈，增益 / 阻抗看交流反馈</h3>
 <p>原笔记反复强调：分析反馈时要先处理电容。对直流而言耦合 / 旁路电容开路；对中频交流而言它们通常近似短路，因此同一只电阻可能只参与直流反馈，也可能同时参与交直流反馈。</p>
 <div class="note-formulas"><div class="note-formula">稳定静态工作点 → 关注直流反馈</div><div class="note-formula">A<sub>uf</sub>、R<sub>if</sub>、R<sub>of</sub> → 画交流通路后再分析</div></div>
-<div class="note-tip"><b>高频失分点：</b>不要拿直流电路直接判断交流反馈类型；先把电容按当前分析条件处理完。</div></div></article>
+<div class="note-tip"><b>这里容易错：</b>不要拿直流电路直接判断交流反馈类型；先把电容按当前分析条件处理完。</div></div></article>
 </div></section>
 `;
 
@@ -407,13 +407,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   function polishFullHtml(html){
     const noteCss = `
 <style id="note-polish-v2">
-.note-source{margin-left:auto;color:#9a9187;font:800 10px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.12em}
-.note-recap{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;align-items:baseline;margin:18px 0 22px;padding:15px 17px;border:1px solid #ddd6cd;border-radius:16px;background:#fbf9f5}
-.note-recap span{grid-row:1/3;padding:5px 8px;border-radius:999px;background:#2d2925;color:#fff;font:800 10px/1 Inter,ui-sans-serif,sans-serif;letter-spacing:.08em;white-space:nowrap}
-.note-recap b{font-size:15px;line-height:1.55}.note-recap em{font-style:normal;color:#746d64;font-size:13px;line-height:1.55}
-.note-figure img{cursor:zoom-in;transition:transform .18s ease,box-shadow .18s ease}.note-figure img:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(35,30,25,.08)}
+.note-kicker{display:none}
+.note-recap{margin:16px 0 22px;padding:12px 0 13px;border-top:1px solid #ddd6cd;border-bottom:1px solid #ddd6cd;background:transparent}
+.note-recap span{display:block;margin-bottom:5px;color:#8a8177;font-size:12px;font-weight:700}
+.note-recap b{display:block;font-size:15px;line-height:1.65;font-weight:800}
+.note-recap em{display:block;margin-top:3px;font-style:normal;color:#746d64;font-size:13px;line-height:1.65}
+.note-figure img{cursor:zoom-in;transition:transform .18s ease,box-shadow .18s ease}.note-figure img:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(35,30,25,.06)}
 .note-panel.no-image .note-copy{padding-top:2px}
-@media(max-width:760px){.note-source{display:none}.note-recap{grid-template-columns:1fr;gap:8px}.note-recap span{grid-row:auto;width:max-content}.note-recap b{font-size:14px}}
+@media(max-width:760px){.note-recap b{font-size:14px}}
 </style>`;
     if(!html.includes('note-polish-v2')) html = html.replace('</head>', noteCss + '</head>');
     html = html
