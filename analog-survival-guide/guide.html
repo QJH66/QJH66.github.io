@@ -17,7 +17,7 @@
 <div class="shell"><div class="box"><div class="title">Analog Survival Guide</div><div class="sub" id="status">正在载入章节内容…</div><div class="bar"></div><div class="err" id="err">章节加载失败。<a href="index.html#home">返回章节总览</a> 后重试。</div></div></div>
 <script>
 (() => {
-const files=Array.from({length:10},(_,i)=>'chunks/part-'+String(i+1).padStart(2,'0')+'.txt');
+const files=Array.from({length:10},(_,i)=>'chunks/part-'+String(i+1).padStart(2,'0')+'.txt?v=20260927-2');
 function extractConst(src,name){
   const token='const '+name+' = `';
   const st=src.indexOf(token);
@@ -64,20 +64,27 @@ async function getText(url){
 }
 async function boot(){
   try{
+    document.getElementById('status').textContent='正在并行载入章节内容…';
     const loaderPromise=getText('index.html');
-    const parts=[];
-    for(let i=0;i<files.length;i++){
-      document.getElementById('status').textContent='正在载入章节内容… '+(i+1)+'/10';
-      parts.push(await getText(files[i]));
-    }
-    const loader=await loaderPromise;
-    const html=polish(parts.join(''),loader);
+    let loaded=0;
+    const partPromises=files.map((file,i)=>getText(file).then(txt=>{
+      loaded++;
+      const el=document.getElementById('status');
+      if(el) el.textContent='正在载入章节内容… '+loaded+'/10';
+      return {i,txt};
+    }));
+    const [loader,loadedParts]=await Promise.all([loaderPromise,Promise.all(partPromises)]);
+    loadedParts.sort((a,b)=>a.i-b.i);
+    const html=polish(loadedParts.map(x=>x.txt).join(''),loader);
     document.open();document.write(html);document.close();
   }catch(e){
     console.error(e);
-    document.querySelector('.bar').style.display='none';
-    document.getElementById('status').textContent='章节暂时没有载入成功';
-    document.getElementById('err').style.display='block';
+    const bar=document.querySelector('.bar');
+    if(bar) bar.style.display='none';
+    const status=document.getElementById('status');
+    if(status) status.textContent='章节暂时没有载入成功';
+    const err=document.getElementById('err');
+    if(err) err.style.display='block';
   }
 }
 boot();
