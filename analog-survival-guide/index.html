@@ -83,7 +83,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   <div class="eyebrow">Clover's Analog Electronics</div>
   <h1>Analog Survival Guide</h1>
   <div class="sub">Clover 大聪明的模电网站</div>
-  <div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div>
+  <div class="home-guide">推荐复习顺序：速通 → 核心笔记 → 知识点 → 真题 → 考前清单</div>
   <div class="home-state" id="homeState">
     <span class="overall-progress" id="overallProgress"><i></i><span>0 / 80</span></span>
     <a class="continue-link" id="continueLink" href="#diode/quick">继续上次复习 →</a>
@@ -168,10 +168,40 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FORMULA · DYNAMIC RANGE</div><h3>最大不失真摆幅：限制你的是更近的那一端</h3>
 <p>交流负载线经过静态工作点 Q。向饱和端和截止端分别还能摆多少，两个余量都算出来，最后取较小者。</p>
-<div class="note-formulas"><div class="note-formula">U<sub>R</sub> = U<sub>CEQ</sub> − U<sub>CES</sub></div><div class="note-formula">U<sub>F</sub> = I<sub>CQ</sub>R′<sub>L</sub></div><div class="note-formula">U<sub>om,max</sub> = min(U<sub>R</sub>, U<sub>F</sub>)</div></div>
+<div class="note-formulas"><div class="note-formula">交流负载线：经过 Q，斜率 = −1 / R′<sub>L</sub></div><div class="note-formula">U<sub>R</sub> = U<sub>CEQ</sub> − U<sub>CES</sub></div><div class="note-formula">U<sub>F</sub> = I<sub>CQ</sub>R′<sub>L</sub></div><div class="note-formula">U<sub>om,max</sub> = min(U<sub>R</sub>, U<sub>F</sub>)</div></div>
 <div class="note-tip"><b>一眼识别：</b>出现“最大不失真输出 / 动态范围 / 交流负载线”，先找 Q 点到两端的余量。</div></div></article>
 </div></section>
 `;
+
+
+  const fetCoreNotes = \`
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">FET 这章最值得保留的不是定义堆叠，而是三张能直接带你做题的原笔记图：先认管型，再定偏置与 Q 点，最后换低频小信号模型。</p>
+<div class="note-atlas-grid">
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/fet-types.jpg" alt="笔记中的 FET 管型与转移特性快速识别图"></div>
+<div class="note-copy"><div class="note-kicker">DIAGRAM · TYPE ID</div><h3>看 u<sub>GS</sub> 的取值范围，先把管型认出来</h3>
+<p>按原笔记的快速识别：u<sub>GS</sub> 有正有负 → 耗尽型 MOSFET；全为正 → 增强型 MOSFET；全为负 → JFET。先认管型，再看沟道方向和转移特性。</p>
+<div class="note-formulas"><div class="note-formula">I<sub>DSS</sub>：转移曲线与 i<sub>D</sub> 轴交点</div><div class="note-formula">U<sub>GS(th)</sub> / U<sub>GS(off)</sub>：看 u<sub>GS</sub> 轴交点</div></div>
+<div class="note-tip"><b>考试抓手：</b>认管型题别先死背符号，先看 u<sub>GS</sub> 能落在哪一段。</div></div>
+</article>
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/fet-bias.jpg" alt="笔记中的 FET 自给偏置与分压偏置图"></div>
+<div class="note-copy"><div class="note-kicker">METHOD · BIAS</div><h3>偏置先问：这个管能不能自偏？</h3>
+<p>JFET、耗尽型 MOSFET 可用自给偏置；增强型 MOSFET 需要 u<sub>GS</sub>&gt;0 才形成沟道，因此原笔记明确标为不适用于自给偏置。分压偏置可用于各种 FET。</p>
+<div class="note-formulas"><div class="note-formula">I<sub>G</sub> ≈ 0</div><div class="note-formula">典型 N 沟道 JFET 自偏：U<sub>GS</sub> = −I<sub>D</sub>R<sub>S</sub></div></div>
+<div class="note-tip"><b>Q 点顺序：</b>求 U<sub>G</sub> → 写 U<sub>GS</sub> → 代恒流区公式 → 求 U<sub>DS</sub> → 验工作区。</div></div>
+</article>
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/fet-small-signal.jpg" alt="笔记中的 FET 低频小信号模型与共源放大图"></div>
+<div class="note-copy"><div class="note-kicker">MODEL · SMALL SIGNAL</div><h3>小信号模型：g<sub>m</sub>u<sub>GS</sub> 是主角，r<sub>ds</sub> 别凭空删</h3>
+<p>低频小信号模型里，受控电流源为 g<sub>m</sub>u<sub>GS</sub>，r<sub>ds</sub> 接在漏源之间。原笔记注明 r<sub>ds</sub> 常作开路近似；若题目给出 λ 或 r<sub>ds</sub>，就应保留。</p>
+<div class="note-formulas"><div class="note-formula">交流通路：耦合 / 旁路电容按交流短路处理</div><div class="note-formula">共源 A<sub>u</sub> 常带负号；R<sub>i</sub>、R<sub>o</sub> 从等效图直接看</div></div>
+<div class="note-tip"><b>考场顺序：</b>画交流通路 → 换小信号模型 → 再列 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub>。</div></div>
+</article>
+</div></section>
+\`;
 
   const feedbackCoreNotes = `
 <section class="section note-atlas" id="notes">
@@ -212,6 +242,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
       .replace(/<section class="grid" id="quick">/g,'<section class="grid">')
       .replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
     html = injectNotes(html,'bjt',bjtCoreNotes);
+    html = injectNotes(html,'fet',fetCoreNotes);
     html = injectNotes(html,'feedback',feedbackCoreNotes);
     return html;
   }
@@ -359,7 +390,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     let last='';try{last=localStorage.getItem('asg-last-route')||''}catch(e){}
     if(state&&cont&&last&&/^#(diode|fet|bjt|frequency|diff|feedback|opamp|power|oscillator|modulation)(\/|$)/.test(last)){
       const [page,sec='quick']=last.slice(1).split('/');
-      const secName={quick:'速通',knowledge:'知识点',papers:'真题',check:'考前清单'}[sec]||'继续学习';
+      const secName={quick:'速通',notes:'核心笔记',knowledge:'知识点',papers:'真题',check:'考前清单'}[sec]||'继续学习';
       cont.href=last;cont.textContent='继续上次：'+routeMeta[page]+' · '+secName+' →';state.classList.add('show');
     }else if(state&&total>0){
       const page=chapterOrder.find(p=>readChapterProgress(p)<8)||'diode';
