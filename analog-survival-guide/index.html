@@ -14,9 +14,11 @@ a{color:inherit;text-decoration:none}
 .sitebar{position:sticky;top:0;z-index:20;background:rgba(246,245,241,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
 .sitebar-inner{max-width:1220px;margin:auto;padding:13px 26px;display:flex;align-items:center;justify-content:space-between}
 .brand{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;font-weight:800;letter-spacing:-.02em}
-.nav{font-size:15px;font-weight:700}
+.nav-actions{display:flex;align-items:center;gap:18px;font-size:15px;font-weight:700}
+.search-open{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-weight:700;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:7px;opacity:.72;transition:opacity .16s ease}
+.search-open:hover{opacity:1}.search-open kbd{font-family:Inter,ui-sans-serif,sans-serif;font-size:9px;font-weight:700;border:1px solid #d9d2c8;border-bottom-color:#c9c1b5;border-radius:5px;padding:2px 5px;background:#fbf9f5;color:#81796f}
 main{max-width:1220px;margin:auto;padding:0 26px 80px}
-.hero{padding:92px 0 62px;border-bottom:1px solid var(--line)}
+.hero{padding:80px 0 52px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:Inter,ui-sans-serif,sans-serif;font-size:11px;font-weight:800;letter-spacing:.18em;color:#8b847b;text-transform:uppercase}
 h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:clamp(58px,8vw,96px);letter-spacing:-.055em;line-height:.96;margin:14px 0 0}
 .sub{font-size:22px;font-weight:800;margin-top:20px;letter-spacing:-.02em}
@@ -50,10 +52,23 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   .section-head h2{font-size:38px}.chapter-card{min-height:160px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chapter-card,.enter::after{transition:none}.loading-bar::after{animation:none}}
+
+.search-layer{position:fixed;inset:0;z-index:200;background:rgba(25,22,18,.22);backdrop-filter:blur(7px);display:none;align-items:flex-start;justify-content:center;padding:10vh 18px 28px}
+.search-layer.open{display:flex}.search-panel{width:min(760px,100%);max-height:78vh;overflow:hidden;background:#fffdf9;border:1px solid #ddd6cc;border-radius:22px;box-shadow:0 28px 90px rgba(32,27,21,.18);display:flex;flex-direction:column}
+.search-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.search-head input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--ink);font:700 18px/1.4 "Songti SC","STSong","SimSun",serif}
+.search-head input::placeholder{color:#aaa198}.search-close{border:0;background:transparent;color:#8a8278;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}
+.search-status{padding:14px 20px;color:#8b847b;font-size:12px;border-bottom:1px solid #eee9e1}
+.search-results{overflow:auto;padding:8px}.search-result{display:block;padding:13px 14px;border-radius:13px}.search-result:hover,.search-result:focus-visible{background:#f6f3ed;outline:0}
+.search-result-top{display:flex;align-items:center;gap:9px;margin-bottom:4px}.search-type{font-family:Inter,ui-sans-serif,sans-serif;font-size:9px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#91887e}.search-chapter{font-size:12px;color:#8b847b}
+.search-result-title{font-size:16px;font-weight:800;line-height:1.45}.search-result-snippet{margin-top:3px;color:#6b655d;font-size:13px;line-height:1.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-empty{padding:34px 20px;text-align:center;color:#8b847b;font-size:14px}
+@media(max-width:760px){.hero{padding-top:60px;padding-bottom:42px}.nav-actions{gap:12px}.search-open kbd{display:none}.search-layer{padding-top:7vh}.search-panel{border-radius:18px;max-height:82vh}.search-head{padding:15px 16px}.search-head input{font-size:16px}}
+
 </style>
 </head>
 <body>
-<header class="sitebar"><div class="sitebar-inner"><div class="brand"><a href="#home">Analog Survival Guide</a></div><div class="nav">章节总览</div></div></header>
+<header class="sitebar"><div class="sitebar-inner"><div class="brand"><a href="#home">Analog Survival Guide</a></div><div class="nav-actions"><span>章节总览</span><button class="search-open" id="openSearch" type="button" aria-label="全站搜索">搜索 <kbd>/</kbd></button></div></div></header>
 
 <main>
 <section class="hero">
@@ -66,16 +81,16 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <section class="section">
   <div class="section-head"><h2>章节</h2></div>
   <div class="grid">
-    <a class="chapter-card" href="#diode"><div class="code"><span class="chapter-no">01</span><span>DIODE</span></div><h2>二极管与稳压管</h2><p>PN结、模型、温度、稳压</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#fet"><div class="code"><span class="chapter-no">02</span><span>FET</span></div><h2>场效应管</h2><p>JFET、MOSFET、Q点、小信号</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#bjt"><div class="code"><span class="chapter-no">03</span><span>BJT</span></div><h2>双极型晶体管</h2><p>静态、动态、共射/共集/共基</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#frequency"><div class="code"><span class="chapter-no">04</span><span>FREQ</span></div><h2>频率响应</h2><p>截止频率、通频带、相频</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#diff"><div class="code"><span class="chapter-no">05</span><span>DIFF</span></div><h2>差动放大</h2><p>差模、共模、恒流源</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#feedback"><div class="code"><span class="chapter-no">06</span><span>FEEDBACK</span></div><h2>反馈</h2><p>组态、深反馈、阻抗变化</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#opamp"><div class="code"><span class="chapter-no">07</span><span>OP AMP</span></div><h2>运放与比较器</h2><p>运算、比较器、迟滞</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#power"><div class="code"><span class="chapter-no">08</span><span>POWER AMP</span></div><h2>功率放大</h2><p>OCL/OTL、效率、管耗</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#oscillator"><div class="code"><span class="chapter-no">09</span><span>OSC</span></div><h2>正弦波振荡</h2><p>RC、LC、振荡条件</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="#modulation"><div class="code"><span class="chapter-no">10</span><span>MOD</span></div><h2>调制</h2><p>AM、FM、带宽、功率</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#diode"><div class="code"><span class="chapter-no">01</span><span>DIODE</span></div><h2>二极管与稳压管</h2><p>状态判断、模型、温度与稳压</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#fet"><div class="code"><span class="chapter-no">02</span><span>FET</span></div><h2>场效应管</h2><p>Q点、小信号、增益与阻抗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#bjt"><div class="code"><span class="chapter-no">03</span><span>BJT</span></div><h2>双极型晶体管</h2><p>Q点、微变等效、三种组态</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#frequency"><div class="code"><span class="chapter-no">04</span><span>FREQ</span></div><h2>频率响应</h2><p>fL / fH、波特图、通频带</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#diff"><div class="code"><span class="chapter-no">05</span><span>DIFF</span></div><h2>差动放大</h2><p>差模 / 共模、CMRR、恒流源</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#feedback"><div class="code"><span class="chapter-no">06</span><span>FEEDBACK</span></div><h2>反馈</h2><p>判型、深反馈、增益与阻抗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#opamp"><div class="code"><span class="chapter-no">07</span><span>OP AMP</span></div><h2>运放与比较器</h2><p>虚短虚断、运算、比较器</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#power"><div class="code"><span class="chapter-no">08</span><span>POWER AMP</span></div><h2>功率放大</h2><p>OCL / OTL、效率、最大管耗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#oscillator"><div class="code"><span class="chapter-no">09</span><span>OSC</span></div><h2>正弦波振荡</h2><p>起振条件、RC / LC、振荡频率</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="#modulation"><div class="code"><span class="chapter-no">10</span><span>MOD</span></div><h2>调制</h2><p>AM / FM、带宽与功率</p><div class="enter">进入章节 →</div></a>
   </div>
 </section>
 </main>
@@ -83,51 +98,142 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <footer class="footer">Clover 大聪明的模电网站</footer>
 <div class="loading" id="loading" aria-live="polite" aria-busy="true"><div class="loading-inner"><div class="loading-title">Analog Survival Guide</div><div class="loading-sub">正在载入这一章的完整内容…</div><div class="loading-bar"></div></div></div>
 
+<div class="search-layer" id="searchLayer" aria-hidden="true">
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="全站搜索">
+    <div class="search-head"><input id="searchInput" type="search" autocomplete="off" placeholder="搜索知识点、真题、关键词…"><button class="search-close" id="searchClose" type="button" aria-label="关闭搜索">×</button></div>
+    <div class="search-status" id="searchStatus">输入关键词开始搜索</div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
 <script>
 (() => {
   const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt`);
   const loading = document.getElementById('loading');
+  const searchLayer = document.getElementById('searchLayer');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const searchStatus = document.getElementById('searchStatus');
+  const routeMeta = {
+    diode:'二极管与稳压管',fet:'场效应管',bjt:'双极型晶体管',frequency:'频率响应',diff:'差动放大',
+    feedback:'反馈',opamp:'运放与比较器',power:'功率放大',oscillator:'正弦波振荡',modulation:'调制'
+  };
   let started = false;
+  let fullHtmlPromise = null;
+  let homeSearchIndex = null;
+
+  const fullExtraCSS = `
+.nav-search{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-size:15px;font-weight:700;padding:0;cursor:pointer;opacity:.72;transition:opacity .16s}.nav-search:hover{opacity:1}
+.search-layer{position:fixed;inset:0;z-index:400;background:rgba(25,22,18,.22);backdrop-filter:blur(7px);display:none;align-items:flex-start;justify-content:center;padding:10vh 18px 28px}.search-layer.open{display:flex}
+.search-panel{width:min(760px,100%);max-height:78vh;overflow:hidden;background:#fffdf9;border:1px solid #ddd6cc;border-radius:22px;box-shadow:0 28px 90px rgba(32,27,21,.18);display:flex;flex-direction:column}
+.search-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.search-head input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--ink);font:700 18px/1.4 "Songti SC","STSong","SimSun",serif}.search-head input::placeholder{color:#aaa198}
+.search-close{border:0;background:transparent;color:#8a8278;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}.search-status{padding:14px 20px;color:#8b847b;font-size:12px;border-bottom:1px solid #eee9e1}.search-results{overflow:auto;padding:8px}
+.search-result{display:block;padding:13px 14px;border-radius:13px}.search-result:hover,.search-result:focus-visible{background:#f6f3ed;outline:0}.search-result-top{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.search-type{font-family:Inter,ui-sans-serif,sans-serif;font-size:9px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#91887e}.search-chapter{font-size:12px;color:#8b847b}.search-result-title{font-size:16px;font-weight:800;line-height:1.45}.search-result-snippet{margin-top:3px;color:#6b655d;font-size:13px;line-height:1.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.search-empty{padding:34px 20px;text-align:center;color:#8b847b;font-size:14px}
+.check-progress{margin-left:auto;flex:0 0 auto;padding:5px 9px;border:1px solid #ddd6cd;border-radius:999px;background:#fbf9f5;color:#696158;font:700 11px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.01em}
+#check .section-head{align-items:center}
+@media(max-width:760px){.nav-search{font-size:14px}.search-layer{padding-top:7vh}.search-panel{border-radius:18px;max-height:82vh}.search-head{padding:15px 16px}.search-head input{font-size:16px}.check-progress{margin-top:10px;margin-left:0;display:inline-flex}}
+`;
+
+  const fullSearchOverlay = `<div class="search-layer" id="asgSearchLayer" aria-hidden="true"><div class="search-panel" role="dialog" aria-modal="true" aria-label="全站搜索"><div class="search-head"><input id="asgSearchInput" type="search" autocomplete="off" placeholder="搜索知识点、真题、关键词…"><button class="search-close" id="asgSearchClose" type="button" aria-label="关闭搜索">×</button></div><div class="search-status" id="asgSearchStatus">输入关键词开始搜索</div><div class="search-results" id="asgSearchResults"></div></div></div>`;
+
+  const fullEnhancementCode = `
+  function buildASGSearchIndex(){
+    const out=[]; const chapterNames={diode:'二极管与稳压管',fet:'场效应管',bjt:'双极型晶体管',frequency:'频率响应',diff:'差动放大',feedback:'反馈',opamp:'运放与比较器',power:'功率放大',oscillator:'正弦波振荡',modulation:'调制'};
+    ORDER.forEach(page=>{
+      const tpl=document.getElementById('tpl-'+page); if(!tpl) return; const root=tpl.content;
+      out.push({page,type:'章节',title:chapterNames[page],snippet:(root.querySelector('.hero-lead')?.textContent||'').trim(),hash:'#'+page+'/quick'});
+      root.querySelectorAll('.quick h3').forEach(el=>out.push({page,type:'速通',title:el.textContent.trim(),snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'}));
+      root.querySelectorAll('details.knowledge-item').forEach(el=>out.push({page,type:'知识点',title:(el.querySelector('summary')?.textContent||'').trim(),snippet:(el.querySelector('.knowledge-lead')?.textContent||el.querySelector('.knowledge-body p')?.textContent||'').trim(),hash:'#'+page+'/knowledge'}));
+      root.querySelectorAll('.exam-title h3').forEach(el=>out.push({page,type:'真题',title:el.textContent.trim(),snippet:[...el.parentElement.querySelectorAll('.tag')].map(x=>x.textContent.trim()).join(' · '),hash:'#'+page+'/papers'}));
+    }); return out;
+  }
+  const asgSearchLayer=document.getElementById('asgSearchLayer'), asgSearchInput=document.getElementById('asgSearchInput'), asgSearchResults=document.getElementById('asgSearchResults'), asgSearchStatus=document.getElementById('asgSearchStatus');
+  const asgIndex=buildASGSearchIndex();
+  function escASG(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function renderASGSearch(q){
+    q=q.trim().toLowerCase(); if(!q){asgSearchStatus.textContent='输入关键词开始搜索';asgSearchResults.innerHTML='';return;}
+    const terms=q.split(/\\s+/).filter(Boolean); const scored=asgIndex.map(x=>{const t=(x.title+' '+x.snippet+' '+x.type+' '+(META[x.page]?.name||'')).toLowerCase();const title=x.title.toLowerCase();let score=0;terms.forEach(k=>{if(title.includes(k))score+=5;if(t.includes(k))score+=2;});return {x,score};}).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,14);
+    asgSearchStatus.textContent=scored.length?'找到 '+scored.length+' 个最相关结果':'没有找到匹配内容';
+    asgSearchResults.innerHTML=scored.length?scored.map(({x})=>'<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+escASG(x.type)+'</span><span class="search-chapter">'+escASG(META[x.page]?.name||'')+'</span></div><div class="search-result-title">'+escASG(x.title)+'</div><div class="search-result-snippet">'+escASG(x.snippet)+'</div></a>').join(''):'<div class="search-empty">换一个关键词试试，例如：深反馈、CMRR、OCL、稳压管</div>';
+  }
+  function openASGSearch(){asgSearchLayer.classList.add('open');asgSearchLayer.setAttribute('aria-hidden','false');setTimeout(()=>asgSearchInput.focus(),0);}
+  function closeASGSearch(){asgSearchLayer.classList.remove('open');asgSearchLayer.setAttribute('aria-hidden','true');}
+  document.addEventListener('click',e=>{if(e.target.closest('.nav-search'))openASGSearch();if(e.target.id==='asgSearchClose'||e.target===asgSearchLayer)closeASGSearch();if(e.target.closest('.search-result'))closeASGSearch();});
+  asgSearchInput.addEventListener('input',()=>renderASGSearch(asgSearchInput.value));
+  document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openASGSearch();}if(e.key==='Escape'&&asgSearchLayer.classList.contains('open'))closeASGSearch();});
+
+  function setupCheckProgress(){
+    const section=app.querySelector('#check'); if(!section) return; const boxes=[...section.querySelectorAll('.check-box')]; if(!boxes.length)return;
+    let badge=section.querySelector('.check-progress'); if(!badge){badge=document.createElement('div');badge.className='check-progress';section.querySelector('.section-head')?.appendChild(badge);}
+    const done=boxes.filter(x=>x.checked).length; badge.textContent=done===boxes.length?'已完成 '+done+' / '+boxes.length:done+' / '+boxes.length+' 完成';
+  }
+  app.addEventListener('change',e=>{if(e.target.matches('.check-box'))requestAnimationFrame(setupCheckProgress);});
+  const asgObserver=new MutationObserver(()=>requestAnimationFrame(setupCheckProgress));asgObserver.observe(app,{childList:true,subtree:true});setupCheckProgress();
+`;
+
+  async function getFullHtml(){
+    if(!fullHtmlPromise) fullHtmlPromise = Promise.all(files.map(f=>fetch(f,{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error(f+' '+r.status);return r.text();}))).then(parts=>parts.join(''));
+    return fullHtmlPromise;
+  }
 
   function patchFullSite(html){
     html = html.replace(/<section class="grid" id="quick">/g,'<section class="grid">');
-    html = html.replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
-    html = html.replace(
-      '<div class="sub">Clover 大聪明的模电网站</div></section>',
-      '<div class="sub">Clover 大聪明的模电网站</div><div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div></section>'
-    );
-    html = html.replace('</style>', '.home-guide{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.65;letter-spacing:.01em}@media(max-width:760px){.home-guide{font-size:13.5px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.route-fade{animation:none}.chapter-card,.quick,.sop-step,.chapter-pager a,.original img{transition:none}}<\/style>');
+    html = html.replace(/<section class="section"><div class="section-head"><h2>速通<\\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
+    html = html.replace('<div class="sub">Clover 大聪明的模电网站</div></section>','<div class="sub">Clover 大聪明的模电网站</div><div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div></section>');
+    const copy={"PN结、模型、温度、稳压":"状态判断、模型、温度与稳压","JFET、MOSFET、Q点、小信号":"Q点、小信号、增益与阻抗","静态、动态、共射/共集/共基":"Q点、微变等效、三种组态","截止频率、通频带、相频":"fL / fH、波特图、通频带","差模、共模、恒流源":"差模 / 共模、CMRR、恒流源","组态、深反馈、阻抗变化":"判型、深反馈、增益与阻抗","运算、比较器、迟滞":"虚短虚断、运算、比较器","OCL/OTL、效率、管耗":"OCL / OTL、效率、最大管耗","RC、LC、振荡条件":"起振条件、RC / LC、振荡频率","AM、FM、带宽、功率":"AM / FM、带宽与功率"};
+    Object.entries(copy).forEach(([a,b])=>{html=html.replace(a,b);});
+    html = html.replace('</style>', '.home-guide{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.65;letter-spacing:.01em}'+fullExtraCSS+'</style>');
+    html = html.replace("nav.innerHTML = '<a class=\\\"is-active\\\" href=\\\"#home\\\">章节总览</a>';","nav.innerHTML = '<a class=\\\"is-active\\\" href=\\\"#home\\\">章节总览</a><button class=\\\"nav-search\\\" type=\\\"button\\\">搜索</button>'; ");
+    html = html.replace("    }).join('');\\n  }","    }).join('') + '<button class=\\\"nav-search\\\" type=\\\"button\\\">搜索</button>';\\n  }");
+    html = html.replace('<div id="globalLightbox"', fullSearchOverlay+'<div id="globalLightbox"');
+    html = html.replace("  window.addEventListener('hashchange', render);\\n  render();","  window.addEventListener('hashchange', render);\\n  render();\\n"+fullEnhancementCode);
     return html;
   }
 
   async function loadFullSite(){
     if(started) return;
-    started = true;
-    loading.classList.add('on');
+    started = true; loading.classList.add('on');
     try{
-      const parts = await Promise.all(files.map(f=>fetch(f,{cache:'force-cache'}).then(r=>{
-        if(!r.ok) throw new Error(f+' '+r.status);
-        return r.text();
-      })));
-      const html = patchFullSite(parts.join(''));
-      document.open();
-      document.write(html);
-      document.close();
+      const html = patchFullSite(await getFullHtml());
+      document.open(); document.write(html); document.close();
     }catch(err){
-      started = false;
-      loading.classList.remove('on');
-      console.error(err);
-      alert('章节加载失败，请刷新页面重试。');
+      started=false;loading.classList.remove('on');console.error(err);alert('章节加载失败，请刷新页面重试。');
     }
   }
 
-  function routeNeedsFullSite(){
-    const raw = location.hash.replace(/^#/,'');
-    return raw && raw !== 'home';
+  function buildHomeIndex(html){
+    const doc=new DOMParser().parseFromString(html,'text/html'); const out=[];
+    Object.entries(routeMeta).forEach(([page,name])=>{
+      const tpl=doc.getElementById('tpl-'+page); if(!tpl)return; const root=tpl.content;
+      out.push({page,type:'章节',title:name,snippet:(root.querySelector('.hero-lead')?.textContent||'').trim(),hash:'#'+page+'/quick'});
+      root.querySelectorAll('.quick h3').forEach(el=>out.push({page,type:'速通',title:el.textContent.trim(),snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'}));
+      root.querySelectorAll('details.knowledge-item').forEach(el=>out.push({page,type:'知识点',title:(el.querySelector('summary')?.textContent||'').trim(),snippet:(el.querySelector('.knowledge-lead')?.textContent||el.querySelector('.knowledge-body p')?.textContent||'').trim(),hash:'#'+page+'/knowledge'}));
+      root.querySelectorAll('.exam-title h3').forEach(el=>out.push({page,type:'真题',title:el.textContent.trim(),snippet:[...el.parentElement.querySelectorAll('.tag')].map(x=>x.textContent.trim()).join(' · '),hash:'#'+page+'/papers'}));
+    }); return out;
   }
+  function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  async function ensureHomeIndex(){
+    if(homeSearchIndex)return homeSearchIndex; searchStatus.textContent='正在建立全站索引…'; homeSearchIndex=buildHomeIndex(await getFullHtml()); searchStatus.textContent='输入关键词开始搜索'; return homeSearchIndex;
+  }
+  async function runHomeSearch(){
+    const q=searchInput.value.trim().toLowerCase(); if(!q){searchStatus.textContent='输入关键词开始搜索';searchResults.innerHTML='';return;}
+    const idx=await ensureHomeIndex(); const terms=q.split(/\\s+/).filter(Boolean);
+    const scored=idx.map(x=>{const all=(x.title+' '+x.snippet+' '+x.type+' '+routeMeta[x.page]).toLowerCase();const title=x.title.toLowerCase();let score=0;terms.forEach(k=>{if(title.includes(k))score+=5;if(all.includes(k))score+=2;});return {x,score};}).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,14);
+    searchStatus.textContent=scored.length?'找到 '+scored.length+' 个最相关结果':'没有找到匹配内容';
+    searchResults.innerHTML=scored.length?scored.map(({x})=>'<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+esc(x.type)+'</span><span class="search-chapter">'+esc(routeMeta[x.page])+'</span></div><div class="search-result-title">'+esc(x.title)+'</div><div class="search-result-snippet">'+esc(x.snippet)+'</div></a>').join(''):'<div class="search-empty">换一个关键词试试，例如：深反馈、CMRR、OCL、稳压管</div>';
+  }
+  function openSearch(){searchLayer.classList.add('open');searchLayer.setAttribute('aria-hidden','false');ensureHomeIndex().catch(console.error);setTimeout(()=>searchInput.focus(),0);}
+  function closeSearch(){searchLayer.classList.remove('open');searchLayer.setAttribute('aria-hidden','true');}
+  document.getElementById('openSearch').addEventListener('click',openSearch);
+  document.getElementById('searchClose').addEventListener('click',closeSearch);
+  searchLayer.addEventListener('click',e=>{if(e.target===searchLayer)closeSearch();});
+  searchResults.addEventListener('click',e=>{if(e.target.closest('.search-result'))closeSearch();});
+  searchInput.addEventListener('input',()=>runHomeSearch().catch(console.error));
+  document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openSearch();}if(e.key==='Escape'&&searchLayer.classList.contains('open'))closeSearch();});
 
-  window.addEventListener('hashchange',()=>{ if(routeNeedsFullSite()) loadFullSite(); });
-  if(routeNeedsFullSite()) loadFullSite();
+  function routeNeedsFullSite(){const raw=location.hash.replace(/^#/,'');return raw&&raw!=='home';}
+  window.addEventListener('hashchange',()=>{if(routeNeedsFullSite())loadFullSite();});
+  if(routeNeedsFullSite())loadFullSite();
 })();
 </script>
 </body>
