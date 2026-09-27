@@ -119,7 +119,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div>
 <script>
 (() => {
-  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260928-2`);
+  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260928-3`);
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
   const searchInput = document.getElementById('searchInput');
@@ -243,24 +243,28 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   const diffCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
-<p class="note-atlas-intro">差动放大别拆着背公式。这章按这个顺序最省事：静态先定尾电流；动态再分差模 / 共模；最后看单端 / 双端输出以及恒流源尾电路。</p>
+<p class="note-atlas-intro">差动放大别拆着背公式。这章按这个顺序最省事：静态先定尾电流；动态再分差模 / 共模；最后看单端 / 双端输出和恒流源尾电路。</p>
 <div class="note-atlas-grid">
 <article class="note-panel">
-<div class="note-figure"><img loading="lazy" src="assets/notes/diff-static.webp" alt="这里的差动放大静态分析电路与批注"></div>
-<div class="note-copy"><div class="note-kicker">METHOD · STATIC</div><h3>静态分析：先锁尾电流，再利用对称性平分</h3>
-<p>对称差动对的静态分析先从公共发射极节点入手：确定尾电流，再利用两侧对称关系得到每支路静态电流，最后回到集电极与发射极电位求 U<sub>CEQ</sub>。</p>
-<div class="note-formulas"><div class="note-formula">I<sub>tail</sub> → I<sub>C1</sub> ≈ I<sub>C2</sub> ≈ I<sub>tail</sub> / 2</div><div class="note-formula">U<sub>CEQ</sub> = U<sub>CQ</sub> − U<sub>EQ</sub></div></div>
-<div class="note-tip"><b>做题时：</b>不要一上来分别列两只管子的方程；先把“公共节点 → 总电流 → 对称平分”这条链写出来。</div></div>
+<div class="note-figure"><img loading="lazy" src="assets/notes/diff-static.webp" alt="差动放大静态分析电路与批注"></div>
+<div class="note-copy"><h3>静态分析：先锁尾电流，再利用对称性平分</h3>
+<p>先求公共发射极点电位，再得到尾电流。两边参数相同，就先各分一半，再回到集电极求 U<sub>CEQ</sub>。</p>
+<div class="note-formulas"><div class="note-formula">I<sub>tail</sub> → I<sub>C1</sub> ≈ I<sub>C2</sub> ≈ I<sub>tail</sub>/2</div><div class="note-formula">U<sub>CEQ</sub> = U<sub>CQ</sub> − U<sub>EQ</sub></div></div>
+<div class="note-tip"><b>做题时：</b>不要一上来分别列两只管子的方程，先把“公共节点 → 总电流 → 对称平分”走完。</div></div>
 </article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MODEL · COMMON / DIFFERENTIAL</div><h3>差模看交流地，共模看每边等效 2R<sub>E</sub></h3>
-<p><b>差模：</b>两侧交流变化大小相等、方向相反，公共发射极点对交流近似不动；所以差模分析时公共发射极点可近似看成交流地。</p>
-<p><b>共模：</b>两侧同向变化，这里把每个晶体管发射极一侧等效为 2R<sub>E</sub>；双端输出时，两侧共模输出理想对称并相消。</p>
-<div class="note-formulas"><div class="note-formula">差模双端：R<sub>L</sub> 中点可视为差模交流地</div><div class="note-formula">共模双端：理想对称时负载中的共模电流相消</div></div>
-<div class="note-tip"><b>这里注意：</b>压缩总结页把“共模输入”也写成“大小相等、极性相反”，与前文共模分析口径冲突；这里不把该句作为记忆结论。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · CMRR</div><h3>恒流源尾电路：重点记住“压共模、提 CMRR、稳 Q 点”</h3>
-<p>这里把恒流源差动电路的优势集中在三点：减小共模增益、提高共模抑制比，并改善静态工作点的稳定性。做设计题时，这比单纯记“把 R<sub>E</sub> 换成恒流源”更有用。</p>
-<div class="note-formulas"><div class="note-formula">CMRR = |A<sub>d</sub> / A<sub>c</sub>|</div><div class="note-formula">常用近似：单端 R<sub>o</sub> ≈ R<sub>C</sub>，双端 R<sub>o</sub> ≈ 2R<sub>C</sub></div></div>
-<div class="note-tip"><b>注意：</b>本章输入电阻这块笔记前后有一处写法不一致，这里只留做题时确定的结论。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>差模、共模，先看两边是反着动还是一起动</h3>
+<p><b>差模：</b>两输入大小相等、极性相反。两边交流变化相反，公共发射极点近似不动，所以差模分析时可把它看成交流地。</p>
+<p><b>共模：</b>两输入大小相等、极性相同。两边一起变化，每只管看到的发射极电阻可等效成 2R<sub>E</sub>；双端输出时理想共模分量会相消。</p>
+<div class="note-formulas"><div class="note-formula">差模双端：R<sub>L</sub> 中点可视为交流地</div><div class="note-formula">共模双端：理想情况下 u<sub>o</sub> ≈ 0</div></div>
+<div class="note-tip"><b>这章的核心：</b>有用信号按差模放大，温漂和电源扰动尽量当成共模压掉。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>单端 / 双端输出，先把“2 倍关系”记住</h3>
+<p>差模输入时，双端输出把两边的变化作差，所以电压增益是单端输出的 2 倍；输出电阻也随取法变化。</p>
+<div class="note-formulas"><div class="note-formula">A<sub>ud,双</sub> = 2A<sub>ud,单</sub></div><div class="note-formula">R<sub>o,单</sub> ≈ R<sub>C</sub>　｜　R<sub>o,双</sub> ≈ 2R<sub>C</sub></div></div>
+<div class="note-tip"><b>做题时：</b>先看题目到底从一个集电极取输出，还是从两个集电极之间取输出。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>恒流源尾电路：主要就是为了把共模压得更低</h3>
+<p>把长尾电阻换成恒流源后，尾电流更稳定，共模增益更小，静态工作点也更稳，因此 CMRR 会提高。</p>
+<div class="note-formulas"><div class="note-formula">CMRR = |A<sub>d</sub>/A<sub>c</sub>|</div></div>
+<div class="note-tip"><b>记用途：</b>抑制零点漂移、压共模、稳 Q 点，这三个是一条线。</div></div></article>
 </div></section>
 `;
 
@@ -268,29 +272,30 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   const opampCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
-<p class="note-atlas-intro">运放题第一步先别算。先看它在线性区还是非线性区，再决定能不能用虚短；比例、求和、比较器分开处理会省很多事。</p>
+<p class="note-atlas-intro">运放题第一步先别算。先看它在线性区还是非线性区，再决定能不能用虚短；比例、求和、积分微分、比较器分开处理。</p>
 <div class="note-recap"><span>复习顺序</span><b>负反馈：虚短 + 虚断｜开环 / 正反馈：只保留虚断</b><em>迟滞比较器先把上下阈值标出来，再看输入是上升还是下降。</em></div>
 <div class="note-atlas-grid">
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST DECISION · REGION</div><h3>第一问永远是：线性运算，还是比较器非线性？</h3>
-<p>这里直接按负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
-<div class="note-formulas"><div class="note-formula">线性负反馈：u<sub>+</sub> ≈ u<sub>−</sub>，i<sub>+</sub> ≈ i<sub>−</sub> ≈ 0</div><div class="note-formula">理想运放：R<sub>i</sub> → ∞，R<sub>o</sub> → 0</div><div class="note-formula">比较器：先找阈值与输出限幅，不套 u<sub>+</sub> ≈ u<sub>−</sub></div></div>
-<div class="note-tip"><b>考场第一行：</b>先写“负反馈线性区”或“开环 / 正反馈非线性区”，后面的分析方法自然就定了。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · OPERATION</div><h3>运算电路：先认结构，再把复杂电路拆成一级一级</h3>
-<p>反相 / 同相比例先认反馈路径；求和电路优先用叠加法，把其余输入逐个置零；多级运放则先求前一级输出，再把它当成后一级输入。</p>
-<div class="note-formulas"><div class="note-formula">反相比例：A<sub>u</sub> = −R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">同相比例：A<sub>u</sub> = 1 + R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">反相求和：用叠加法逐路求贡献，再相加</div></div>
-<div class="note-tip"><b>注意：</b>题目要求“画传输特性”不等于它一定是比较器；先用瞬时极性判断反馈正负，再决定分析方法。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · HYSTERESIS</div><h3>迟滞比较器画波形：先在输入波形上画两条阈值线</h3>
-<p>画波形时可以这样做：先求 / 读出两个阈值，再看输入当前是上升还是下降；每次穿越相应阈值时，根据传输特性决定输出是否翻转。</p>
-<div class="note-formulas"><div class="note-formula">求 U<sub>T1</sub>, U<sub>T2</sub> → 标 U<sub>OH</sub>, U<sub>OL</sub> → 看输入方向 → 判跳变</div><div class="note-formula">横向平移：改参考电位　｜　纵向改变：改输出限幅　｜　反向：交换 + / − 输入</div></div>
-<div class="note-tip"><b>做题时：</b>不要只看“输入是否超过某个值”，迟滞题必须同时看输入变化方向和当前输出状态。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · LIMITER / COMPARATOR</div><h3>单门限比较器：求阈值只是假想临界点，不代表虚短一直成立</h3>
-<p>原笔记里这类题经常把参考电压、电阻网络和输出限幅二极管放在一起。求阈值时令两个输入端“刚好相等”只是找翻转临界条件；真正工作在高 / 低饱和输出时，运放并不满足虚短。</p>
-<div class="note-formulas"><div class="note-formula">临界点：u<sub>+</sub> = u<sub>−</sub> → 解 U<sub>T</sub></div><div class="note-formula">u<sub>+</sub> &gt; u<sub>−</sub> → 输出趋向正饱和；反之趋向负饱和</div></div>
-<div class="note-tip"><b>这里容易错：</b>“求阈值时令两端相等”≠“比较器全过程都可以用虚短”。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · SUMMING</div><h3>求和题别硬列大方程：先线性叠加，再还原</h3>
-<p>反相 / 同相求和都可以直接用叠加法：一次只保留一路输入，其余独立电压源置零，先变成熟悉的比例运算电路，再把各路贡献相加。</p>
-<div class="note-formulas"><div class="note-formula">反相求和：每一路贡献都带反相比例系数</div><div class="note-formula">同相多输入：先求 u<sub>+</sub>，再乘闭环同相增益</div></div>
-<div class="note-tip"><b>看图时：</b>复杂运放先找反馈电阻，再看信号究竟进“−”端还是“+”端，结构会立刻简单很多。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>第一问永远是：线性运算，还是比较器非线性？</h3>
+<p>负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
+<div class="note-formulas"><div class="note-formula">线性负反馈：u<sub>+</sub> ≈ u<sub>−</sub>，i<sub>+</sub> ≈ i<sub>−</sub> ≈ 0</div><div class="note-formula">理想运放：R<sub>i</sub> → ∞，R<sub>o</sub> → 0</div></div>
+<div class="note-tip"><b>第一行先写清楚：</b>“负反馈线性区”还是“开环 / 正反馈非线性区”。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>比例运算：先认反相还是同相</h3>
+<p>反相看输入电阻和反馈电阻；同相看闭环反馈网络。多级运放就一级一级往后算，不要一上来列总方程。</p>
+<div class="note-formulas"><div class="note-formula">反相：A<sub>u</sub> = −R<sub>f</sub>/R<sub>1</sub></div><div class="note-formula">同相：A<sub>u</sub> = 1 + R<sub>f</sub>/R<sub>1</sub></div></div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>求和题别硬列大方程：先线性叠加</h3>
+<p>一次只保留一路输入，其余独立电压源置零，先变成熟悉的比例运算电路，再把各路贡献相加。</p>
+<div class="note-formulas"><div class="note-formula">反相求和：各路贡献带反相比例系数后相加</div><div class="note-formula">同相多输入：先求 u<sub>+</sub>，再乘闭环同相增益</div></div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>积分 / 微分：先看电容放在哪</h3>
+<p>反馈支路放电容是积分；输入支路放电容、反馈支路放电阻是微分。</p>
+<div class="note-formulas"><div class="note-formula">积分：u<sub>o</sub> = −(1/RC)∫u<sub>i</sub>dt</div><div class="note-formula">微分：u<sub>o</sub> = −RC·du<sub>i</sub>/dt</div></div>
+<div class="note-tip"><b>先看图：</b>C 在输入还是反馈，电路类型基本就定了。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>单门限比较器：求阈值时两端相等，不代表全过程虚短</h3>
+<p>令 u<sub>+</sub> = u<sub>−</sub> 只是为了找翻转临界点。真正输出处在高 / 低饱和时，运放并不满足虚短。</p>
+<div class="note-formulas"><div class="note-formula">临界点：u<sub>+</sub> = u<sub>−</sub> → 解 U<sub>T</sub></div><div class="note-formula">u<sub>+</sub> &gt; u<sub>−</sub> → 输出趋向正饱和</div></div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>迟滞比较器：先画两条阈值线</h3>
+<p>先求 U<sub>T1</sub>、U<sub>T2</sub>，再看输入是上升还是下降。每次穿越对应阈值时，再判断输出是否翻转。</p>
+<div class="note-formulas"><div class="note-formula">U<sub>T1</sub>, U<sub>T2</sub> → 标 U<sub>OH</sub>, U<sub>OL</sub> → 看输入方向 → 判跳变</div></div>
+<div class="note-tip"><b>为什么抗干扰：</b>两个不同阈值形成回差，门限附近的小抖动不容易让输出来回翻转；代价是灵敏度低一些。</div></div></article>
 </div></section>
 `;
 
@@ -305,7 +310,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-formulas"><div class="note-formula">BW = f<sub>H</sub> − f<sub>L</sub></div><div class="note-formula">截止点：相对中频增益下降 3 dB</div></div>
 <div class="note-tip"><b>做题时：</b>看到频率特性表达式或波特图，先找中频平台，再找两侧 −3 dB 截止点。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · REGION</div><h3>先判输入频率落在哪个区，再讨论幅度和相位</h3>
-<p>做题时先把频率放到低频区 / 中频区 / 高频区。原笔记特别强调 ±3 dB 附近常考，并要求分别判断两个信号频率落在哪个范围。</p>
+<p>做题时先把频率放到低频区 / 中频区 / 高频区。这里特别注意 ±3 dB 附近常考，并要求分别判断两个信号频率落在哪个范围。</p>
 <div class="note-tip"><b>复习时：</b>频率位置 → 增益变化 → 相位变化 → 是否进入截止区。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">LINK · FEEDBACK</div><h3>和反馈章联动：负反馈会展宽通频带</h3>
 <p>这里在反馈章明确总结：负反馈使上限截止频率增大、下限截止频率减小，通频带展宽。这里作为跨章联系保留。</p>
@@ -316,19 +321,23 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   const powerCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
-<p class="note-atlas-intro">功放题先别急着套效率公式。这一章就按这条线复习：工作状态 → OCL 结构 → 最大输出 → 效率 / 管耗 → 交越失真。</p>
+<p class="note-atlas-intro">功放题先看工作状态和结构，别一上来套效率公式。按：工作状态 → OCL → 交越失真 → 效率 / 管耗 来复习。</p>
 <div class="note-atlas-grid">
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">CLASSIFY · CONDUCTION</div><h3>甲 / 乙 / 甲乙 / 丙类：先看导通范围和 Q 点位置</h3>
-<p>按一个周期内的导通情况区分四类工作状态，并把 Q 点位置、导通角和输入输出波形识别列为直接考点。</p>
-<div class="note-formulas"><div class="note-formula">乙类理想最大效率：η<sub>max</sub> = π / 4 ≈ 78.5%</div></div>
-<div class="note-tip"><b>做题时：</b>给波形就看每只管导通了多少周期；给类型就反推 Q 点位置。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">STRUCTURE · OCL</div><h3>OCL：两个互补共集管交替工作</h3>
-<p>这里把双电源互补推挽乙类 OCL 概括为：NPN 与 PNP 两管各工作半个周期，交替合成完整输出；共集输出阻抗小、带负载能力强，输出与输入同相。</p>
-<div class="note-formulas"><div class="note-formula">U<sub>(BR)CEO</sub> &gt; 2U<sub>CC</sub></div></div>
-<div class="note-tip"><b>选管时：</b>击穿电压条件是非常适合选择 / 填空直接考的结论。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DISTORTION · CROSSOVER</div><h3>交越失真：输入还没跨过发射结导通门槛</h3>
-<p>这里注意：当输入幅度小于发射结导通电压时，两只功率管会同时截止，输出在过零附近出现交越失真；改进思路是用二极管提供预偏置。</p>
-<div class="note-tip"><b>注意：</b>这里“最大单管损耗”的手写标注前后存在不一致，网站继续保留冲突提示，不替你擅自选一个数值。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>甲、乙、甲乙、丙：先看导通范围，再看 Q 点</h3>
+<p>给类型就看 Q 点在哪；给输入输出波形，就看每只管在一个周期里导通了多少。</p>
+<div class="note-formulas"><div class="note-formula">甲类：整个周期导通</div><div class="note-formula">乙类：半个周期导通，Q 点在截止附近</div><div class="note-formula">甲乙类：大于半个周期导通</div><div class="note-formula">乙类理想最大效率：η<sub>max</sub> = π/4 ≈ 78.5%</div></div>
+<div class="note-tip"><b>选择题：</b>导通范围、Q 点位置、效率经常放在一起考。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>OCL：两只互补管一人管半个周期</h3>
+<p>双电源互补推挽 OCL 本质上就是两个共集电路拼在一起：NPN 管正半周，PNP 管负半周，最后在负载上合成完整输出。</p>
+<div class="note-formulas"><div class="note-formula">静态理想功耗 ≈ 0</div><div class="note-formula">输出与输入同相，R<sub>o</sub> 小，带负载能力强</div><div class="note-formula">选管：U<sub>(BR)CEO</sub> &gt; 2U<sub>CC</sub></div></div>
+<div class="note-tip"><b>看结构：</b>NPN + PNP 互补、双电源、射极输出，基本就是 OCL。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>交越失真：过零附近两只管都还没导通</h3>
+<p>输入幅度小于发射结导通电压时，两只功率管会短暂同时截止，于是输出过零附近出现凹口。</p>
+<div class="note-tip"><b>怎么改：</b>加二极管预偏置，让两只管提前一点导通，把纯乙类推到甲乙类。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>效率和管耗别混：最大效率不等于最大管耗</h3>
+<p>乙类 OCL 的最大效率出现在输出幅度尽量接近电源电压时；单管耗散功率最大却在另一处工作点。</p>
+<div class="note-formulas"><div class="note-formula">最大效率：η<sub>max</sub> = π/4 ≈ 78.5%</div><div class="note-formula">单管损耗最大时：ξ = 2/π</div></div>
+<div class="note-tip"><b>这里要分清：</b>ξ = 1 对应最大效率；ξ = 2/π 对应单管损耗最大。</div></div></article>
 </div></section>
 `;
 
@@ -362,7 +371,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">调制按一条线看：为什么调制 → 包络 → 频谱 → 带宽 → 功率。AM 先吃透，FM 放到真题里补。</p>
 <div class="note-atlas-grid">
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">WHY · MODULATION</div><h3>调制目的按原笔记记三点</h3>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">WHY · MODULATION</div><h3>调制目的按这里的复习顺序记三点</h3>
 <p>调制的核心目的记三点：降低天线长度、实现频分复用，以及增强信号抗噪声能力。选择 / 填空题很适合直接考这些结论。</p>
 <div class="note-tip"><b>记的时候：</b>先解决“能不能有效传输”，再解决“多个信号怎么分开”，最后记抗噪声能力。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">SAM · ENVELOPE</div><h3>标准调幅先看包络，再读调幅指数</h3>
