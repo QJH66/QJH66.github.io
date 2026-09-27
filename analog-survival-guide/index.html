@@ -23,8 +23,16 @@ main{max-width:1220px;margin:auto;padding:0 26px 80px}
 h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:clamp(58px,8vw,96px);letter-spacing:-.055em;line-height:.96;margin:14px 0 0}
 .sub{font-size:22px;font-weight:800;margin-top:20px;letter-spacing:-.02em}
 .home-guide{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.65;letter-spacing:.01em}
+.home-state{margin-top:20px;display:none;align-items:center;flex-wrap:wrap;gap:10px 14px}
+.home-state.show{display:flex}.overall-progress{display:inline-flex;align-items:center;gap:9px;padding:7px 11px;border:1px solid #ddd6cd;border-radius:999px;background:#fbf9f5;color:#625b53;font:700 12px/1.2 Inter,ui-sans-serif,sans-serif}
+.overall-progress i{display:block;width:64px;height:3px;border-radius:99px;background:#e7e1d8;overflow:hidden}.overall-progress i::after{content:"";display:block;width:var(--p,0%);height:100%;background:#514b44;border-radius:inherit;transition:width .25s ease}
+.continue-link{font-size:13px;font-weight:800;color:#4d4740;border-bottom:1px solid #bfb6aa;padding-bottom:2px}.continue-link:hover{border-color:#4d4740}
+.chapter-progress{position:absolute;top:25px;right:27px;padding:4px 8px;border-radius:999px;border:1px solid #e1dbd2;background:#faf8f4;color:#817970;font:700 10px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.02em}
+.chapter-progress.done{background:#2b2824;border-color:#2b2824;color:#fff}.chapter-card.has-progress .code{padding-right:54px}
+.section-summary{margin-left:auto;color:#81796f;font:700 12px/1.2 Inter,ui-sans-serif,sans-serif}
+
 .section{padding-top:70px}
-.section-head{margin-bottom:24px}
+.section-head{margin-bottom:24px;display:flex;align-items:end;justify-content:space-between;gap:18px}
 .section-head h2{font-size:42px;margin:0;letter-spacing:-.03em;font-weight:800}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .chapter-card{position:relative;overflow:hidden;min-height:178px;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:27px 28px 25px;transition:.18s ease}
@@ -49,7 +57,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 @media(max-width:760px){
   main{padding:0 18px 60px}.sitebar-inner{padding:12px 18px}.grid{grid-template-columns:1fr}
   .hero{padding-top:70px;padding-bottom:48px}.sub{font-size:19px}.home-guide{font-size:13.5px}
-  .section-head h2{font-size:38px}.chapter-card{min-height:160px}
+  .section-head h2{font-size:38px}.section-summary{font-size:11px}.chapter-card{min-height:160px}.chapter-progress{top:22px;right:22px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chapter-card,.enter::after{transition:none}.loading-bar::after{animation:none}}
 
@@ -76,10 +84,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   <h1>Analog Survival Guide</h1>
   <div class="sub">Clover 大聪明的模电网站</div>
   <div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div>
+  <div class="home-state" id="homeState">
+    <span class="overall-progress" id="overallProgress"><i></i><span>0 / 80</span></span>
+    <a class="continue-link" id="continueLink" href="#diode/quick">继续上次复习 →</a>
+  </div>
 </section>
 
 <section class="section">
-  <div class="section-head"><h2>章节</h2></div>
+  <div class="section-head"><h2>章节</h2><div class="section-summary" id="sectionSummary"></div></div>
   <div class="grid">
     <a class="chapter-card" href="#diode"><div class="code"><span class="chapter-no">01</span><span>DIODE</span></div><h2>二极管与稳压管</h2><p>状态判断、模型、温度与稳压</p><div class="enter">进入章节 →</div></a>
     <a class="chapter-card" href="#fet"><div class="code"><span class="chapter-no">02</span><span>FET</span></div><h2>场效应管</h2><p>Q点、小信号、增益与阻抗</p><div class="enter">进入章节 →</div></a>
@@ -130,6 +142,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 .search-result{display:block;padding:13px 14px;border-radius:13px}.search-result:hover,.search-result:focus-visible{background:#f6f3ed;outline:0}.search-result-top{display:flex;align-items:center;gap:9px;margin-bottom:4px}
 .search-type{font-family:Inter,ui-sans-serif,sans-serif;font-size:9px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#91887e}.search-chapter{font-size:12px;color:#8b847b}.search-result-title{font-size:16px;font-weight:800;line-height:1.45}.search-result-snippet{margin-top:3px;color:#6b655d;font-size:13px;line-height:1.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.search-empty{padding:34px 20px;text-align:center;color:#8b847b;font-size:14px}
 .check-progress{margin-left:auto;flex:0 0 auto;padding:5px 9px;border:1px solid #ddd6cd;border-radius:999px;background:#fbf9f5;color:#696158;font:700 11px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.01em}
+.check-progress.done{background:#2b2824;border-color:#2b2824;color:#fff}.chapter-finish-note{display:none;margin-top:18px;padding:14px 16px;border:1px solid #dcd5cb;border-radius:15px;background:#fbf9f5;color:#514b44;font-size:14px;line-height:1.65}.chapter-finish-note.show{display:block}.chapter-finish-note strong{color:#211f1c}
 #check .section-head{align-items:center}
 @media(max-width:760px){.nav-search{font-size:14px}.search-layer{padding-top:7vh}.search-panel{border-radius:18px;max-height:82vh}.search-head{padding:15px 16px}.search-head input{font-size:16px}.check-progress{margin-top:10px;margin-left:0;display:inline-flex}}
 `;
@@ -162,12 +175,20 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   asgSearchInput.addEventListener('input',()=>renderASGSearch(asgSearchInput.value));
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openASGSearch();}if(e.key==='Escape'&&asgSearchLayer.classList.contains('open'))closeASGSearch();});
 
+  function rememberASGRoute(){
+    const r=parseRoute(); if(r.page==='home') return;
+    const sec=r.section||'quick'; try{localStorage.setItem('asg-last-route','#'+r.page+'/'+sec)}catch(e){}
+  }
   function setupCheckProgress(){
     const section=app.querySelector('#check'); if(!section) return; const boxes=[...section.querySelectorAll('.check-box')]; if(!boxes.length)return;
     let badge=section.querySelector('.check-progress'); if(!badge){badge=document.createElement('div');badge.className='check-progress';section.querySelector('.section-head')?.appendChild(badge);}
-    const done=boxes.filter(x=>x.checked).length; badge.textContent=done===boxes.length?'已完成 '+done+' / '+boxes.length:done+' / '+boxes.length+' 完成';
+    const done=boxes.filter(x=>x.checked).length; const all=done===boxes.length;
+    badge.textContent=all?'本章完成 '+done+' / '+boxes.length:done+' / '+boxes.length+' 完成'; badge.classList.toggle('done',all);
+    let note=section.querySelector('.chapter-finish-note'); if(!note){note=document.createElement('div');note.className='chapter-finish-note';note.innerHTML='<strong>本章已通关。</strong> 建议下一步直接做下一章速通；考前再回来快速扫一遍真题和清单。';section.appendChild(note);}
+    note.classList.toggle('show',all);
   }
   app.addEventListener('change',e=>{if(e.target.matches('.check-box'))requestAnimationFrame(setupCheckProgress);});
+  window.addEventListener('hashchange',rememberASGRoute); rememberASGRoute();
   const asgObserver=new MutationObserver(()=>requestAnimationFrame(setupCheckProgress));asgObserver.observe(app,{childList:true,subtree:true});setupCheckProgress();
 `;
 
@@ -230,6 +251,52 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   searchResults.addEventListener('click',e=>{if(e.target.closest('.search-result'))closeSearch();});
   searchInput.addEventListener('input',()=>runHomeSearch().catch(console.error));
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openSearch();}if(e.key==='Escape'&&searchLayer.classList.contains('open'))closeSearch();});
+
+
+  const chapterOrder=['diode','fet','bjt','frequency','diff','feedback','opamp','power','oscillator','modulation'];
+  const homeState=document.getElementById('homeState');
+  const overallProgress=document.getElementById('overallProgress');
+  const continueLink=document.getElementById('continueLink');
+  const sectionSummary=document.getElementById('sectionSummary');
+
+  function readChapterProgress(page){
+    let saved={}; try{saved=JSON.parse(localStorage.getItem('asg-single-check-'+page)||'{}')}catch(e){}
+    return Object.values(saved).filter(Boolean).length;
+  }
+  function refreshHomeProgress(){
+    let total=0, touched=0, complete=0;
+    document.querySelectorAll('.chapter-card').forEach(card=>{
+      const page=(card.getAttribute('href')||'').replace(/^#/,'').split('/')[0];
+      if(!page) return;
+      const done=readChapterProgress(page); total+=done;
+      if(done>0)touched++; if(done>=8)complete++;
+      let badge=card.querySelector('.chapter-progress');
+      if(!badge){badge=document.createElement('span');badge.className='chapter-progress';card.appendChild(badge);}
+      badge.textContent=done>=8?'完成':done+'/8';
+      badge.classList.toggle('done',done>=8);
+      card.classList.toggle('has-progress',done>0);
+      badge.style.display=done>0?'inline-flex':'none';
+    });
+    const pct=Math.round(total/80*100);
+    overallProgress.style.setProperty('--p',pct+'%');
+    overallProgress.querySelector('span').textContent=total+' / 80';
+    sectionSummary.textContent=total?('已完成 '+total+' / 80 · '+complete+' 章通关'):'';
+    let last=''; try{last=localStorage.getItem('asg-last-route')||''}catch(e){}
+    if(last && /^#(diode|fet|bjt|frequency|diff|feedback|opamp|power|oscillator|modulation)(\/|$)/.test(last)){
+      const raw=last.slice(1).split('/'); const page=raw[0], sec=raw[1]||'quick';
+      const secName={quick:'速通',knowledge:'知识点',papers:'真题',check:'考前清单'}[sec]||'继续学习';
+      continueLink.href=last; continueLink.textContent='继续上次：'+routeMeta[page]+' · '+secName+' →';
+      homeState.classList.add('show');
+    }else if(total>0){
+      const page=chapterOrder.find(p=>readChapterProgress(p)<8)||'diode';
+      continueLink.href='#'+page+'/quick'; continueLink.textContent='继续复习：'+routeMeta[page]+' →';
+      homeState.classList.add('show');
+    }else{
+      homeState.classList.remove('show');
+    }
+  }
+  refreshHomeProgress();
+  window.addEventListener('storage',refreshHomeProgress);
 
   function routeNeedsFullSite(){const raw=location.hash.replace(/^#/,'');return raw&&raw!=='home';}
   window.addEventListener('hashchange',()=>{if(routeNeedsFullSite())loadFullSite();});
