@@ -404,7 +404,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
       root.querySelectorAll('.note-panel h3').forEach(el=>out.push({page,type:'核心笔记',title:el.textContent.trim(),snippet:(el.closest('.note-copy')?.querySelector('p')?.textContent||'').trim(),hash:'guide.html#'+page+'/notes'}));
       root.querySelectorAll('.quick h3').forEach(el=>out.push({
         page,type:'速通',title:el.textContent.trim(),
-        snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'
+        snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'guide.html#'+page+'/quick'
       }));
       root.querySelectorAll('details.knowledge-item').forEach(el=>out.push({
         page,type:'知识点',title:(el.querySelector('summary')?.textContent||'').trim(),
