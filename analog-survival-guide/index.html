@@ -199,7 +199,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   function patchFullSite(html){
     html = html.replace(/<section class="grid" id="quick">/g,'<section class="grid">');
-    html = html.replace(/<section class="section"><div class="section-head"><h2>速通<\\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
+    html = html.replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
     html = html.replace('<div class="sub">Clover 大聪明的模电网站</div></section>','<div class="sub">Clover 大聪明的模电网站</div><div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div></section>');
     const copy={"PN结、模型、温度、稳压":"状态判断、模型、温度与稳压","JFET、MOSFET、Q点、小信号":"Q点、小信号、增益与阻抗","静态、动态、共射/共集/共基":"Q点、微变等效、三种组态","截止频率、通频带、相频":"fL / fH、波特图、通频带","差模、共模、恒流源":"差模 / 共模、CMRR、恒流源","组态、深反馈、阻抗变化":"判型、深反馈、增益与阻抗","运算、比较器、迟滞":"虚短虚断、运算、比较器","OCL/OTL、效率、管耗":"OCL / OTL、效率、最大管耗","RC、LC、振荡条件":"起振条件、RC / LC、振荡频率","AM、FM、带宽、功率":"AM / FM、带宽与功率"};
     Object.entries(copy).forEach(([a,b])=>{html=html.replace(a,b);});
