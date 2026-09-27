@@ -174,7 +174,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 `;
 
 
-  const fetCoreNotes = \`
+  const fetCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
 <p class="note-atlas-intro">FET 这章最值得保留的不是定义堆叠，而是三张能直接带你做题的原笔记图：先认管型，再定偏置与 Q 点，最后换低频小信号模型。</p>
@@ -201,7 +201,53 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-tip"><b>考场顺序：</b>画交流通路 → 换小信号模型 → 再列 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub>。</div></div>
 </article>
 </div></section>
-\`;
+`;
+
+
+  const diffCoreNotes = `
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">差动放大别把公式拆着背。按你的原笔记，最稳的顺序是：静态先定尾电流；动态再分差模 / 共模；最后看单端 / 双端输出以及恒流源尾电路。</p>
+<div class="note-atlas-grid">
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/diff-static.webp" alt="笔记中的差动放大静态分析电路与批注"></div>
+<div class="note-copy"><div class="note-kicker">METHOD · STATIC</div><h3>静态分析：先锁尾电流，再利用对称性平分</h3>
+<p>对称差动对的静态分析先从公共发射极节点入手：确定尾电流，再利用两侧对称关系得到每支路静态电流，最后回到集电极与发射极电位求 U<sub>CEQ</sub>。</p>
+<div class="note-formulas"><div class="note-formula">I<sub>tail</sub> → I<sub>C1</sub> ≈ I<sub>C2</sub> ≈ I<sub>tail</sub> / 2</div><div class="note-formula">U<sub>CEQ</sub> = U<sub>CQ</sub> − U<sub>EQ</sub></div></div>
+<div class="note-tip"><b>考试抓手：</b>不要一上来分别列两只管子的方程；先把“公共节点 → 总电流 → 对称平分”这条链写出来。</div></div>
+</article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MODEL · COMMON / DIFFERENTIAL</div><h3>差模看交流地，共模看每边等效 2R<sub>E</sub></h3>
+<p><b>差模：</b>两侧交流变化大小相等、方向相反，公共发射极点对交流近似不动；原笔记因此把尾电阻在差模交流等效里处理为交流地。</p>
+<p><b>共模：</b>两侧同向变化，原笔记把每个晶体管发射极一侧等效为 2R<sub>E</sub>；双端输出时，两侧共模输出理想对称并相消。</p>
+<div class="note-formulas"><div class="note-formula">差模双端：R<sub>L</sub> 中点可视为差模交流地</div><div class="note-formula">共模双端：理想对称时负载中的共模电流相消</div></div>
+<div class="note-tip"><b>原笔记冲突提示：</b>压缩总结页把“共模输入”也写成“大小相等、极性相反”，与前文共模分析口径冲突；这里不把该句作为记忆结论。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · CMRR</div><h3>恒流源尾电路：重点记住“压共模、提 CMRR、稳 Q 点”</h3>
+<p>原笔记把恒流源差动电路的优势集中在三点：减小共模增益、提高共模抑制比，并改善静态工作点的稳定性。做设计题时，这比单纯记“把 R<sub>E</sub> 换成恒流源”更有用。</p>
+<div class="note-formulas"><div class="note-formula">CMRR = |A<sub>d</sub> / A<sub>c</sub>|</div><div class="note-formula">按笔记总结口径：单端 R<sub>o</sub> ≈ R<sub>C</sub>，双端 R<sub>o</sub> ≈ 2R<sub>C</sub></div></div>
+<div class="note-tip"><b>复习提醒：</b>本章原笔记对输入电阻的个别总结存在前后不一致，网站只保留一致且能直接用于做题的部分。</div></div></article>
+</div></section>
+`;
+
+
+  const opampCoreNotes = `
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">运放题最容易失分的地方不是算式，而是第一步就把电路类型看错。你的原笔记最适合整理成三条做题链：先判线性 / 非线性，再做运算结构，最后单独处理比较器和迟滞。</p>
+<div class="note-atlas-grid">
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST DECISION · REGION</div><h3>第一问永远是：线性运算，还是比较器非线性？</h3>
+<p>按原笔记，负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
+<div class="note-formulas"><div class="note-formula">线性负反馈：u<sub>+</sub> ≈ u<sub>−</sub>，i<sub>+</sub> ≈ i<sub>−</sub> ≈ 0</div><div class="note-formula">比较器：先找阈值与输出限幅，不套 u<sub>+</sub> ≈ u<sub>−</sub></div></div>
+<div class="note-tip"><b>原笔记冲突提示：</b>正文中有一处“理想运放输入 / 输出电阻”文字与后文表述相互冲突；网站不把那句作为记忆结论。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · OPERATION</div><h3>运算电路：先认结构，再把复杂电路拆成一级一级</h3>
+<p>反相 / 同相比例先认反馈路径；求和电路优先用叠加法，把其余输入逐个置零；多级运放则先求前一级输出，再把它当成后一级输入。</p>
+<div class="note-formulas"><div class="note-formula">反相比例：A<sub>u</sub> = −R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">同相比例：A<sub>u</sub> = 1 + R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">反相求和：用叠加法逐路求贡献，再相加</div></div>
+<div class="note-tip"><b>易错：</b>题目要求“画传输特性”不等于它一定是比较器；先用瞬时极性判断反馈正负，再决定分析方法。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · HYSTERESIS</div><h3>迟滞比较器画波形：先在输入波形上画两条阈值线</h3>
+<p>你的笔记给出的画法非常适合考场：先求 / 读出两个阈值，再看输入当前是上升还是下降；每次穿越相应阈值时，根据传输特性决定输出是否翻转。</p>
+<div class="note-formulas"><div class="note-formula">求 U<sub>T1</sub>, U<sub>T2</sub> → 标 U<sub>OH</sub>, U<sub>OL</sub> → 看输入方向 → 判跳变</div><div class="note-formula">横向平移：改参考电位　｜　纵向改变：改输出限幅　｜　反向：交换 + / − 输入</div></div>
+<div class="note-tip"><b>考试抓手：</b>不要只看“输入是否超过某个值”，迟滞题必须同时看输入变化方向和当前输出状态。</div></div></article>
+</div></section>
+`;
 
   const feedbackCoreNotes = `
 <section class="section note-atlas" id="notes">
@@ -239,11 +285,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   function polishFullHtml(html){
     html = html
+      .replace("['home','章节'],['quick','速通'],['knowledge','知识点'],['papers','真题'],['check','考前清单']","['home','章节'],['quick','速通'],['notes','核心笔记'],['knowledge','知识点'],['papers','真题'],['check','考前清单']")
       .replace(/<section class="grid" id="quick">/g,'<section class="grid">')
       .replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
     html = injectNotes(html,'bjt',bjtCoreNotes);
     html = injectNotes(html,'fet',fetCoreNotes);
+    html = injectNotes(html,'diff',diffCoreNotes);
     html = injectNotes(html,'feedback',feedbackCoreNotes);
+    html = injectNotes(html,'opamp',opampCoreNotes);
     return html;
   }
 
@@ -337,7 +386,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     searchStatus.textContent=hits.length?'找到 '+hits.length+' 个最相关结果':'没有找到匹配内容';
     searchResults.innerHTML=hits.length?hits.map(({x}) =>
       '<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+esc(x.type)+'</span><span class="search-chapter">'+esc(routeMeta[x.page])+'</span></div><div class="search-result-title">'+esc(x.title)+'</div><div class="search-result-snippet">'+esc(x.snippet)+'</div></a>'
-    ).join(''):'<div class="search-empty">换一个关键词试试，例如：深反馈、CMRR、OCL、稳压管</div>';
+    ).join(''):'<div class="search-empty">换一个关键词试试，例如：差模、CMRR、迟滞、深反馈、OCL</div>';
   }
 
   function openSearch(){
