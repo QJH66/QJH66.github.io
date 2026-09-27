@@ -218,6 +218,22 @@ body{min-height:100vh}
 .mock-exam .label{color:#776f65}
 @media(max-width:760px){.mock-exam .solution{padding:22px 20px}}
 
+
+/* v2.1 Core Notes / Note Atlas */
+.note-atlas{padding-top:72px}.note-atlas .section-head{margin-bottom:14px}
+.note-atlas-intro{max-width:780px;margin:0 0 24px;color:var(--muted);font-size:15px;line-height:1.85}
+.note-atlas-grid{display:grid;gap:18px}
+.note-panel{display:grid;grid-template-columns:minmax(260px,.88fr) minmax(0,1.12fr);overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:22px}
+.note-panel.no-image{grid-template-columns:1fr}
+.note-figure{display:flex;align-items:center;justify-content:center;min-height:250px;padding:18px;background:#f1eee8;border-right:1px solid var(--line)}
+.note-figure img{display:block;width:100%;height:auto;max-height:410px;object-fit:contain;border-radius:10px;box-shadow:0 7px 24px rgba(35,30,24,.06)}
+.note-copy{padding:27px 29px 28px}.note-kicker{font:800 10px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#8b847b}
+.note-copy h3{margin:9px 0 11px;font-size:25px;line-height:1.35;letter-spacing:-.025em}
+.note-copy p{margin:0;color:#5f5952;font-size:15px;line-height:1.9}.note-copy p+p{margin-top:9px}
+.note-formulas{display:grid;gap:8px;margin-top:17px}
+.note-formula{padding:10px 12px;border:1px solid #e3ddd4;border-radius:11px;background:#f8f5ef;font-family:"Times New Roman","STIX Two Text",serif;font-size:18px;line-height:1.45;color:#25211d}
+.note-tip{margin-top:17px;padding-top:14px;border-top:1px solid var(--line);color:#625b53;font-size:13.5px;line-height:1.75}.note-tip b{color:#28231f}
+@media(max-width:800px){.note-atlas{padding-top:58px}.note-panel{grid-template-columns:1fr}.note-figure{min-height:0;padding:12px;border-right:0;border-bottom:1px solid var(--line)}.note-copy{padding:21px 20px 23px}.note-copy h3{font-size:22px}.note-formula{font-size:17px}}
 </style>
 <!-- content-polish: v1.6 -->
 </head>
