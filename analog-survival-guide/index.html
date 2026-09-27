@@ -119,7 +119,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div>
 <script>
 (() => {
-  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260928-1`);
+  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260928-2`);
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
   const searchInput = document.getElementById('searchInput');
@@ -187,7 +187,15 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <p>对 NPN 共射题，原图还把输出削顶方向画了出来。考场上结合相位反转和 Q 点位置一起判断，比单背波形更稳。</p>
 <div class="note-tip"><b>怎么改：</b>先考虑减小输入幅值；若题目要求调偏置，就把 Q 点往更合适的动态范围中部移动。</div></div>
 </article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FORMULA · DYNAMIC RANGE</div><h3>最大不失真摆幅：限制你的是更近的那一端</h3>
+<article class="note-panel no-image"><div class="note-copy"><h3>共射、共集、共基，别混着背</h3>
+<p>三种组态最容易一起考。先抓用途，再补相位和阻抗，比背一整张表稳。</p>
+<div class="note-compare">
+<div><b>共射</b><span>电压放大能力强</span><span>输入 / 输出反相</span><span>最常见的电压放大</span></div>
+<div><b>共集</b><span>A<sub>u</sub> ≈ 1</span><span>输入电阻大、输出电阻小</span><span>电压跟随，带负载强</span></div>
+<div><b>共基</b><span>有电压放大，无电流放大</span><span>输入 / 输出同相</span><span>频带宽，适合高频</span></div>
+</div>
+<div class="note-tip"><b>记法：</b>共射看“放大”，共集看“跟随 / 带负载”，共基看“高频”。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>最大不失真摆幅：限制你的是更近的那一端</h3>
 <p>交流负载线经过静态工作点 Q。向饱和端和截止端分别还能摆多少，两个余量都算出来，最后取较小者。</p>
 <div class="note-formulas"><div class="note-formula">交流负载线：经过 Q，斜率 = −1 / R′<sub>L</sub></div><div class="note-formula">U<sub>R</sub> = U<sub>CEQ</sub> − U<sub>CES</sub></div><div class="note-formula">U<sub>F</sub> = I<sub>CQ</sub>R′<sub>L</sub></div><div class="note-formula">U<sub>om,max</sub> = min(U<sub>R</sub>, U<sub>F</sub>)</div></div>
 <div class="note-tip"><b>看到这类题：</b>出现“最大不失真输出 / 动态范围 / 交流负载线”，先找 Q 点到两端的余量。</div></div></article>
@@ -216,11 +224,18 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </article>
 <article class="note-panel">
 <div class="note-figure"><img loading="lazy" src="assets/notes/fet-small-signal.jpg" alt="这里的 FET 低频小信号模型与共源放大图"></div>
-<div class="note-copy"><div class="note-kicker">MODEL · SMALL SIGNAL</div><h3>小信号模型：g<sub>m</sub>u<sub>GS</sub> 是主角，r<sub>ds</sub> 别凭空删</h3>
+<div class="note-copy"><h3>小信号模型：g<sub>m</sub>u<sub>GS</sub> 是主角，r<sub>ds</sub> 别凭空删</h3>
 <p>低频小信号模型里，受控电流源为 g<sub>m</sub>u<sub>GS</sub>，r<sub>ds</sub> 接在漏源之间。通常可以先把 r<sub>ds</sub> 看成开路；若题目给出 λ 或 r<sub>ds</sub>，就应保留。</p>
 <div class="note-formulas"><div class="note-formula">交流通路：耦合 / 旁路电容按交流短路处理</div><div class="note-formula">共源 A<sub>u</sub> 常带负号；R<sub>i</sub>、R<sub>o</sub> 从等效图直接看</div></div>
 <div class="note-tip"><b>做题顺序：</b>画交流通路 → 换小信号模型 → 再列 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub>。</div></div>
 </article>
+<article class="note-panel no-image"><div class="note-copy"><h3>含源极电阻时，先看它有没有被旁路</h3>
+<p>源极电阻如果没有旁路电容，交流时仍在电路里，会形成局部负反馈，电压增益会下降，但工作会更稳。若被旁路电容短掉，中频交流分析里就不再起同样作用。</p>
+<div class="note-tip"><b>别急着套公式：</b>先把交流通路画出来，R<sub>S</sub> 到底还在不在，一眼就清楚。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>多级放大时，后一级就是前一级的负载</h3>
+<p>算前一级增益时，别忘了后一级输入电阻会并到它的负载上。这个思路和 BJT 多级放大完全一样。</p>
+<div class="note-formulas"><div class="note-formula">前一级有效负载：R<sub>D</sub> ∥ R<sub>L</sub> ∥ R<sub>in,next</sub></div></div>
+<div class="note-tip"><b>注意：</b>题目一旦出现“多级”，先找级间负载关系，再算每一级。</div></div></article>
 </div></section>
 `;
 
@@ -386,7 +401,11 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <p>这类题很常见：不是给电路让你判反馈，而是给“稳定什么、输入输出电阻怎样变化”，让你反推该接哪一种反馈。</p>
 <div class="note-formulas"><div class="note-formula">减小向电压源索取电流 + 增强带负载能力 → 电压串联负反馈</div><div class="note-formula">电流 → 稳定电压转换 → 电压并联负反馈</div><div class="note-formula">电压 → 稳定电流转换 → 电流串联负反馈</div></div>
 <div class="note-tip"><b>做题顺序：</b>先看“输出想稳定电压还是电流”，再看“输入希望高阻还是低阻”。两步拼起来就是完整组态。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DC / AC · FEEDBACK</div><h3>静态稳定看直流反馈，增益 / 阻抗看交流反馈</h3>
+<article class="note-panel no-image"><div class="note-copy"><h3>先把最基本的三条式子放稳</h3>
+<p>后面的“增益下降、稳定性变好、带宽变宽”都从反馈基本式往下推，不需要各背各的。</p>
+<div class="note-formulas"><div class="note-formula">A = X<sub>o</sub> / X′<sub>i</sub></div><div class="note-formula">F = X<sub>f</sub> / X<sub>o</sub></div><div class="note-formula">A<sub>f</sub> = A / (1 + AF)</div><div class="note-formula">反馈深度 D = 1 + AF</div></div>
+<div class="note-tip"><b>深反馈：</b>AF ≫ 1 时，A<sub>f</sub> ≈ 1/F，闭环增益主要由反馈网络决定。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>静态稳定看直流反馈，增益 / 阻抗看交流反馈</h3>
 <p>这里先做一件事：分析反馈时要先处理电容。对直流而言耦合 / 旁路电容开路；对中频交流而言它们通常近似短路，因此同一只电阻可能只参与直流反馈，也可能同时参与交直流反馈。</p>
 <div class="note-formulas"><div class="note-formula">稳定静态工作点 → 关注直流反馈</div><div class="note-formula">A<sub>uf</sub>、R<sub>if</sub>、R<sub>of</sub> → 画交流通路后再分析</div></div>
 <div class="note-tip"><b>这里容易错：</b>不要拿直流电路直接判断交流反馈类型；先把电容按当前分析条件处理完。</div></div></article>
@@ -427,6 +446,10 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 .note-formulas{margin-top:13px!important}
 .note-formula{background:transparent!important;border:0!important;border-left:2px solid #cfc7bd!important;border-radius:0!important;padding:7px 0 7px 13px!important;margin:4px 0!important}
 .note-tip{margin-top:14px!important;padding:0!important;background:transparent!important;border:0!important;color:#5f5952!important}
+.note-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:14px 0 8px;border-top:1px solid #ded7cf;border-bottom:1px solid #ded7cf}
+.note-compare>div{padding:13px 16px;border-left:1px solid #e6e0d8}
+.note-compare>div:first-child{border-left:0}.note-compare b{display:block;margin-bottom:8px;font-size:15px}.note-compare span{display:block;margin:4px 0;color:#625c55;font-size:13px;line-height:1.55}
+@media(max-width:760px){.note-compare{grid-template-columns:1fr}.note-compare>div{border-left:0;border-top:1px solid #e6e0d8}.note-compare>div:first-child{border-top:0}}
 @media(max-width:760px){.note-recap b{font-size:14px}.note-panel{grid-template-columns:1fr!important;gap:16px!important;padding:24px 0!important}.note-copy h3{font-size:21px!important}.note-figure::after{font-size:10.5px}}
 </style>`;
     if(!html.includes('note-polish-v2')) html = html.replace('</head>', noteCss + '</head>');
