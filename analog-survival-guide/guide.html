@@ -45,7 +45,7 @@ function polish(html,loader){
   const oldNav="['home','章节'],['quick','速通'],['knowledge','知识点'],['papers','真题'],['check','考前清单']";
   const newNav="['home','章节'],['quick','速通'],['notes','核心笔记'],['knowledge','知识点'],['papers','真题'],['check','考前清单']";
   html=html.replace(oldNav,newNav);
-  const map={bjt:'bjtCoreNotes',fet:'fetCoreNotes',diff:'diffCoreNotes',feedback:'feedbackCoreNotes',opamp:'opampCoreNotes'};
+  const map={bjt:'bjtCoreNotes',fet:'fetCoreNotes',frequency:'frequencyCoreNotes',diff:'diffCoreNotes',feedback:'feedbackCoreNotes',opamp:'opampCoreNotes',power:'powerCoreNotes',oscillator:'oscillatorCoreNotes'};
   Object.entries(map).forEach(([page,name])=>{html=injectNotes(html,page,extractConst(loader,name));});
   html=html.split('href="#home"').join('href="index.html#home"');
   return html;
