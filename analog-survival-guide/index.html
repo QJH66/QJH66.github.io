@@ -119,7 +119,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div>
 <script>
 (() => {
-  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt`);
+  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260927-3`);
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
   const searchInput = document.getElementById('searchInput');
@@ -258,8 +258,8 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST DECISION · REGION</div><h3>第一问永远是：线性运算，还是比较器非线性？</h3>
 <p>按原笔记，负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
-<div class="note-formulas"><div class="note-formula">线性负反馈：u<sub>+</sub> ≈ u<sub>−</sub>，i<sub>+</sub> ≈ i<sub>−</sub> ≈ 0</div><div class="note-formula">比较器：先找阈值与输出限幅，不套 u<sub>+</sub> ≈ u<sub>−</sub></div></div>
-<div class="note-tip"><b>原笔记冲突提示：</b>正文中有一处“理想运放输入 / 输出电阻”文字与后文表述相互冲突；网站不把那句作为记忆结论。</div></div></article>
+<div class="note-formulas"><div class="note-formula">线性负反馈：u<sub>+</sub> ≈ u<sub>−</sub>，i<sub>+</sub> ≈ i<sub>−</sub> ≈ 0</div><div class="note-formula">理想运放：R<sub>i</sub> → ∞，R<sub>o</sub> → 0</div><div class="note-formula">比较器：先找阈值与输出限幅，不套 u<sub>+</sub> ≈ u<sub>−</sub></div></div>
+<div class="note-tip"><b>考场第一行：</b>先写“负反馈线性区”或“开环 / 正反馈非线性区”，后面的分析方法自然就定了。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · OPERATION</div><h3>运算电路：先认结构，再把复杂电路拆成一级一级</h3>
 <p>反相 / 同相比例先认反馈路径；求和电路优先用叠加法，把其余输入逐个置零；多级运放则先求前一级输出，再把它当成后一级输入。</p>
 <div class="note-formulas"><div class="note-formula">反相比例：A<sub>u</sub> = −R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">同相比例：A<sub>u</sub> = 1 + R<sub>f</sub> / R<sub>1</sub></div><div class="note-formula">反相求和：用叠加法逐路求贡献，再相加</div></div>
@@ -268,6 +268,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <p>你的笔记给出的画法非常适合考场：先求 / 读出两个阈值，再看输入当前是上升还是下降；每次穿越相应阈值时，根据传输特性决定输出是否翻转。</p>
 <div class="note-formulas"><div class="note-formula">求 U<sub>T1</sub>, U<sub>T2</sub> → 标 U<sub>OH</sub>, U<sub>OL</sub> → 看输入方向 → 判跳变</div><div class="note-formula">横向平移：改参考电位　｜　纵向改变：改输出限幅　｜　反向：交换 + / − 输入</div></div>
 <div class="note-tip"><b>考试抓手：</b>不要只看“输入是否超过某个值”，迟滞题必须同时看输入变化方向和当前输出状态。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · LIMITER / COMPARATOR</div><h3>单门限比较器：求阈值只是假想临界点，不代表虚短一直成立</h3>
+<p>原笔记里这类题经常把参考电压、电阻网络和输出限幅二极管放在一起。求阈值时令两个输入端“刚好相等”只是找翻转临界条件；真正工作在高 / 低饱和输出时，运放并不满足虚短。</p>
+<div class="note-formulas"><div class="note-formula">临界点：u<sub>+</sub> = u<sub>−</sub> → 解 U<sub>T</sub></div><div class="note-formula">u<sub>+</sub> &gt; u<sub>−</sub> → 输出趋向正饱和；反之趋向负饱和</div></div>
+<div class="note-tip"><b>特别容易错：</b>“求阈值时令两端相等”≠“比较器全过程都可以用虚短”。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · SUMMING</div><h3>求和题别硬列大方程：先线性叠加，再还原</h3>
+<p>你的笔记对反相 / 同相求和都推荐叠加法：一次只保留一路输入，其余独立电压源置零，先变成熟悉的比例运算电路，再把各路贡献相加。</p>
+<div class="note-formulas"><div class="note-formula">反相求和：每一路贡献都带反相比例系数</div><div class="note-formula">同相多输入：先求 u<sub>+</sub>，再乘闭环同相增益</div></div>
+<div class="note-tip"><b>识别抓手：</b>复杂运放先找反馈电阻，再看信号究竟进“−”端还是“+”端，结构会立刻简单很多。</div></div></article>
 </div></section>
 `;
 
@@ -317,8 +325,12 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST CHECK · OSCILLATION</div><h3>先检查四个环节，再谈能不能振</h3>
 <p>原笔记把振荡电路的组成压成：放大、正反馈、选频和稳幅。复习时先检查这些环节是否存在，再进入幅值 / 相位条件。</p>
-<div class="note-formulas"><div class="note-formula">笔记压缩口径：AF ≥ 1（用于起振条件记忆）</div></div>
-<div class="note-tip"><b>注意：</b>这里保留原笔记的压缩表述，不额外改写成别的教材口径。</div></div></article>
+<div class="note-formulas"><div class="note-formula">起振：|AF| &gt; 1，φ<sub>A</sub> + φ<sub>F</sub> = 2nπ</div><div class="note-formula">稳态：|AF| = 1，φ<sub>A</sub> + φ<sub>F</sub> = 2nπ</div></div>
+<div class="note-tip"><b>必分清：</b>“起振”和“稳态平衡”不是同一个幅值条件；选择题特别爱在这里换概念。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">RC · WIEN BRIDGE</div><h3>文氏桥：谐振时 F = 1/3，所以放大器增益要略大于 3 才能起振</h3>
+<p>这是你振荡笔记里最值得单独拎出来的公式组。RC 文氏桥常用于低频正弦信号发生器；R、C 对称时，选频网络在谐振频率处相移为 0。</p>
+<div class="note-formulas"><div class="note-formula">f<sub>0</sub> = 1 / (2πRC)</div><div class="note-formula">谐振时 F = 1 / 3</div><div class="note-formula">同相放大器 A = 1 + R<sub>f</sub>/R<sub>1</sub>；起振时要求 A &gt; 3</div></div>
+<div class="note-tip"><b>一眼识别：</b>看到“串联 RC + 并联 RC”的文氏网络，就先写 f<sub>0</sub> 和 F=1/3。</div></div></article>
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · LC THREE-POINT</div><h3>LC 三点式先用“射同基反”判相位</h3>
 <p>三点式振荡器中，三个引出点分别接三极管三个极。原笔记给出的快速判断原则是：射极两侧接同性质电抗，基极侧接相反性质电抗。</p>
 <div class="note-formulas"><div class="note-formula">并联 LC：f &lt; f<sub>0</sub> 呈感性，f &gt; f<sub>0</sub> 呈容性</div><div class="note-formula">串联 LC：f &lt; f<sub>0</sub> 呈容性，f &gt; f<sub>0</sub> 呈感性</div></div>
@@ -370,6 +382,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <p>输入端只看串 / 并联，输出端只看电压 / 电流取样。再配合“想稳定什么量，就引入什么量的负反馈”，就能反推所需组态。</p>
 <div class="note-formulas"><div class="note-formula">串联负反馈 → R<sub>if</sub> ↑　　并联负反馈 → R<sub>if</sub> ↓</div><div class="note-formula">电压负反馈 → R<sub>of</sub> ↓　　电流负反馈 → R<sub>of</sub> ↑</div><div class="note-formula">稳 U<sub>o</sub> → 电压反馈　　稳 I<sub>o</sub> → 电流反馈</div></div>
 <div class="note-tip"><b>反推口诀：</b>少向电压源索取电流 → 提高 R<sub>i</sub> → 串联；带负载能力强 → 降低 R<sub>o</sub> → 电压反馈。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · REVERSE THINKING</div><h3>题目给“要求”，就从要求反推反馈组态</h3>
+<p>这是你原笔记里非常值得单独留下的一类题：不是给电路让你判反馈，而是给“稳定什么、输入输出电阻怎样变化”，让你反推该接哪一种反馈。</p>
+<div class="note-formulas"><div class="note-formula">减小向电压源索取电流 + 增强带负载能力 → 电压串联负反馈</div><div class="note-formula">电流 → 稳定电压转换 → 电压并联负反馈</div><div class="note-formula">电压 → 稳定电流转换 → 电流串联负反馈</div></div>
+<div class="note-tip"><b>做题顺序：</b>先看“输出想稳定电压还是电流”，再看“输入希望高阻还是低阻”。两步拼起来就是完整组态。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DC / AC · FEEDBACK</div><h3>静态稳定看直流反馈，增益 / 阻抗看交流反馈</h3>
+<p>原笔记反复强调：分析反馈时要先处理电容。对直流而言耦合 / 旁路电容开路；对中频交流而言它们通常近似短路，因此同一只电阻可能只参与直流反馈，也可能同时参与交直流反馈。</p>
+<div class="note-formulas"><div class="note-formula">稳定静态工作点 → 关注直流反馈</div><div class="note-formula">A<sub>uf</sub>、R<sub>if</sub>、R<sub>of</sub> → 画交流通路后再分析</div></div>
+<div class="note-tip"><b>高频失分点：</b>不要拿直流电路直接判断交流反馈类型；先把电容按当前分析条件处理完。</div></div></article>
 </div></section>
 `;
 
