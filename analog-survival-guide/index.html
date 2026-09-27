@@ -129,178 +129,179 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     diode:'二极管与稳压管',fet:'场效应管',bjt:'双极型晶体管',frequency:'频率响应',diff:'差动放大',
     feedback:'反馈',opamp:'运放与比较器',power:'功率放大',oscillator:'正弦波振荡',modulation:'调制'
   };
-  let started = false;
+  const chapterOrder = Object.keys(routeMeta);
   let fullHtmlPromise = null;
-  let homeSearchIndex = null;
+  let searchIndex = null;
+  let loadingFull = false;
 
-  const fullExtraCSS = `
-.nav-search{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-size:15px;font-weight:700;padding:0;cursor:pointer;opacity:.72;transition:opacity .16s}.nav-search:hover{opacity:1}
-.search-layer{position:fixed;inset:0;z-index:400;background:rgba(25,22,18,.22);backdrop-filter:blur(7px);display:none;align-items:flex-start;justify-content:center;padding:10vh 18px 28px}.search-layer.open{display:flex}
-.search-panel{width:min(760px,100%);max-height:78vh;overflow:hidden;background:#fffdf9;border:1px solid #ddd6cc;border-radius:22px;box-shadow:0 28px 90px rgba(32,27,21,.18);display:flex;flex-direction:column}
-.search-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.search-head input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--ink);font:700 18px/1.4 "Songti SC","STSong","SimSun",serif}.search-head input::placeholder{color:#aaa198}
-.search-close{border:0;background:transparent;color:#8a8278;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}.search-status{padding:14px 20px;color:#8b847b;font-size:12px;border-bottom:1px solid #eee9e1}.search-results{overflow:auto;padding:8px}
-.search-result{display:block;padding:13px 14px;border-radius:13px}.search-result:hover,.search-result:focus-visible{background:#f6f3ed;outline:0}.search-result-top{display:flex;align-items:center;gap:9px;margin-bottom:4px}
-.search-type{font-family:Inter,ui-sans-serif,sans-serif;font-size:9px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#91887e}.search-chapter{font-size:12px;color:#8b847b}.search-result-title{font-size:16px;font-weight:800;line-height:1.45}.search-result-snippet{margin-top:3px;color:#6b655d;font-size:13px;line-height:1.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.search-empty{padding:34px 20px;text-align:center;color:#8b847b;font-size:14px}
-.check-progress{margin-left:auto;flex:0 0 auto;padding:5px 9px;border:1px solid #ddd6cd;border-radius:999px;background:#fbf9f5;color:#696158;font:700 11px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.01em}
-.check-progress.done{background:#2b2824;border-color:#2b2824;color:#fff}.chapter-finish-note{display:none;margin-top:18px;padding:14px 16px;border:1px solid #dcd5cb;border-radius:15px;background:#fbf9f5;color:#514b44;font-size:14px;line-height:1.65}.chapter-finish-note.show{display:block}.chapter-finish-note strong{color:#211f1c}
-#check .section-head{align-items:center}
-@media(max-width:760px){.nav-search{font-size:14px}.search-layer{padding-top:7vh}.search-panel{border-radius:18px;max-height:82vh}.search-head{padding:15px 16px}.search-head input{font-size:16px}.check-progress{margin-top:10px;margin-left:0;display:inline-flex}}
-`;
-
-  const fullSearchOverlay = `<div class="search-layer" id="asgSearchLayer" aria-hidden="true"><div class="search-panel" role="dialog" aria-modal="true" aria-label="全站搜索"><div class="search-head"><input id="asgSearchInput" type="search" autocomplete="off" placeholder="搜索知识点、真题、关键词…"><button class="search-close" id="asgSearchClose" type="button" aria-label="关闭搜索">×</button></div><div class="search-status" id="asgSearchStatus">输入关键词开始搜索</div><div class="search-results" id="asgSearchResults"></div></div></div>`;
-
-  const fullEnhancementCode = `
-  function buildASGSearchIndex(){
-    const out=[]; const chapterNames={diode:'二极管与稳压管',fet:'场效应管',bjt:'双极型晶体管',frequency:'频率响应',diff:'差动放大',feedback:'反馈',opamp:'运放与比较器',power:'功率放大',oscillator:'正弦波振荡',modulation:'调制'};
-    ORDER.forEach(page=>{
-      const tpl=document.getElementById('tpl-'+page); if(!tpl) return; const root=tpl.content;
-      out.push({page,type:'章节',title:chapterNames[page],snippet:(root.querySelector('.hero-lead')?.textContent||'').trim(),hash:'#'+page+'/quick'});
-      root.querySelectorAll('.quick h3').forEach(el=>out.push({page,type:'速通',title:el.textContent.trim(),snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'}));
-      root.querySelectorAll('details.knowledge-item').forEach(el=>out.push({page,type:'知识点',title:(el.querySelector('summary')?.textContent||'').trim(),snippet:(el.querySelector('.knowledge-lead')?.textContent||el.querySelector('.knowledge-body p')?.textContent||'').trim(),hash:'#'+page+'/knowledge'}));
-      root.querySelectorAll('.exam-title h3').forEach(el=>out.push({page,type:'真题',title:el.textContent.trim(),snippet:[...el.parentElement.querySelectorAll('.tag')].map(x=>x.textContent.trim()).join(' · '),hash:'#'+page+'/papers'}));
-    }); return out;
-  }
-  const asgSearchLayer=document.getElementById('asgSearchLayer'), asgSearchInput=document.getElementById('asgSearchInput'), asgSearchResults=document.getElementById('asgSearchResults'), asgSearchStatus=document.getElementById('asgSearchStatus');
-  const asgIndex=buildASGSearchIndex();
-  function escASG(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-  function renderASGSearch(q){
-    q=q.trim().toLowerCase(); if(!q){asgSearchStatus.textContent='输入关键词开始搜索';asgSearchResults.innerHTML='';return;}
-    const terms=q.split(/\\s+/).filter(Boolean); const scored=asgIndex.map(x=>{const t=(x.title+' '+x.snippet+' '+x.type+' '+(META[x.page]?.name||'')).toLowerCase();const title=x.title.toLowerCase();let score=0;terms.forEach(k=>{if(title.includes(k))score+=5;if(t.includes(k))score+=2;});return {x,score};}).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,14);
-    asgSearchStatus.textContent=scored.length?'找到 '+scored.length+' 个最相关结果':'没有找到匹配内容';
-    asgSearchResults.innerHTML=scored.length?scored.map(({x})=>'<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+escASG(x.type)+'</span><span class="search-chapter">'+escASG(META[x.page]?.name||'')+'</span></div><div class="search-result-title">'+escASG(x.title)+'</div><div class="search-result-snippet">'+escASG(x.snippet)+'</div></a>').join(''):'<div class="search-empty">换一个关键词试试，例如：深反馈、CMRR、OCL、稳压管</div>';
-  }
-  function openASGSearch(){asgSearchLayer.classList.add('open');asgSearchLayer.setAttribute('aria-hidden','false');setTimeout(()=>asgSearchInput.focus(),0);}
-  function closeASGSearch(){asgSearchLayer.classList.remove('open');asgSearchLayer.setAttribute('aria-hidden','true');}
-  document.addEventListener('click',e=>{if(e.target.closest('.nav-search'))openASGSearch();if(e.target.id==='asgSearchClose'||e.target===asgSearchLayer)closeASGSearch();if(e.target.closest('.search-result'))closeASGSearch();});
-  asgSearchInput.addEventListener('input',()=>renderASGSearch(asgSearchInput.value));
-  document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openASGSearch();}if(e.key==='Escape'&&asgSearchLayer.classList.contains('open'))closeASGSearch();});
-
-  function rememberASGRoute(){
-    const r=parseRoute(); if(r.page==='home') return;
-    const sec=r.section||'quick'; try{localStorage.setItem('asg-last-route','#'+r.page+'/'+sec)}catch(e){}
-  }
-  function setupCheckProgress(){
-    const section=app.querySelector('#check'); if(!section) return; const boxes=[...section.querySelectorAll('.check-box')]; if(!boxes.length)return;
-    let badge=section.querySelector('.check-progress'); if(!badge){badge=document.createElement('div');badge.className='check-progress';section.querySelector('.section-head')?.appendChild(badge);}
-    const done=boxes.filter(x=>x.checked).length; const all=done===boxes.length;
-    badge.textContent=all?'本章完成 '+done+' / '+boxes.length:done+' / '+boxes.length+' 完成'; badge.classList.toggle('done',all);
-    let note=section.querySelector('.chapter-finish-note'); if(!note){note=document.createElement('div');note.className='chapter-finish-note';note.innerHTML='<strong>本章已通关。</strong> 建议下一步直接做下一章速通；考前再回来快速扫一遍真题和清单。';section.appendChild(note);}
-    note.classList.toggle('show',all);
-  }
-  app.addEventListener('change',e=>{if(e.target.matches('.check-box'))requestAnimationFrame(setupCheckProgress);});
-  window.addEventListener('hashchange',rememberASGRoute); rememberASGRoute();
-  const asgObserver=new MutationObserver(()=>requestAnimationFrame(setupCheckProgress));asgObserver.observe(app,{childList:true,subtree:true});setupCheckProgress();
-`;
-
-  async function getFullHtml(){
-    if(!fullHtmlPromise) fullHtmlPromise = Promise.all(files.map(f=>fetch(f,{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error(f+' '+r.status);return r.text();}))).then(parts=>parts.join(''));
+  function getFullHtml(){
+    if(!fullHtmlPromise){
+      fullHtmlPromise = Promise.all(files.map(f =>
+        fetch(f,{cache:'force-cache'}).then(r=>{
+          if(!r.ok) throw new Error(f+' '+r.status);
+          return r.text();
+        })
+      )).then(parts=>parts.join(''));
+    }
     return fullHtmlPromise;
   }
 
-  function patchFullSite(html){
-    html = html.replace(/<section class="grid" id="quick">/g,'<section class="grid">');
-    html = html.replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
-    html = html.replace('<div class="sub">Clover 大聪明的模电网站</div></section>','<div class="sub">Clover 大聪明的模电网站</div><div class="home-guide">推荐复习顺序：速通 → 知识点 → 真题 → 考前清单</div></section>');
-    const copy={"PN结、模型、温度、稳压":"状态判断、模型、温度与稳压","JFET、MOSFET、Q点、小信号":"Q点、小信号、增益与阻抗","静态、动态、共射/共集/共基":"Q点、微变等效、三种组态","截止频率、通频带、相频":"fL / fH、波特图、通频带","差模、共模、恒流源":"差模 / 共模、CMRR、恒流源","组态、深反馈、阻抗变化":"判型、深反馈、增益与阻抗","运算、比较器、迟滞":"虚短虚断、运算、比较器","OCL/OTL、效率、管耗":"OCL / OTL、效率、最大管耗","RC、LC、振荡条件":"起振条件、RC / LC、振荡频率","AM、FM、带宽、功率":"AM / FM、带宽与功率"};
-    Object.entries(copy).forEach(([a,b])=>{html=html.replace(a,b);});
-    html = html.replace('</style>', '.home-guide{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.65;letter-spacing:.01em}'+fullExtraCSS+'</style>');
-    html = html.replace("nav.innerHTML = '<a class=\\\"is-active\\\" href=\\\"#home\\\">章节总览</a>';","nav.innerHTML = '<a class=\\\"is-active\\\" href=\\\"#home\\\">章节总览</a><button class=\\\"nav-search\\\" type=\\\"button\\\">搜索</button>'; ");
-    html = html.replace("    }).join('');\\n  }","    }).join('') + '<button class=\\\"nav-search\\\" type=\\\"button\\\">搜索</button>';\\n  }");
-    html = html.replace('<div id="globalLightbox"', fullSearchOverlay+'<div id="globalLightbox"');
-    html = html.replace("  window.addEventListener('hashchange', render);\\n  render();","  window.addEventListener('hashchange', render);\\n  render();\\n"+fullEnhancementCode);
-    return html;
+  function polishFullHtml(html){
+    return html
+      .replace(/<section class="grid" id="quick">/g,'<section class="grid">')
+      .replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
   }
 
-  async function loadFullSite(){
-    if(started) return;
-    started = true; loading.classList.add('on');
+  async function enterFullSite(hash){
+    if(loadingFull) return;
+    loadingFull = true;
+    loading.classList.add('on');
     try{
-      const html = patchFullSite(await getFullHtml());
-      document.open(); document.write(html); document.close();
+      const html = polishFullHtml(await getFullHtml());
+      if(hash) history.replaceState(null,'',hash);
+      document.open();
+      document.write(html);
+      document.close();
     }catch(err){
-      started=false;loading.classList.remove('on');console.error(err);alert('章节加载失败，请刷新页面重试。');
+      loadingFull = false;
+      loading.classList.remove('on');
+      console.error(err);
+      alert('章节加载失败，请刷新后重试。');
     }
   }
 
-  function buildHomeIndex(html){
-    const doc=new DOMParser().parseFromString(html,'text/html'); const out=[];
+  // Any chapter/search/continue link enters the full guide.
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]');
+    if(!a) return;
+    const hash=a.getAttribute('href');
+    if(!hash || hash==='#home') return;
+    const page=hash.slice(1).split('/')[0];
+    if(!routeMeta[page]) return;
+    e.preventDefault();
+    enterFullSite(hash);
+  });
+
+  // Direct links such as /analog-survival-guide/#feedback/papers also work.
+  const initialHash=location.hash;
+  if(initialHash && initialHash!=='#home'){
+    const page=initialHash.slice(1).split('/')[0];
+    if(routeMeta[page]) enterFullSite(initialHash);
+  }
+
+  function buildIndex(html){
+    const doc=new DOMParser().parseFromString(html,'text/html');
+    const out=[];
     Object.entries(routeMeta).forEach(([page,name])=>{
-      const tpl=doc.getElementById('tpl-'+page); if(!tpl)return; const root=tpl.content;
+      const tpl=doc.getElementById('tpl-'+page);
+      if(!tpl) return;
+      const root=tpl.content;
       out.push({page,type:'章节',title:name,snippet:(root.querySelector('.hero-lead')?.textContent||'').trim(),hash:'#'+page+'/quick'});
-      root.querySelectorAll('.quick h3').forEach(el=>out.push({page,type:'速通',title:el.textContent.trim(),snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'}));
-      root.querySelectorAll('details.knowledge-item').forEach(el=>out.push({page,type:'知识点',title:(el.querySelector('summary')?.textContent||'').trim(),snippet:(el.querySelector('.knowledge-lead')?.textContent||el.querySelector('.knowledge-body p')?.textContent||'').trim(),hash:'#'+page+'/knowledge'}));
-      root.querySelectorAll('.exam-title h3').forEach(el=>out.push({page,type:'真题',title:el.textContent.trim(),snippet:[...el.parentElement.querySelectorAll('.tag')].map(x=>x.textContent.trim()).join(' · '),hash:'#'+page+'/papers'}));
-    }); return out;
+      root.querySelectorAll('.quick h3').forEach(el=>out.push({
+        page,type:'速通',title:el.textContent.trim(),
+        snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'
+      }));
+      root.querySelectorAll('details.knowledge-item').forEach(el=>out.push({
+        page,type:'知识点',title:(el.querySelector('summary')?.textContent||'').trim(),
+        snippet:(el.querySelector('.knowledge-lead')?.textContent||el.querySelector('.knowledge-body p')?.textContent||'').trim(),
+        hash:'#'+page+'/knowledge'
+      }));
+      root.querySelectorAll('.exam-title h3').forEach(el=>out.push({
+        page,type:'真题',title:el.textContent.trim(),
+        snippet:[...el.parentElement.querySelectorAll('.tag')].map(x=>x.textContent.trim()).join(' · '),
+        hash:'#'+page+'/papers'
+      }));
+    });
+    return out;
   }
-  function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-  async function ensureHomeIndex(){
-    if(homeSearchIndex)return homeSearchIndex; searchStatus.textContent='正在建立全站索引…'; homeSearchIndex=buildHomeIndex(await getFullHtml()); searchStatus.textContent='输入关键词开始搜索'; return homeSearchIndex;
+
+  async function ensureIndex(){
+    if(searchIndex) return searchIndex;
+    searchStatus.textContent='正在建立全站索引…';
+    searchIndex=buildIndex(await getFullHtml());
+    searchStatus.textContent='输入关键词开始搜索';
+    return searchIndex;
   }
-  async function runHomeSearch(){
-    const q=searchInput.value.trim().toLowerCase(); if(!q){searchStatus.textContent='输入关键词开始搜索';searchResults.innerHTML='';return;}
-    const idx=await ensureHomeIndex(); const terms=q.split(/\\s+/).filter(Boolean);
-    const scored=idx.map(x=>{const all=(x.title+' '+x.snippet+' '+x.type+' '+routeMeta[x.page]).toLowerCase();const title=x.title.toLowerCase();let score=0;terms.forEach(k=>{if(title.includes(k))score+=5;if(all.includes(k))score+=2;});return {x,score};}).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,14);
-    searchStatus.textContent=scored.length?'找到 '+scored.length+' 个最相关结果':'没有找到匹配内容';
-    searchResults.innerHTML=scored.length?scored.map(({x})=>'<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+esc(x.type)+'</span><span class="search-chapter">'+esc(routeMeta[x.page])+'</span></div><div class="search-result-title">'+esc(x.title)+'</div><div class="search-result-snippet">'+esc(x.snippet)+'</div></a>').join(''):'<div class="search-empty">换一个关键词试试，例如：深反馈、CMRR、OCL、稳压管</div>';
+
+  function esc(v){
+    return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
-  function openSearch(){searchLayer.classList.add('open');searchLayer.setAttribute('aria-hidden','false');ensureHomeIndex().catch(console.error);setTimeout(()=>searchInput.focus(),0);}
-  function closeSearch(){searchLayer.classList.remove('open');searchLayer.setAttribute('aria-hidden','true');}
+
+  async function runSearch(){
+    const q=searchInput.value.trim().toLowerCase();
+    if(!q){searchStatus.textContent='输入关键词开始搜索';searchResults.innerHTML='';return;}
+    const idx=await ensureIndex();
+    const terms=q.split(/\s+/).filter(Boolean);
+    const hits=idx.map(x=>{
+      const all=(x.title+' '+x.snippet+' '+x.type+' '+routeMeta[x.page]).toLowerCase();
+      let score=0;
+      terms.forEach(k=>{if(x.title.toLowerCase().includes(k))score+=5;if(all.includes(k))score+=2;});
+      return {x,score};
+    }).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,14);
+    searchStatus.textContent=hits.length?'找到 '+hits.length+' 个最相关结果':'没有找到匹配内容';
+    searchResults.innerHTML=hits.length?hits.map(({x}) =>
+      '<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+esc(x.type)+'</span><span class="search-chapter">'+esc(routeMeta[x.page])+'</span></div><div class="search-result-title">'+esc(x.title)+'</div><div class="search-result-snippet">'+esc(x.snippet)+'</div></a>'
+    ).join(''):'<div class="search-empty">换一个关键词试试，例如：深反馈、CMRR、OCL、稳压管</div>';
+  }
+
+  function openSearch(){
+    searchLayer.classList.add('open');
+    searchLayer.setAttribute('aria-hidden','false');
+    ensureIndex().catch(console.error);
+    setTimeout(()=>searchInput.focus(),0);
+  }
+  function closeSearch(){
+    searchLayer.classList.remove('open');
+    searchLayer.setAttribute('aria-hidden','true');
+  }
   document.getElementById('openSearch').addEventListener('click',openSearch);
   document.getElementById('searchClose').addEventListener('click',closeSearch);
   searchLayer.addEventListener('click',e=>{if(e.target===searchLayer)closeSearch();});
-  searchResults.addEventListener('click',e=>{if(e.target.closest('.search-result'))closeSearch();});
-  searchInput.addEventListener('input',()=>runHomeSearch().catch(console.error));
-  document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openSearch();}if(e.key==='Escape'&&searchLayer.classList.contains('open'))closeSearch();});
-
-
-  const chapterOrder=['diode','fet','bjt','frequency','diff','feedback','opamp','power','oscillator','modulation'];
-  const homeState=document.getElementById('homeState');
-  const overallProgress=document.getElementById('overallProgress');
-  const continueLink=document.getElementById('continueLink');
-  const sectionSummary=document.getElementById('sectionSummary');
+  searchInput.addEventListener('input',()=>runSearch().catch(console.error));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();openSearch();}
+    if(e.key==='Escape'&&searchLayer.classList.contains('open'))closeSearch();
+  });
 
   function readChapterProgress(page){
-    let saved={}; try{saved=JSON.parse(localStorage.getItem('asg-single-check-'+page)||'{}')}catch(e){}
+    let saved={};
+    try{saved=JSON.parse(localStorage.getItem('asg-single-check-'+page)||'{}')}catch(e){}
     return Object.values(saved).filter(Boolean).length;
   }
   function refreshHomeProgress(){
-    let total=0, touched=0, complete=0;
+    let total=0,complete=0;
     document.querySelectorAll('.chapter-card').forEach(card=>{
       const page=(card.getAttribute('href')||'').replace(/^#/,'').split('/')[0];
-      if(!page) return;
-      const done=readChapterProgress(page); total+=done;
-      if(done>0)touched++; if(done>=8)complete++;
+      if(!routeMeta[page]) return;
+      const done=readChapterProgress(page);
+      total+=done;if(done>=8)complete++;
       let badge=card.querySelector('.chapter-progress');
       if(!badge){badge=document.createElement('span');badge.className='chapter-progress';card.appendChild(badge);}
       badge.textContent=done>=8?'完成':done+'/8';
       badge.classList.toggle('done',done>=8);
-      card.classList.toggle('has-progress',done>0);
       badge.style.display=done>0?'inline-flex':'none';
+      card.classList.toggle('has-progress',done>0);
     });
-    const pct=Math.round(total/80*100);
-    overallProgress.style.setProperty('--p',pct+'%');
-    overallProgress.querySelector('span').textContent=total+' / 80';
-    sectionSummary.textContent=total?('已完成 '+total+' / 80 · '+complete+' 章通关'):'';
-    let last=''; try{last=localStorage.getItem('asg-last-route')||''}catch(e){}
-    if(last && /^#(diode|fet|bjt|frequency|diff|feedback|opamp|power|oscillator|modulation)(\/|$)/.test(last)){
-      const raw=last.slice(1).split('/'); const page=raw[0], sec=raw[1]||'quick';
+    const overall=document.getElementById('overallProgress');
+    const summary=document.getElementById('sectionSummary');
+    const state=document.getElementById('homeState');
+    const cont=document.getElementById('continueLink');
+    if(overall){
+      overall.style.setProperty('--p',Math.round(total/80*100)+'%');
+      overall.querySelector('span').textContent=total+' / 80';
+    }
+    if(summary) summary.textContent=total?('已完成 '+total+' / 80 · '+complete+' 章通关'):'';
+    let last='';try{last=localStorage.getItem('asg-last-route')||''}catch(e){}
+    if(state&&cont&&last&&/^#(diode|fet|bjt|frequency|diff|feedback|opamp|power|oscillator|modulation)(\/|$)/.test(last)){
+      const [page,sec='quick']=last.slice(1).split('/');
       const secName={quick:'速通',knowledge:'知识点',papers:'真题',check:'考前清单'}[sec]||'继续学习';
-      continueLink.href=last; continueLink.textContent='继续上次：'+routeMeta[page]+' · '+secName+' →';
-      homeState.classList.add('show');
-    }else if(total>0){
+      cont.href=last;cont.textContent='继续上次：'+routeMeta[page]+' · '+secName+' →';state.classList.add('show');
+    }else if(state&&total>0){
       const page=chapterOrder.find(p=>readChapterProgress(p)<8)||'diode';
-      continueLink.href='#'+page+'/quick'; continueLink.textContent='继续复习：'+routeMeta[page]+' →';
-      homeState.classList.add('show');
-    }else{
-      homeState.classList.remove('show');
+      cont.href='#'+page+'/quick';cont.textContent='继续复习：'+routeMeta[page]+' →';state.classList.add('show');
     }
   }
   refreshHomeProgress();
-  window.addEventListener('storage',refreshHomeProgress);
-
-  function routeNeedsFullSite(){const raw=location.hash.replace(/^#/,'');return raw&&raw!=='home';}
-  window.addEventListener('hashchange',()=>{if(routeNeedsFullSite())loadFullSite();});
-  if(routeNeedsFullSite())loadFullSite();
 })();
 </script>
 </body>
