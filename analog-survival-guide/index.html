@@ -146,6 +146,26 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     return fullHtmlPromise;
   }
 
+
+  const diodeCoreNotes = `
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">二极管这一章的价值不在公式多，而在“状态判断必须快”。把 PN 结、二极管模型、温度和稳压管放在同一条判断链里，后面做差动与运放综合题也会继续用到。</p>
+<div class="note-atlas-grid">
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FOUNDATION · PN JUNCTION</div><h3>先判断偏置方向，再决定导通还是截止</h3>
+<p>原笔记把本章主线压成：半导体基本概念 → PN 结单向导电 → 二极管特性与参数 → 大 / 小信号模型 → 基本应用 → 稳压管反向击穿。</p>
+<div class="note-formulas"><div class="note-formula">N 型：五价杂质　｜　P 型：三价杂质</div></div>
+<div class="note-tip"><b>考试抓手：</b>整流、限幅、稳压题第一步都不是列式，而是先判每只器件当前处于什么状态。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MODEL · DIODE</div><h3>大信号看工作状态，小信号看工作点附近变化</h3>
+<p>原笔记明确把二极管大信号模型和小信号模型列为考试要点。看到直流状态判断、导通压降和交流微小变化时，要先选对模型再计算。</p>
+<div class="note-tip"><b>易错：</b>不要把“导通”理解成任何情况下都固定一个压降；题目若明确给模型，应严格按题设模型处理。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">ZENER · STATE CHECK</div><h3>稳压管：先假设没稳压，再用结果反证</h3>
+<p>原笔记在综合题里给出了一个很实用的方法：先假设稳压管尚未进入反向稳压区，按支路无稳压电流处理；若算出的电压超过假设条件，再切换到稳压状态重新分析。</p>
+<div class="note-formulas"><div class="note-formula">保持正向电流不变时：温度 ↑ → 二极管正向导通电压 ↓</div></div>
+<div class="note-tip"><b>跨章价值：</b>这套“先假设状态 → 算结果 → 检查是否自洽”的思路，后面差动和运放限幅题还会继续出现。</div></div></article>
+</div></section>
+`;
+
   const bjtCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
@@ -306,6 +326,26 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div></section>
 `;
 
+
+  const modulationCoreNotes = `
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">调制章最值得保留的是一条非常清晰的链：为什么调制 → SAM 时域包络 → 频谱 → 带宽 → 功率。先把 AM 主线吃透，再看真题中的 FM。</p>
+<div class="note-atlas-grid">
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">WHY · MODULATION</div><h3>调制目的按原笔记记三点</h3>
+<p>原笔记列出的核心目的包括：降低天线长度、实现频分复用，以及增强信号抗噪声能力。选择 / 填空题很适合直接考这些结论。</p>
+<div class="note-tip"><b>记忆顺序：</b>先解决“能不能有效传输”，再解决“多个信号怎么分开”，最后记抗噪声能力。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">SAM · ENVELOPE</div><h3>标准调幅先看包络，再读调幅指数</h3>
+<p>原笔记把 SAM 包络写成上下两端幅值：(1+m<sub>a</sub>)U<sub>cm</sub> 与 (1−m<sub>a</sub>)U<sub>cm</sub>。当 m<sub>a</sub>&gt;1 时出现过调幅，包络失真；m<sub>a</sub>=1 对应 100% 调幅。</p>
+<div class="note-formulas"><div class="note-formula">0 &lt; m<sub>a</sub> ≤ 1：包络可正确反映调制信号</div><div class="note-formula">m<sub>a</sub> &gt; 1：过调幅</div></div>
+<div class="note-tip"><b>考试抓手：</b>给波形先看包络有没有“夹瘪 / 反折”，再判断是否过调幅。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">SPECTRUM · POWER</div><h3>频谱三条线，信息在上下边频</h3>
+<p>标准单音 AM 的频谱由下边频、载频、上边频组成；原笔记特别强调只有上下边频包含调制信息。随后再进入边频功率、总功率和调制效率。</p>
+<div class="note-formulas"><div class="note-formula">f<sub>c</sub>−f<sub>m</sub>　｜　f<sub>c</sub>　｜　f<sub>c</sub>+f<sub>m</sub></div><div class="note-formula">单音 AM 带宽：BW = 2f<sub>m</sub></div></div>
+<div class="note-tip"><b>来源边界：</b>FM 的带宽计算主要来自历年真题补充，不和 AM 正文笔记混在一起。</div></div></article>
+</div></section>
+`;
+
   const feedbackCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
@@ -345,6 +385,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
       .replace("['home','章节'],['quick','速通'],['knowledge','知识点'],['papers','真题'],['check','考前清单']","['home','章节'],['quick','速通'],['notes','核心笔记'],['knowledge','知识点'],['papers','真题'],['check','考前清单']")
       .replace(/<section class="grid" id="quick">/g,'<section class="grid">')
       .replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
+    html = injectNotes(html,'diode',diodeCoreNotes);
     html = injectNotes(html,'bjt',bjtCoreNotes);
     html = injectNotes(html,'fet',fetCoreNotes);
     html = injectNotes(html,'frequency',frequencyCoreNotes);
@@ -353,6 +394,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     html = injectNotes(html,'opamp',opampCoreNotes);
     html = injectNotes(html,'power',powerCoreNotes);
     html = injectNotes(html,'oscillator',oscillatorCoreNotes);
+    html = injectNotes(html,'modulation',modulationCoreNotes);
     return html;
   }
 
