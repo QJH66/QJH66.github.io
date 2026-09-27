@@ -146,10 +146,74 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     return fullHtmlPromise;
   }
 
+  const bjtCoreNotes = `
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">这里不再重复教材定义，而是保留你原笔记里最值得反复看的图：Q 点怎么动、失真怎么判、动态范围怎么卡。图保留原批注，旁边只整理成考场能调用的结论。</p>
+<div class="note-atlas-grid">
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/bjt-qpoint.jpg" alt="笔记中的 BJT Q 点与 RB、RC 变化关系图"></div>
+<div class="note-copy"><div class="note-kicker">DIAGRAM · Q POINT</div><h3>R<sub>B</sub>、R<sub>C</sub> 改变时，Q 点到底怎么走？</h3>
+<p><b>改 R<sub>B</sub></b>：直流负载线不变，变化的是 I<sub>BQ</sub>，所以工作点沿原直流负载线移动。</p>
+<p><b>改 R<sub>C</sub></b>：I<sub>BQ</sub> 不变，但直流负载线斜率改变，因此 Q 点沿对应输出特性曲线移动。</p>
+<div class="note-formulas"><div class="note-formula">u<sub>CE</sub> = V<sub>CC</sub> − i<sub>C</sub>R<sub>C</sub></div><div class="note-formula">直流负载线斜率 ∝ −1 / R<sub>C</sub></div></div>
+<div class="note-tip"><b>考试抓手：</b>不要背“左移右移”，先问自己：这次是换 I<sub>B</sub> 曲线，还是换负载线？图就不会乱。</div></div>
+</article>
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/bjt-distortion.jpg" alt="笔记中的截止失真和饱和失真示意图"></div>
+<div class="note-copy"><div class="note-kicker">EASY TO MISS · DISTORTION</div><h3>截止 / 饱和失真：先看 Q 点离哪一端更近</h3>
+<p>你的笔记把这件事压得很清楚：<b>Q 点过低，更容易碰到截止端；Q 点过高，更容易碰到饱和端。</b>输入增大后，离 Q 点更近的一侧先被“顶住”，于是输出出现削顶。</p>
+<p>对 NPN 共射题，原图还把输出削顶方向画了出来。考场上结合相位反转和 Q 点位置一起判断，比单背波形更稳。</p>
+<div class="note-tip"><b>消除思路：</b>先考虑减小输入幅值；若题目要求调偏置，就把 Q 点往更合适的动态范围中部移动。</div></div>
+</article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FORMULA · DYNAMIC RANGE</div><h3>最大不失真摆幅：限制你的是更近的那一端</h3>
+<p>交流负载线经过静态工作点 Q。向饱和端和截止端分别还能摆多少，两个余量都算出来，最后取较小者。</p>
+<div class="note-formulas"><div class="note-formula">U<sub>R</sub> = U<sub>CEQ</sub> − U<sub>CES</sub></div><div class="note-formula">U<sub>F</sub> = I<sub>CQ</sub>R′<sub>L</sub></div><div class="note-formula">U<sub>om,max</sub> = min(U<sub>R</sub>, U<sub>F</sub>)</div></div>
+<div class="note-tip"><b>一眼识别：</b>出现“最大不失真输出 / 动态范围 / 交流负载线”，先找 Q 点到两端的余量。</div></div></article>
+</div></section>
+`;
+
+  const feedbackCoreNotes = `
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">反馈章最容易“每句话都会，但一上图就乱”。这里把你的判断顺序固定下来：先找反馈通路，再判极性，再判输出取样和输入混合，最后才进入深反馈计算。</p>
+<div class="note-atlas-grid">
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/feedback-judge.jpg" alt="笔记中的电压电流反馈和串并联反馈判断图"></div>
+<div class="note-copy"><div class="note-kicker">METHOD · CLASSIFY</div><h3>四种反馈组态：拆成两个判断，别一次猜全名</h3>
+<p><b>输出端：</b>把输出负载短路。反馈消失 → 电压反馈；反馈仍存在 → 电流反馈。</p>
+<p><b>输入端：</b>输入量与反馈量落在同一点 → 并联；不在同一点 → 串联。</p>
+<div class="note-tip"><b>固定顺序：</b>找反馈通路 → 判正 / 负 → 判电压 / 电流 → 判串联 / 并联。复杂多级图也只是重复这四步。</div></div>
+</article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">METHOD · DEEP FEEDBACK</div><h3>深度负反馈：先建立“输入量 ≈ 反馈量”</h3>
+<p>你的笔记把深反馈压成了两个非常好用的入口：串联混合时看电压，并联混合时看电流。这样通常可以直接从反馈网络求闭环关系。</p>
+<div class="note-formulas"><div class="note-formula">串联反馈：U<sub>i</sub> ≈ U<sub>f</sub></div><div class="note-formula">并联反馈：I<sub>i</sub> ≈ I<sub>f</sub></div><div class="note-formula">AF ≫ 1 ⇒ A<sub>f</sub> ≈ 1 / F</div></div>
+<div class="note-tip"><b>考场习惯：</b>先判组态，再写近似关系；不要一上来就把整个多级放大器的开环增益算完。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">DESIGN · Rᵢ / Rₒ</div><h3>输入、输出电阻变化：四句话解决设计题</h3>
+<p>输入端只看串 / 并联，输出端只看电压 / 电流取样。再配合“想稳定什么量，就引入什么量的负反馈”，就能反推所需组态。</p>
+<div class="note-formulas"><div class="note-formula">串联负反馈 → R<sub>if</sub> ↑　　并联负反馈 → R<sub>if</sub> ↓</div><div class="note-formula">电压负反馈 → R<sub>of</sub> ↓　　电流负反馈 → R<sub>of</sub> ↑</div><div class="note-formula">稳 U<sub>o</sub> → 电压反馈　　稳 I<sub>o</sub> → 电流反馈</div></div>
+<div class="note-tip"><b>反推口诀：</b>少向电压源索取电流 → 提高 R<sub>i</sub> → 串联；带负载能力强 → 降低 R<sub>o</sub> → 电压反馈。</div></div></article>
+</div></section>
+`;
+
+  function injectNotes(html,page,section){
+    const start=html.indexOf('<template id="tpl-'+page+'">');
+    if(start<0) return html;
+    const end=html.indexOf('</template>',start);
+    const marker='<section class="section" id="knowledge">';
+    const at=html.indexOf(marker,start);
+    if(at<0 || at>end) return html;
+    if(html.slice(start,end).includes('class="section note-atlas"')) return html;
+    return html.slice(0,at)+section+html.slice(at);
+  }
+
   function polishFullHtml(html){
-    return html
+    html = html
       .replace(/<section class="grid" id="quick">/g,'<section class="grid">')
       .replace(/<section class="section"><div class="section-head"><h2>速通<\/h2>/g,'<section class="section" id="quick"><div class="section-head"><h2>速通</h2>');
+    html = injectNotes(html,'bjt',bjtCoreNotes);
+    html = injectNotes(html,'feedback',feedbackCoreNotes);
+    return html;
   }
 
   async function enterFullSite(hash){
@@ -190,13 +254,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   }
 
   function buildIndex(html){
-    const doc=new DOMParser().parseFromString(html,'text/html');
+    const doc=new DOMParser().parseFromString(polishFullHtml(html),'text/html');
     const out=[];
     Object.entries(routeMeta).forEach(([page,name])=>{
       const tpl=doc.getElementById('tpl-'+page);
       if(!tpl) return;
       const root=tpl.content;
       out.push({page,type:'章节',title:name,snippet:(root.querySelector('.hero-lead')?.textContent||'').trim(),hash:'#'+page+'/quick'});
+      root.querySelectorAll('.note-panel h3').forEach(el=>out.push({page,type:'核心笔记',title:el.textContent.trim(),snippet:(el.closest('.note-copy')?.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/notes'}));
       root.querySelectorAll('.quick h3').forEach(el=>out.push({
         page,type:'速通',title:el.textContent.trim(),
         snippet:(el.parentElement.querySelector('p')?.textContent||'').trim(),hash:'#'+page+'/quick'
