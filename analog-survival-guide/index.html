@@ -149,7 +149,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const diodeCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">二极管这一章的价值不在公式多，而在“状态判断必须快”。把 PN 结、二极管模型、温度和稳压管放在同一条判断链里，后面做差动与运放综合题也会继续用到。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FOUNDATION · PN JUNCTION</div><h3>先判断偏置方向，再决定导通还是截止</h3>
@@ -168,8 +168,9 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const bjtCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">这里不再重复教材定义，而是保留你原笔记里最值得反复看的图：Q 点怎么动、失真怎么判、动态范围怎么卡。图保留原批注，旁边只整理成考场能调用的结论。</p>
+<div class="note-recap"><span>考前 30 秒</span><b>先 Q 点 → 再小信号 → 再三种组态 → 最后失真 / 最大摆幅</b><em>不会做时先画直流负载线和交流等效图。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel">
 <div class="note-figure"><img loading="lazy" src="assets/notes/bjt-qpoint.jpg" alt="笔记中的 BJT Q 点与 RB、RC 变化关系图"></div>
@@ -196,7 +197,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const fetCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">FET 这章最值得保留的不是定义堆叠，而是三张能直接带你做题的原笔记图：先认管型，再定偏置与 Q 点，最后换低频小信号模型。</p>
 <div class="note-atlas-grid">
 <article class="note-panel">
@@ -226,7 +227,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const diffCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">差动放大别把公式拆着背。按你的原笔记，最稳的顺序是：静态先定尾电流；动态再分差模 / 共模；最后看单端 / 双端输出以及恒流源尾电路。</p>
 <div class="note-atlas-grid">
 <article class="note-panel">
@@ -251,8 +252,9 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const opampCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">运放题最容易失分的地方不是算式，而是第一步就把电路类型看错。你的原笔记最适合整理成三条做题链：先判线性 / 非线性，再做运算结构，最后单独处理比较器和迟滞。</p>
+<div class="note-recap"><span>考前 30 秒</span><b>负反馈：虚短 + 虚断｜开环 / 正反馈：只保留虚断</b><em>迟滞比较器一定先求上下阈值，再看输入变化方向。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST DECISION · REGION</div><h3>第一问永远是：线性运算，还是比较器非线性？</h3>
 <p>按原笔记，负反馈下的运算电路工作在线性区，可用“虚短 + 虚断”；开环或正反馈比较器工作在非线性区，此时只保留“虚断”，不能继续套虚短。</p>
@@ -272,7 +274,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const frequencyCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">频率响应这一章不适合堆公式，最重要的是把幅频 / 相频、上下限截止频率和 ±3 dB 位置放在同一张“频率地图”里。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">MAP · FREQUENCY RESPONSE</div><h3>八个词要连起来记，而不是分开背</h3>
@@ -290,7 +292,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const powerCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">功放题先别急着套效率公式。原笔记真正的主线是：工作状态 → OCL 结构 → 最大输出 → 效率 / 管耗 → 交越失真。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">CLASSIFY · CONDUCTION</div><h3>甲 / 乙 / 甲乙 / 丙类：先看导通范围和 Q 点位置</h3>
@@ -309,8 +311,9 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const oscillatorCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">振荡章最适合做成“判断树”：有没有放大？有没有正反馈？有没有选频？三问先过，再认 RC / LC / 晶体。</p>
+<div class="note-recap"><span>考前 30 秒</span><b>起振先看幅值条件 + 相位条件；稳态再回到环路增益 1</b><em>RC 看文氏桥，LC 三点式先用“射同基反”，晶体抓串 / 并联谐振点。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">FIRST CHECK · OSCILLATION</div><h3>先检查四个环节，再谈能不能振</h3>
 <p>原笔记把振荡电路的组成压成：放大、正反馈、选频和稳幅。复习时先检查这些环节是否存在，再进入幅值 / 相位条件。</p>
@@ -329,7 +332,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const modulationCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">调制章最值得保留的是一条非常清晰的链：为什么调制 → SAM 时域包络 → 频谱 → 带宽 → 功率。先把 AM 主线吃透，再看真题中的 FM。</p>
 <div class="note-atlas-grid">
 <article class="note-panel no-image"><div class="note-copy"><div class="note-kicker">WHY · MODULATION</div><h3>调制目的按原笔记记三点</h3>
@@ -348,8 +351,9 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   const feedbackCoreNotes = `
 <section class="section note-atlas" id="notes">
-<div class="section-head"><h2>核心笔记</h2></div>
+<div class="section-head"><h2>核心笔记</h2><div class="note-source">FROM YOUR NOTES · 精炼版</div></div>
 <p class="note-atlas-intro">反馈章最容易“每句话都会，但一上图就乱”。这里把你的判断顺序固定下来：先找反馈通路，再判极性，再判输出取样和输入混合，最后才进入深反馈计算。</p>
+<div class="note-recap"><span>考前 30 秒</span><b>找通路 → 判正负 → 输出端判电压 / 电流 → 输入端判串 / 并</b><em>深反馈再写 Ui≈Uf 或 Ii≈If；不要反过来。</em></div>
 <div class="note-atlas-grid">
 <article class="note-panel">
 <div class="note-figure"><img loading="lazy" src="assets/notes/feedback-judge.jpg" alt="笔记中的电压电流反馈和串并联反馈判断图"></div>
@@ -381,6 +385,17 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   }
 
   function polishFullHtml(html){
+    const noteCss = `
+<style id="note-polish-v2">
+.note-source{margin-left:auto;color:#9a9187;font:800 10px/1.2 Inter,ui-sans-serif,sans-serif;letter-spacing:.12em}
+.note-recap{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;align-items:baseline;margin:18px 0 22px;padding:15px 17px;border:1px solid #ddd6cd;border-radius:16px;background:#fbf9f5}
+.note-recap span{grid-row:1/3;padding:5px 8px;border-radius:999px;background:#2d2925;color:#fff;font:800 10px/1 Inter,ui-sans-serif,sans-serif;letter-spacing:.08em;white-space:nowrap}
+.note-recap b{font-size:15px;line-height:1.55}.note-recap em{font-style:normal;color:#746d64;font-size:13px;line-height:1.55}
+.note-figure img{cursor:zoom-in;transition:transform .18s ease,box-shadow .18s ease}.note-figure img:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(35,30,25,.08)}
+.note-panel.no-image .note-copy{padding-top:2px}
+@media(max-width:760px){.note-source{display:none}.note-recap{grid-template-columns:1fr;gap:8px}.note-recap span{grid-row:auto;width:max-content}.note-recap b{font-size:14px}}
+</style>`;
+    if(!html.includes('note-polish-v2')) html = html.replace('</head>', noteCss + '</head>');
     html = html
       .replace("['home','章节'],['quick','速通'],['knowledge','知识点'],['papers','真题'],['check','考前清单']","['home','章节'],['quick','速通'],['notes','核心笔记'],['knowledge','知识点'],['papers','真题'],['check','考前清单']")
       .replace(/<section class="grid" id="quick">/g,'<section class="grid">')
