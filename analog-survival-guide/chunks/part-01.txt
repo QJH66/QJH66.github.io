@@ -278,7 +278,7 @@ body{min-height:100vh}
 <div class="note-atlas-grid">
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P1"><img loading="lazy" decoding="async" src="assets/notes/diode-pn.jpg?v=20260928-full4" alt="N型P型半导体与PN结形成的原笔记图"></div>
+<div class="note-figure" data-page="原笔记 P1"><img loading="lazy" decoding="async" src="assets/notes/diode-pn.jpg?v=20260928-full5" alt="N型P型半导体与PN结形成的原笔记图"></div>
 <div class="note-copy">
 <h3>先判断偏置方向，再决定导通还是截止</h3>
 <p>先看外加电压让耗尽层变窄还是变宽，再判断载流子运动和器件状态。整流、限幅、稳压题都从这一步开始。</p>
@@ -287,7 +287,7 @@ body{min-height:100vh}
 </div></article>
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P2"><img loading="lazy" decoding="async" src="assets/notes/diode-model.jpg?v=20260928-full4" alt="二极管伏安特性与模型的原笔记图"></div>
+<div class="note-figure" data-page="原笔记 P2"><img loading="lazy" decoding="async" src="assets/notes/diode-model.jpg?v=20260928-full5" alt="二极管伏安特性与模型的原笔记图"></div>
 <div class="note-copy">
 <h3>大信号看工作状态，小信号看工作点附近变化</h3>
 <p>直流题先看题目采用理想模型、恒压降模型还是折线模型；交流微小变化再用工作点附近的小信号电阻。</p>
@@ -296,7 +296,7 @@ body{min-height:100vh}
 </div></article>
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P5"><img loading="lazy" decoding="async" src="assets/notes/diode-limiter.jpg?v=20260928-full4" alt="二极管限幅电路与波形判断原笔记图"></div>
+<div class="note-figure" data-page="原笔记 P5"><img loading="lazy" decoding="async" src="assets/notes/diode-limiter.jpg?v=20260928-full5" alt="二极管限幅电路与波形判断原笔记图"></div>
 <div class="note-copy">
 <h3>限幅题：先看二极管两端电位，再分区间画波形</h3>
 <p>不需要背每种接法的波形。先假设截止，算两端电位；假设不成立时再切换到导通状态。</p>
@@ -305,7 +305,7 @@ body{min-height:100vh}
 </div></article>
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P6"><img loading="lazy" decoding="async" src="assets/notes/diode-zener.jpg?v=20260928-full4" alt="稳压管限幅与输出波形原笔记图"></div>
+<div class="note-figure" data-page="原笔记 P6"><img loading="lazy" decoding="async" src="assets/notes/diode-zener.jpg?v=20260928-full5" alt="稳压管限幅与输出波形原笔记图"></div>
 <div class="note-copy">
 <h3>稳压管：先假设没稳压，再用结果反证</h3>
 <p>稳压管只是多了一个反向稳压状态，本质仍然是状态判断。先按未进入稳压区处理，结果不自洽再切换状态。</p>
