@@ -270,6 +270,49 @@ body{min-height:100vh}
 <div class="quick"><div class="n">05 · 温度</div><h3>温度升高，正向特性会移动</h3><p>固定正向电流时：温度升高，正向导通电压减小。</p></div>
 <div class="quick"><div class="n">06 · 稳压管</div><h3>反向击穿不是“坏了”</h3><p>先判是否进入反向击穿区；没进入，就不能直接写 U<sub>Z</sub>。</p></div>
 </div></section>
+
+<section class="section note-atlas" id="notes">
+<div class="section-head"><h2>核心笔记</h2></div>
+<p class="note-atlas-intro">二极管这章先抓状态判断。图里已经有的内容不再重复打字，下面只留做题时会用到的结论。</p>
+<div class="note-atlas-grid">
+
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/diode-pn.jpg" alt="N型P型半导体与PN结形成的原笔记图"></div>
+<div class="note-copy">
+<h3>先判断偏置方向，再决定导通还是截止</h3>
+<p>先看外加电压让耗尽层变窄还是变宽，再判断载流子运动和器件状态。整流、限幅、稳压题都从这一步开始。</p>
+<div class="note-formulas"><div class="note-formula">正偏：耗尽层变窄 → 扩散增强 → 易导通</div><div class="note-formula">反偏：耗尽层变宽 → 扩散受阻 → 电流很小</div></div>
+<div class="note-tip"><b>做题时：</b>先判状态，再列式。别反过来。</div>
+</div></article>
+
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/diode-model.jpg" alt="二极管伏安特性与模型的原笔记图"></div>
+<div class="note-copy">
+<h3>大信号看工作状态，小信号看工作点附近变化</h3>
+<p>直流题先看题目采用理想模型、恒压降模型还是折线模型；交流微小变化再用工作点附近的小信号电阻。</p>
+<div class="note-formulas"><div class="note-formula">Si 常用导通压降约 0.7 V　｜　Ge 约 0.3 V</div><div class="note-formula">小信号：r<sub>d</sub> ≈ U<sub>T</sub> / I<sub>DQ</sub></div></div>
+<div class="note-tip"><b>注意：</b>题目明确给了模型，就按题设模型算，不要自己换模型。</div>
+</div></article>
+
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/diode-limiter.jpg" alt="二极管限幅电路与波形判断原笔记图"></div>
+<div class="note-copy">
+<h3>限幅题：先看二极管两端电位，再分区间画波形</h3>
+<p>不需要背每种接法的波形。先假设截止，算两端电位；假设不成立时再切换到导通状态。</p>
+<div class="note-formulas"><div class="note-formula">假设状态 → 算两端电位 → 检查自洽 → 必要时重算</div></div>
+<div class="note-tip"><b>画波形：</b>输入跨过阈值的位置先在横轴上标出来，再一段一段画。</div>
+</div></article>
+
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/diode-zener.jpg" alt="稳压管限幅与输出波形原笔记图"></div>
+<div class="note-copy">
+<h3>稳压管：先假设没稳压，再用结果反证</h3>
+<p>稳压管只是多了一个反向稳压状态，本质仍然是状态判断。先按未进入稳压区处理，结果不自洽再切换状态。</p>
+<div class="note-formulas"><div class="note-formula">正向导通区　｜　中间截止区　｜　反向稳压区</div><div class="note-formula">保持正向电流不变：温度 ↑ → 正向导通电压 ↓</div></div>
+<div class="note-tip"><b>记住：</b>限幅、稳压综合题都适合用“先假设 → 再验证”这套方法。</div>
+</div></article>
+
+</div></section>
 <section class="section" id="knowledge"><div class="section-head"><h2>知识点详解</h2></div><div class="knowledge-list">
 <details class="knowledge-item"><summary>01｜半导体与 PN 结</summary><div class="knowledge-body"><p class="knowledge-lead">先把 N/P 型和 PN 结吃透，这一章后面几乎都只是应用。N 型多数载流子是电子，P 型多数载流子是空穴；PN 结的单向导电性则是整流、限幅和稳压判断的起点。</p><p>选择填空最容易直接考：N 型掺五价元素，P 型掺三价元素。</p></div></details>
 <details class="knowledge-item"><summary>02｜二极管工作状态判断</summary><div class="knowledge-body"><p class="knowledge-lead">遇到二极管电路，不要先算电流，先判断它到底导通还是截止。最稳的流程是：先假设状态 → 用对应模型替换 → 解电路 → 再回头检查假设。</p><p>典型例题反复练的就是“有没有电流、二极管是否导通”，本质上是在训练这套判断顺序。</p></div></details>
