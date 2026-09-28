@@ -119,7 +119,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div>
 <script>
 (() => {
-  const release='20260928-12';
+  const release='20260928-13';
   const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=${release}`);
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
@@ -256,13 +256,10 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-formulas"><div class="note-formula">交流通路：耦合 / 旁路电容按交流短路处理</div><div class="note-formula">共源 A<sub>u</sub> 常带负号；R<sub>i</sub>、R<sub>o</sub> 从等效图直接看</div></div>
 <div class="note-tip"><b>做题顺序：</b>画交流通路 → 换小信号模型 → 再列 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub>。</div></div>
 </article>
-<article class="note-panel no-image"><div class="note-copy"><h3>含源极电阻时，先看它有没有被旁路</h3>
-<p>源极电阻如果没有旁路电容，交流时仍在电路里，会形成局部负反馈，电压增益会下降，但工作会更稳。若被旁路电容短掉，中频交流分析里就不再起同样作用。</p>
-<div class="note-tip"><b>别急着套公式：</b>先把交流通路画出来，R<sub>S</sub> 到底还在不在，一眼就清楚。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><h3>多级放大时，后一级就是前一级的负载</h3>
-<p>算前一级增益时，别忘了后一级输入电阻会并到它的负载上。这个思路和 BJT 多级放大完全一样。</p>
-<div class="note-formulas"><div class="note-formula">前一级有效负载：R<sub>D</sub> ∥ R<sub>L</sub> ∥ R<sub>in,next</sub></div></div>
-<div class="note-tip"><b>注意：</b>题目一旦出现“多级”，先找级间负载关系，再算每一级。</div></div></article>
+<article class="note-panel no-image"><div class="note-copy"><h3>源极电阻和级间负载：先画交流通路</h3>
+<p>R<sub>S</sub> 未被旁路时会形成局部负反馈，增益下降但稳定性更好；多级放大时，后一级输入电阻还会并入前一级负载。</p>
+<div class="note-formulas"><div class="note-formula">R<sub>S</sub> 是否参与交流 → 先看旁路电容</div><div class="note-formula">前一级有效负载：R<sub>D</sub> ∥ R<sub>L</sub> ∥ R<sub>in,next</sub></div></div>
+<div class="note-tip"><b>做题时：</b>交流通路先画对，后面的 A<sub>u</sub> / R<sub>i</sub> / R<sub>o</sub> 才不会乱。</div></div></article>
 </div></section>
 `;
 
@@ -342,7 +339,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-atlas-grid">
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P34"><img loading="lazy" decoding="async" src="assets/notes/frequency-overview.jpg?v=20260928-notes2" alt="放大电路频率响应与波特图原笔记整页"></div>
+<div class="note-figure" data-page="原笔记 P34"><img loading="lazy" decoding="async" src="assets/notes/frequency-overview.jpg?v=20260928-full6" alt="放大电路频率响应与波特图原笔记整页"></div>
 <div class="note-copy">
 <h3>先找中频平台，再找两侧 −3 dB 截止点</h3>
 <p>低频端主要受耦合、旁路电容影响，高频端主要受晶体管内部电容影响；中间平台就是中频区。</p>
@@ -351,17 +348,11 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div></article>
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P39"><img loading="lazy" decoding="async" src="assets/notes/frequency-example.jpg?v=20260928-notes2" alt="频率特性表达式与上下限频率例题原笔记整页"></div>
+<div class="note-figure" data-page="原笔记 P39"><img loading="lazy" decoding="async" src="assets/notes/frequency-example.jpg?v=20260928-full6" alt="频率特性表达式与上下限频率例题原笔记整页"></div>
 <div class="note-copy">
 <h3>给频率特性表达式时，先拆低频因子和高频因子</h3>
 <p>这类题通常不是硬算复数，而是从每个一阶因子里读出截止频率，再取主导极点或组合判断。</p>
-<div class="note-tip"><b>±3 dB 常考：</b>如果两个信号频率不同，分别判断它们落在低频、中频还是高频区，不要一起套中频增益。</div>
-</div></article>
-
-<article class="note-panel no-image"><div class="note-copy">
-<h3>和反馈章联动：负反馈会把通频带撑开</h3>
-<p>负反馈通常使 f<sub>H</sub> 增大、f<sub>L</sub> 减小，所以通频带变宽。</p>
-<div class="note-formulas"><div class="note-formula">f<sub>Hf</sub> ↑　｜　f<sub>Lf</sub> ↓　｜　BW ↑</div></div>
+<div class="note-tip"><b>±3 dB 常考：</b>不同频率要分别判断所在频段。若再叠加负反馈，通常 f<sub>H</sub> ↑、f<sub>L</sub> ↓，通频带会变宽。</div>
 </div></article>
 
 </div></section>
@@ -434,7 +425,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 <div class="note-atlas-grid">
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P94"><img loading="lazy" decoding="async" src="assets/notes/modulation-overview.jpg?v=20260928-notes2" alt="调制目的标准调幅包络与频谱原笔记整页"></div>
+<div class="note-figure" data-page="原笔记 P94"><img loading="lazy" decoding="async" src="assets/notes/modulation-overview.jpg?v=20260928-full6" alt="调制目的标准调幅包络与频谱原笔记整页"></div>
 <div class="note-copy">
 <h3>标准调幅：先看包络，再看三条频谱线</h3>
 <p>调制最直接的目的之一是把低频信息搬到高频载波上，便于有效辐射和频分复用。SAM 波形先读包络，再读调幅指数。</p>
@@ -443,7 +434,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div></article>
 
 <article class="note-panel">
-<div class="note-figure" data-page="原笔记 P95"><img loading="lazy" decoding="async" src="assets/notes/modulation-power.jpg?v=20260928-notes2" alt="标准调幅边频功率与调制效率原笔记整页"></div>
+<div class="note-figure" data-page="原笔记 P95"><img loading="lazy" decoding="async" src="assets/notes/modulation-power.jpg?v=20260928-full6" alt="标准调幅边频功率与调制效率原笔记整页"></div>
 <div class="note-copy">
 <h3>功率题：真正带信息的是上下边频</h3>
 <p>载频本身不携带调制信息，信息在两个边频。算功率时先分清载波功率、边频功率和总功率。</p>
@@ -532,9 +523,9 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </style>`;
     if(!html.includes('note-polish-v2')) html = html.replace('</head>', noteCss + '</head>');
     if(!html.includes('note-viewer-v2')){
-      const noteViewer = '<div class="note-viewer" id="noteViewer" aria-hidden="true"><div class="note-viewer-bar"><span id="noteViewerPage">原笔记</span><div><button type="button" data-note-zoom="1">适应</button><button type="button" data-note-zoom="1.5">150%</button><button type="button" data-note-zoom="2">200%</button><button class="note-viewer-close" type="button" data-close-note-viewer aria-label="关闭">×</button></div></div><div class="note-viewer-scroll"><div class="note-viewer-inner"><img id="noteViewerImg" alt=""></div></div></div>'
-        + '<style id="note-viewer-style-v2">.note-viewer{position:fixed;inset:0;z-index:99999;display:none;background:rgba(28,25,22,.94);color:#fff}.note-viewer.open{display:flex;flex-direction:column}.note-viewer-bar{height:58px;flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.14);font:600 12px/1.2 Inter,ui-sans-serif,sans-serif}.note-viewer-bar>div{display:flex;gap:8px;align-items:center}.note-viewer-bar button{appearance:none;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:7px 11px;cursor:pointer}.note-viewer-bar button.active{background:#fff;color:#24211f;border-color:#fff}.note-viewer-close{font-size:20px!important;line-height:1!important;padding:5px 10px!important}.note-viewer-scroll{flex:1;overflow:auto;padding:22px}.note-viewer-inner{margin:0 auto;width:min(92vw,1500px)}.note-viewer-inner img{display:block;width:100%;height:auto;max-width:none;margin:0 auto;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.35)}@media(max-width:760px){.note-viewer-bar{padding:0 10px}.note-viewer-bar button[data-note-zoom="1.5"],.note-viewer-bar button[data-note-zoom="2"]{display:none}.note-viewer-scroll{padding:10px}.note-viewer-inner{width:96vw}}</style>'
-        + '<script id="note-viewer-v2">(function(){var v=document.getElementById("noteViewer"),im=document.getElementById("noteViewerImg"),box=v&&v.querySelector(".note-viewer-inner"),pg=document.getElementById("noteViewerPage");var currentZ=1;function setZ(z){if(!box)return;currentZ=Math.max(1,Math.min(2,z||1));box.style.width=currentZ===1?"min(92vw,1500px)":("min("+(92*currentZ)+"vw,"+(1500*currentZ)+"px)");document.querySelectorAll("[data-note-zoom]").forEach(function(b){b.classList.toggle("active",Math.abs((parseFloat(b.dataset.noteZoom)||1)-currentZ)<.01);});}function closeV(){if(!v)return;v.classList.remove("open");v.setAttribute("aria-hidden","true");document.body.style.overflow="";im.removeAttribute("src");setZ(1);}document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest(".note-figure img");if(t){e.preventDefault();im.src=t.currentSrc||t.src;im.alt=t.alt||"";var fig=t.closest(".note-figure");if(pg)pg.textContent=(fig&&fig.dataset.page)||"原笔记";setZ(1);v.classList.add("open");v.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";return;}var zb=e.target.closest&&e.target.closest("[data-note-zoom]");if(zb){setZ(parseFloat(zb.dataset.noteZoom)||1);return;}if(e.target===v||(e.target.closest&&e.target.closest("[data-close-note-viewer]")))closeV();});document.addEventListener("keydown",function(e){if(!v||!v.classList.contains("open"))return;if(e.key==="Escape")closeV();if(e.key==="0")setZ(1);if(e.key==="+"||e.key==="=")setZ(currentZ<1.5?1.5:2);if(e.key==="-")setZ(currentZ>1.5?1.5:1);});})();<\/script>';
+      const noteViewer = '<div class="note-viewer" id="noteViewer" aria-hidden="true"><div class="note-viewer-bar"><span id="noteViewerPage">原笔记</span><div><button type="button" data-note-nav="-1">‹ 上一页</button><button type="button" data-note-zoom="1">适应</button><button type="button" data-note-zoom="1.5">150%</button><button type="button" data-note-zoom="2">200%</button><button type="button" data-note-nav="1">下一页 ›</button><button class="note-viewer-close" type="button" data-close-note-viewer aria-label="关闭">×</button></div></div><div class="note-viewer-scroll"><div class="note-viewer-inner"><img id="noteViewerImg" alt=""></div></div></div>'
+        + '<style id="note-viewer-style-v2">.note-viewer{position:fixed;inset:0;z-index:99999;display:none;background:rgba(28,25,22,.94);color:#fff}.note-viewer.open{display:flex;flex-direction:column}.note-viewer-bar{height:58px;flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.14);font:600 12px/1.2 Inter,ui-sans-serif,sans-serif}.note-viewer-bar>div{display:flex;gap:8px;align-items:center}.note-viewer-bar button{appearance:none;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:7px 11px;cursor:pointer}.note-viewer-bar button.active{background:#fff;color:#24211f;border-color:#fff}.note-viewer-close{font-size:20px!important;line-height:1!important;padding:5px 10px!important}.note-viewer-scroll{flex:1;overflow:auto;padding:22px}.note-viewer-inner{margin:0 auto;width:min(92vw,1500px)}.note-viewer-inner img{display:block;width:100%;height:auto;max-width:none;margin:0 auto;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.35)}@media(max-width:760px){.note-viewer-bar{padding:0 10px}.note-viewer-bar button[data-note-zoom="1.5"],.note-viewer-bar button[data-note-zoom="2"],.note-viewer-bar button[data-note-nav]{display:none}.note-viewer-scroll{padding:10px}.note-viewer-inner{width:96vw}}</style>'
+        + '<script id="note-viewer-v2">(function(){var v=document.getElementById("noteViewer"),im=document.getElementById("noteViewerImg"),box=v&&v.querySelector(".note-viewer-inner"),pg=document.getElementById("noteViewerPage"),currentImg=null,currentZ=1;function imgs(){return Array.from(document.querySelectorAll(".note-figure img"));}function setZ(z){if(!box)return;currentZ=Math.max(1,Math.min(2,z||1));box.style.width=currentZ===1?"min(92vw,1500px)":("min("+(92*currentZ)+"vw,"+(1500*currentZ)+"px)");document.querySelectorAll("[data-note-zoom]").forEach(function(b){b.classList.toggle("active",Math.abs((parseFloat(b.dataset.noteZoom)||1)-currentZ)<.01);});}function show(t){if(!t)return;currentImg=t;im.src=t.currentSrc||t.src;im.alt=t.alt||"";var list=imgs(),idx=list.indexOf(t),fig=t.closest(".note-figure"),label=(fig&&fig.dataset.page)||"原笔记";if(pg)pg.textContent=label+(idx>=0?" · "+(idx+1)+"/"+list.length:"");setZ(1);v.classList.add("open");v.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";}function move(step){var list=imgs(),idx=list.indexOf(currentImg);if(!list.length)return;if(idx<0)idx=0;show(list[(idx+step+list.length)%list.length]);}function closeV(){if(!v)return;v.classList.remove("open");v.setAttribute("aria-hidden","true");document.body.style.overflow="";im.removeAttribute("src");currentImg=null;setZ(1);}document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest(".note-figure img");if(t){e.preventDefault();show(t);return;}var nb=e.target.closest&&e.target.closest("[data-note-nav]");if(nb){move(parseInt(nb.dataset.noteNav,10)||0);return;}var zb=e.target.closest&&e.target.closest("[data-note-zoom]");if(zb){setZ(parseFloat(zb.dataset.noteZoom)||1);return;}if(e.target===v||(e.target.closest&&e.target.closest("[data-close-note-viewer]")))closeV();});document.addEventListener("keydown",function(e){if(!v||!v.classList.contains("open"))return;if(e.key==="Escape")closeV();if(e.key==="ArrowLeft")move(-1);if(e.key==="ArrowRight")move(1);if(e.key==="0")setZ(1);if(e.key==="+"||e.key==="=")setZ(currentZ<1.5?1.5:2);if(e.key==="-")setZ(currentZ>1.5?1.5:1);});})();<\/script>';
       html = html.replace('</body>', noteViewer + '</body>');
     }
     html = html
