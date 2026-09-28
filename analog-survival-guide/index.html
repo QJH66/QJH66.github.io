@@ -611,8 +611,11 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   async function ensureIndex(){
     if(searchIndex) return searchIndex;
-    searchStatus.textContent='正在建立全站索引…';
-    searchIndex=buildIndex(await getFullHtml());
+    searchStatus.textContent='正在载入搜索索引…';
+    const r=await fetch('search-index.json?v='+release,{cache:'force-cache'});
+    if(!r.ok) throw new Error('search-index '+r.status);
+    const data=await r.json();
+    searchIndex=Array.isArray(data)?data:(data.items||[]);
     searchStatus.textContent='输入关键词开始搜索';
     return searchIndex;
   }
@@ -634,7 +637,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     }).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,14);
     searchStatus.textContent=hits.length?'找到 '+hits.length+' 个最相关结果':'没有找到匹配内容';
     searchResults.innerHTML=hits.length?hits.map(({x}) =>
-      '<a class="search-result" href="'+x.hash+'"><div class="search-result-top"><span class="search-type">'+esc(x.type)+'</span><span class="search-chapter">'+esc(routeMeta[x.page])+'</span></div><div class="search-result-title">'+esc(x.title)+'</div><div class="search-result-snippet">'+esc(x.snippet)+'</div></a>'
+      '<a class="search-result" href="guide.html?v='+release+'#'+x.page+'/'+x.section+'"><div class="search-result-top"><span class="search-type">'+esc(x.type)+'</span><span class="search-chapter">'+esc(routeMeta[x.page])+'</span></div><div class="search-result-title">'+esc(x.title)+'</div><div class="search-result-snippet">'+esc(x.snippet)+'</div></a>'
     ).join(''):'<div class="search-empty">换一个关键词试试，例如：差模、CMRR、迟滞、深反馈、OCL</div>';
   }
 
