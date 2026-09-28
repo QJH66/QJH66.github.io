@@ -119,7 +119,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 </div>
 <script>
 (() => {
-  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260928-4`);
+  const files = Array.from({length:10},(_,i)=>`chunks/part-${String(i+1).padStart(2,'0')}.txt?v=20260928-5`);
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
   const searchInput = document.getElementById('searchInput');
@@ -347,23 +347,31 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   const powerCoreNotes = `
 <section class="section note-atlas" id="notes">
 <div class="section-head"><h2>核心笔记</h2></div>
-<p class="note-atlas-intro">功放题先看工作状态和结构，别一上来套效率公式。按：工作状态 → OCL → 交越失真 → 效率 / 管耗 来复习。</p>
+<p class="note-atlas-intro">功放题先看工作状态和结构。图里已经画清楚的地方就不重复解释，下面只留做题时会用到的结论。</p>
 <div class="note-atlas-grid">
-<article class="note-panel no-image"><div class="note-copy"><h3>甲、乙、甲乙、丙：先看导通范围，再看 Q 点</h3>
-<p>给类型就看 Q 点在哪；给输入输出波形，就看每只管在一个周期里导通了多少。</p>
-<div class="note-formulas"><div class="note-formula">甲类：整个周期导通</div><div class="note-formula">乙类：半个周期导通，Q 点在截止附近</div><div class="note-formula">甲乙类：大于半个周期导通</div><div class="note-formula">乙类理想最大效率：η<sub>max</sub> = π/4 ≈ 78.5%</div></div>
-<div class="note-tip"><b>选择题：</b>导通范围、Q 点位置、效率经常放在一起考。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><h3>OCL：两只互补管一人管半个周期</h3>
-<p>双电源互补推挽 OCL 本质上就是两个共集电路拼在一起：NPN 管正半周，PNP 管负半周，最后在负载上合成完整输出。</p>
-<div class="note-formulas"><div class="note-formula">静态理想功耗 ≈ 0</div><div class="note-formula">输出与输入同相，R<sub>o</sub> 小，带负载能力强</div><div class="note-formula">选管：U<sub>(BR)CEO</sub> &gt; 2U<sub>CC</sub></div></div>
-<div class="note-tip"><b>看结构：</b>NPN + PNP 互补、双电源、射极输出，基本就是 OCL。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><h3>交越失真：过零附近两只管都还没导通</h3>
-<p>输入幅度小于发射结导通电压时，两只功率管会短暂同时截止，于是输出过零附近出现凹口。</p>
-<div class="note-tip"><b>怎么改：</b>加二极管预偏置，让两只管提前一点导通，把纯乙类推到甲乙类。</div></div></article>
-<article class="note-panel no-image"><div class="note-copy"><h3>效率和管耗别混：最大效率不等于最大管耗</h3>
-<p>乙类 OCL 的最大效率出现在输出幅度尽量接近电源电压时；单管耗散功率最大却在另一处工作点。</p>
-<div class="note-formulas"><div class="note-formula">最大效率：η<sub>max</sub> = π/4 ≈ 78.5%</div><div class="note-formula">单管损耗最大时：ξ = 2/π</div></div>
-<div class="note-tip"><b>这里要分清：</b>ξ = 1 对应最大效率；ξ = 2/π 对应单管损耗最大。</div></div></article>
+
+<article class="note-panel">
+<div class="note-figure"><img loading="lazy" src="assets/notes/power-class-ocl.jpg" alt="甲乙甲乙类工作状态与OCL结构原笔记图"></div>
+<div class="note-copy">
+<h3>先看导通范围，再认 OCL 的互补结构</h3>
+<p>甲、乙、甲乙、丙类先看一个周期内导通了多少；OCL 则看 NPN 和 PNP 两只互补管交替工作。</p>
+<div class="note-formulas"><div class="note-formula">甲类：整个周期导通　｜　乙类：半个周期导通</div><div class="note-formula">甲乙类：大于半个周期　｜　乙类 η<sub>max</sub> = π/4 ≈ 78.5%</div><div class="note-formula">OCL：R<sub>o</sub> 小，带负载能力强，输出与输入同相</div><div class="note-formula">选管：U<sub>(BR)CEO</sub> &gt; 2U<sub>CC</sub></div></div>
+<div class="note-tip"><b>看图时：</b>先看 Q 点和导通范围；看到 NPN + PNP 互补、双电源、射极输出，就往 OCL 想。</div>
+</div></article>
+
+<article class="note-panel no-image"><div class="note-copy">
+<h3>交越失真：过零附近两只管都还没导通</h3>
+<p>输入幅度还没达到发射结导通电压时，两只功率管会短暂同时截止，于是输出过零附近出现一个缺口。</p>
+<div class="note-tip"><b>怎么改：</b>加二极管预偏置，让两只管提前一点进入导通，把纯乙类推到甲乙类。</div>
+</div></article>
+
+<article class="note-panel no-image"><div class="note-copy">
+<h3>效率和管耗别混：最大效率不等于最大管耗</h3>
+<p>这两个点放在一起最容易选错。一个看输出摆幅接近电源的程度，一个看单管自身耗散。</p>
+<div class="note-formulas"><div class="note-formula">ξ = 1 → η<sub>max</sub> = π/4 ≈ 78.5%</div><div class="note-formula">ξ = 2/π → 单管损耗最大</div></div>
+<div class="note-tip"><b>记住：</b>最大效率和最大管耗对应的工作点不是同一个。</div>
+</div></article>
+
 </div></section>
 `;
 
