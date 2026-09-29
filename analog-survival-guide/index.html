@@ -73,6 +73,16 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 .search-empty{padding:34px 20px;text-align:center;color:#8b847b;font-size:14px}
 @media(max-width:760px){.hero{padding-top:60px;padding-bottom:42px}.nav-actions{gap:12px}.search-open kbd{display:none}.search-layer{padding-top:7vh}.search-panel{border-radius:18px;max-height:82vh}.search-head{padding:15px 16px}.search-head input{font-size:16px}}
 
+
+/* Compact overview and comfortable touch targets. */
+.hero{padding:48px 0 32px}h1{font-size:clamp(42px,7vw,80px);overflow-wrap:break-word}
+.section{padding-top:38px}.section-head{margin-bottom:18px}.section-head h2{font-size:34px}
+.chapter-card{min-height:158px;padding:22px 24px}.chapter-card h2{margin-top:10px}.enter{padding-top:14px}
+.search-open,.search-close{min-height:44px;min-width:44px}
+:focus-visible{outline:2px solid #80766a;outline-offset:3px}
+.search-layer{overflow:auto;overscroll-behavior:contain}.search-panel{max-height:calc(100dvh - 48px)}
+.search-results{min-height:0;overscroll-behavior:contain}.search-result.active{background:#f6f3ed}
+@media(max-width:760px){.hero{padding:32px 0 26px}.section{padding-top:28px}.chapter-card{min-height:144px;padding:20px}.chapter-card h2{font-size:24px}.section-head{flex-wrap:wrap;gap:10px}.section-head h2{font-size:30px}.sitebar-inner{gap:8px;flex-wrap:wrap}.brand{font-size:14px}.nav-actions{font-size:13px;gap:10px}.home-guide{line-height:1.8}.search-layer{padding:16px 12px}.search-head{gap:4px}.chapter-progress{top:20px;right:20px}}
 </style>
 </head>
 <body>
@@ -86,23 +96,23 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   <div class="home-guide">推荐复习顺序：速通 → 核心笔记 → 知识点 → 真题 → 考前清单</div>
   <div class="home-state" id="homeState">
     <span class="overall-progress" id="overallProgress"><i></i><span>0 / 80</span></span>
-    <a class="continue-link" id="continueLink" href="guide.html?v=20260929-17#diode/quick">继续上次复习 →</a>
+    <a class="continue-link" id="continueLink" href="guide.html?v=20260929-18#diode/quick">继续上次复习 →</a>
   </div>
 </section>
 
 <section class="section">
   <div class="section-head"><h2>章节</h2><div class="section-summary" id="sectionSummary"></div></div>
   <div class="grid">
-    <a class="chapter-card" href="guide.html?v=20260929-17#diode/quick"><div class="code"><span class="chapter-no">01</span><span>DIODE</span></div><h2>二极管与稳压管</h2><p>状态判断、模型、温度与稳压</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#fet/quick"><div class="code"><span class="chapter-no">02</span><span>FET</span></div><h2>场效应管</h2><p>Q点、小信号、增益与阻抗</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#bjt/quick"><div class="code"><span class="chapter-no">03</span><span>BJT</span></div><h2>双极型晶体管</h2><p>Q点、微变等效、三种组态</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#frequency/quick"><div class="code"><span class="chapter-no">04</span><span>FREQ</span></div><h2>频率响应</h2><p>fL / fH、波特图、通频带</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#diff/quick"><div class="code"><span class="chapter-no">05</span><span>DIFF</span></div><h2>差动放大</h2><p>差模 / 共模、CMRR、恒流源</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#feedback/quick"><div class="code"><span class="chapter-no">06</span><span>FEEDBACK</span></div><h2>反馈</h2><p>判型、深反馈、增益与阻抗</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#opamp/quick"><div class="code"><span class="chapter-no">07</span><span>OP AMP</span></div><h2>运放与比较器</h2><p>虚短虚断、运算、比较器</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#power/quick"><div class="code"><span class="chapter-no">08</span><span>POWER AMP</span></div><h2>功率放大</h2><p>OCL / OTL、效率、最大管耗</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#oscillator/quick"><div class="code"><span class="chapter-no">09</span><span>OSC</span></div><h2>正弦波振荡</h2><p>起振条件、RC / LC、振荡频率</p><div class="enter">进入章节 →</div></a>
-    <a class="chapter-card" href="guide.html?v=20260929-17#modulation/quick"><div class="code"><span class="chapter-no">10</span><span>MOD</span></div><h2>调制</h2><p>AM / FM、带宽与功率</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#diode/quick"><div class="code"><span class="chapter-no">01</span><span>DIODE</span></div><h2>二极管与稳压管</h2><p>状态判断、模型、温度与稳压</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#fet/quick"><div class="code"><span class="chapter-no">02</span><span>FET</span></div><h2>场效应管</h2><p>Q点、小信号、增益与阻抗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#bjt/quick"><div class="code"><span class="chapter-no">03</span><span>BJT</span></div><h2>双极型晶体管</h2><p>Q点、微变等效、三种组态</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#frequency/quick"><div class="code"><span class="chapter-no">04</span><span>FREQ</span></div><h2>频率响应</h2><p>fL / fH、波特图、通频带</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#diff/quick"><div class="code"><span class="chapter-no">05</span><span>DIFF</span></div><h2>差动放大</h2><p>差模 / 共模、CMRR、恒流源</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#feedback/quick"><div class="code"><span class="chapter-no">06</span><span>FEEDBACK</span></div><h2>反馈</h2><p>判型、深反馈、增益与阻抗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#opamp/quick"><div class="code"><span class="chapter-no">07</span><span>OP AMP</span></div><h2>运放与比较器</h2><p>虚短虚断、运算、比较器</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#power/quick"><div class="code"><span class="chapter-no">08</span><span>POWER AMP</span></div><h2>功率放大</h2><p>OCL / OTL、效率、最大管耗</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#oscillator/quick"><div class="code"><span class="chapter-no">09</span><span>OSC</span></div><h2>正弦波振荡</h2><p>起振条件、RC / LC、振荡频率</p><div class="enter">进入章节 →</div></a>
+    <a class="chapter-card" href="guide.html?v=20260929-18#modulation/quick"><div class="code"><span class="chapter-no">10</span><span>MOD</span></div><h2>调制</h2><p>AM / FM、带宽与功率</p><div class="enter">进入章节 →</div></a>
   </div>
 </section>
 </main>
@@ -112,14 +122,14 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
 <div class="search-layer" id="searchLayer" aria-hidden="true">
   <div class="search-panel" role="dialog" aria-modal="true" aria-label="全站搜索">
-    <div class="search-head"><input id="searchInput" type="search" autocomplete="off" placeholder="搜索知识点、真题、关键词…"><button class="search-close" id="searchClose" type="button" aria-label="关闭搜索">×</button></div>
-    <div class="search-status" id="searchStatus">输入关键词开始搜索</div>
+    <div class="search-head"><input id="searchInput" aria-label="搜索知识点、真题、关键词" aria-controls="searchResults" type="search" autocomplete="off" placeholder="搜索知识点、真题、关键词…"><button class="search-close" id="searchClose" type="button" aria-label="关闭搜索">×</button></div>
+    <div class="search-status" id="searchStatus" role="status" aria-live="polite">输入关键词开始搜索</div>
     <div class="search-results" id="searchResults"></div>
   </div>
 </div>
 <script>
 (() => {
-  const release='20260929-17';
+  const release='20260929-18';
   const loading = document.getElementById('loading');
   const searchLayer = document.getElementById('searchLayer');
   const searchInput = document.getElementById('searchInput');
@@ -130,7 +140,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     feedback:'反馈',opamp:'运放与比较器',power:'功率放大',oscillator:'正弦波振荡',modulation:'调制'
   };
   const chapterOrder = Object.keys(routeMeta);
-  let searchIndex = null;
+  let searchIndex = null, indexPromise = null, searchToken = 0, searchTimer, returnFocus, previousOverflow = "";
 
 
   // Any chapter/search/continue link enters the full guide.
@@ -154,13 +164,11 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
 
   async function ensureIndex(){
     if(searchIndex) return searchIndex;
-    searchStatus.textContent='正在载入搜索索引…';
-    const r=await fetch('search-index.json?v='+release,{cache:'force-cache'});
-    if(!r.ok) throw new Error('search-index '+r.status);
-    const data=await r.json();
-    searchIndex=Array.isArray(data)?data:(data.items||[]);
-    searchStatus.textContent='输入关键词开始搜索';
-    return searchIndex;
+    if(!indexPromise) indexPromise=fetch('search-index.json?v='+release,{cache:'force-cache'})
+      .then(r=>{if(!r.ok)throw Error('search-index '+r.status);return r.json()})
+      .then(data=>searchIndex=Array.isArray(data)?data:(data.items||[]))
+      .catch(e=>{indexPromise=null;throw e});
+    return indexPromise;
   }
 
   function esc(v){
@@ -168,12 +176,17 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   }
 
   async function runSearch(){
-    const q=searchInput.value.trim().toLowerCase();
+    const token=++searchToken;
+    const q=searchInput.value.normalize('NFKC').trim().toLowerCase();
     if(!q){searchStatus.textContent='输入关键词开始搜索';searchResults.innerHTML='';return;}
-    const idx=await ensureIndex();
+    searchStatus.textContent='正在搜索…';
+    let idx;
+    try{idx=await ensureIndex()}catch(e){if(token===searchToken){searchStatus.textContent='搜索暂时不可用，请稍后重新输入重试';searchResults.innerHTML='';}return;}
+    if(token!==searchToken)return;
     const terms=q.split(/\s+/).filter(Boolean);
     const hits=idx.map(x=>{
-      const all=(x.title+' '+x.snippet+' '+x.type+' '+routeMeta[x.page]).toLowerCase();
+      const all=(x.title+' '+x.snippet+' '+x.type+' '+x.page+' '+routeMeta[x.page]).normalize('NFKC').toLowerCase();
+      if(!terms.every(k=>all.includes(k)))return {x,score:0};
       let score=0;
       terms.forEach(k=>{if(x.title.toLowerCase().includes(k))score+=5;if(all.includes(k))score+=2;});
       return {x,score};
@@ -185,19 +198,37 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
   }
 
   function openSearch(){
+    returnFocus=document.activeElement;previousOverflow=document.body.style.overflow;
+    document.body.style.overflow='hidden';
     searchLayer.classList.add('open');
     searchLayer.setAttribute('aria-hidden','false');
-    ensureIndex().catch(console.error);
+    runSearch();
     setTimeout(()=>searchInput.focus(),0);
   }
   function closeSearch(){
+    ++searchToken;clearTimeout(searchTimer);document.body.style.overflow=previousOverflow;
     searchLayer.classList.remove('open');
     searchLayer.setAttribute('aria-hidden','true');
+    returnFocus?.focus();
   }
   document.getElementById('openSearch').addEventListener('click',openSearch);
   document.getElementById('searchClose').addEventListener('click',closeSearch);
   searchLayer.addEventListener('click',e=>{if(e.target===searchLayer)closeSearch();});
-  searchInput.addEventListener('input',()=>runSearch().catch(console.error));
+  searchInput.addEventListener('input',e=>{++searchToken;clearTimeout(searchTimer);if(!e.isComposing)searchTimer=setTimeout(runSearch,120)});
+  searchInput.addEventListener('compositionend',()=>{clearTimeout(searchTimer);runSearch()});
+  searchLayer.addEventListener('keydown',e=>{
+    const links=[...searchResults.querySelectorAll('a')];
+    if((e.key==='ArrowDown'||e.key==='ArrowUp')&&links.length){
+      e.preventDefault();const i=links.indexOf(document.activeElement);
+      links[(i+(e.key==='ArrowDown'?1:-1)+links.length)%links.length].focus();
+    }
+    if(e.key==='Enter'&&document.activeElement===searchInput&&links.length){e.preventDefault();links[0].click()}
+    if(e.key==='Tab'){
+      const items=[searchInput,document.getElementById('searchClose'),...links],i=items.indexOf(document.activeElement);
+      if(e.shiftKey&&i===0){e.preventDefault();items.at(-1).focus()}
+      else if(!e.shiftKey&&i===items.length-1){e.preventDefault();searchInput.focus()}
+    }
+  });
   searchResults.addEventListener('click',e=>{
     const a=e.target.closest('a.search-result');
     if(!a)return;
@@ -258,6 +289,7 @@ h1{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",s
     });
   });
 
+  window.addEventListener('pageshow',()=>{loading.classList.remove('on');loading.setAttribute('aria-busy','false');refreshHomeProgress()});
   refreshHomeProgress();
 })();
 </script>
